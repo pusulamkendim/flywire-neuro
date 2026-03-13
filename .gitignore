@@ -1,0 +1,6 @@
+venv/
+data/
+flywire-network-analysis/
+__pycache__/
+*.pyc
+.DS_Store
