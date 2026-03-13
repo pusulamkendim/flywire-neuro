@@ -12,7 +12,7 @@ conn = pd.read_feather("data/proofread_connections_783.feather")
 ann = pd.read_csv("data/neuron_annotations.tsv", sep="\t", low_memory=False)
 
 nt_cols = ['ach_avg', 'gaba_avg', 'glut_avg', 'da_avg', 'ser_avg', 'oct_avg']
-nt_labels = ['Asetilkolin', 'GABA', 'Glutamat', 'Dopamin', 'Serotonin', 'Oktopamin']
+nt_labels = ['Acetylcholine', 'GABA', 'Glutamate', 'Dopamine', 'Serotonin', 'Octopamine']
 nt_colors = ['#2ecc71', '#e74c3c', '#3498db', '#f39c12', '#9b59b6', '#e67e22']
 
 # =====================================================================
@@ -31,7 +31,7 @@ wedges, texts, autotexts = ax.pie(
 for t in autotexts:
     t.set_fontsize(11)
     t.set_fontweight('bold')
-ax.set_title('Meyve Sineği Beyni - Nörotransmitter Dağılımı\n(54.5M sinaps, ağırlıklı)', fontsize=14, fontweight='bold')
+ax.set_title('Drosophila Brain — Neurotransmitter Distribution\n(54.5M synapses, weighted)', fontsize=14, fontweight='bold')
 plt.tight_layout()
 plt.savefig('results/01_pie_overall.png', dpi=150, bbox_inches='tight')
 plt.close()
@@ -59,8 +59,8 @@ for i, col in enumerate(nt_cols):
 
 ax.set_xticks(range(len(top15)))
 ax.set_xticklabels(top15.index, rotation=45, ha='right', fontsize=11)
-ax.set_ylabel('Oran', fontsize=12)
-ax.set_title('En Büyük 15 Beyin Bölgesinde Nörotransmitter Dağılımı', fontsize=14, fontweight='bold')
+ax.set_ylabel('Proportion', fontsize=12)
+ax.set_title('Neurotransmitter Distribution in Top 15 Brain Regions', fontsize=14, fontweight='bold')
 ax.legend(loc='upper right', fontsize=10)
 ax.set_ylim(0, 1.05)
 
@@ -106,8 +106,8 @@ ax.barh([y + bar_height/2 for y in y_pos], comp_df['serotonin'], bar_height,
 
 ax.set_yticks(y_pos)
 ax.set_yticklabels(comp_df['region'], fontsize=11)
-ax.set_xlabel('Sinaps Sayısı', fontsize=12)
-ax.set_title('Dopamin vs Serotonin — Hedef Beyin Bölgeleri', fontsize=14, fontweight='bold')
+ax.set_xlabel('Synapse Count', fontsize=12)
+ax.set_title('Dopamine vs Serotonin — Target Brain Regions', fontsize=14, fontweight='bold')
 ax.legend(fontsize=12)
 ax.grid(axis='x', alpha=0.3)
 
@@ -129,16 +129,16 @@ da_super = da_neurons['super_class'].value_counts()
 ax1.pie(da_super.values, labels=da_super.index, autopct='%1.1f%%',
         startangle=90, textprops={'fontsize': 9},
         colors=plt.cm.Oranges(np.linspace(0.3, 0.9, len(da_super))))
-ax1.set_title(f'Dopaminerjik Nöronlar\n(n={len(da_neurons):,})', fontsize=13, fontweight='bold')
+ax1.set_title(f'Dopaminergic Neurons\n(n={len(da_neurons):,})', fontsize=13, fontweight='bold')
 
 # Serotonin - süper sınıf
 ser_super = ser_neurons['super_class'].value_counts()
 ax2.pie(ser_super.values, labels=ser_super.index, autopct='%1.1f%%',
         startangle=90, textprops={'fontsize': 9},
         colors=plt.cm.Purples(np.linspace(0.3, 0.9, len(ser_super))))
-ax2.set_title(f'Serotonerjik Nöronlar\n(n={len(ser_neurons):,})', fontsize=13, fontweight='bold')
+ax2.set_title(f'Serotonergic Neurons\n(n={len(ser_neurons):,})', fontsize=13, fontweight='bold')
 
-plt.suptitle('Nöron Süper Sınıf Dağılımı', fontsize=15, fontweight='bold', y=1.02)
+plt.suptitle('Neuron Super Class Distribution', fontsize=15, fontweight='bold', y=1.02)
 plt.tight_layout()
 plt.savefig('results/04_da_ser_neuron_types.png', dpi=150, bbox_inches='tight')
 plt.close()
@@ -154,8 +154,8 @@ da_class = da_neurons['cell_class'].value_counts().head(10)
 ax1.barh(range(len(da_class)), da_class.values, color='#f39c12', alpha=0.85)
 ax1.set_yticks(range(len(da_class)))
 ax1.set_yticklabels(da_class.index, fontsize=11)
-ax1.set_xlabel('Nöron Sayısı', fontsize=11)
-ax1.set_title('Dopamin — Hücre Sınıfları', fontsize=13, fontweight='bold')
+ax1.set_xlabel('Neuron Count', fontsize=11)
+ax1.set_title('Dopamine — Cell Classes', fontsize=13, fontweight='bold')
 ax1.invert_yaxis()
 for i, v in enumerate(da_class.values):
     ax1.text(v + 20, i, str(v), va='center', fontsize=10)
@@ -165,8 +165,8 @@ ser_class = ser_neurons['cell_class'].value_counts().head(10)
 ax2.barh(range(len(ser_class)), ser_class.values, color='#9b59b6', alpha=0.85)
 ax2.set_yticks(range(len(ser_class)))
 ax2.set_yticklabels(ser_class.index, fontsize=11)
-ax2.set_xlabel('Nöron Sayısı', fontsize=11)
-ax2.set_title('Serotonin — Hücre Sınıfları', fontsize=13, fontweight='bold')
+ax2.set_xlabel('Neuron Count', fontsize=11)
+ax2.set_title('Serotonin — Cell Classes', fontsize=13, fontweight='bold')
 ax2.invert_yaxis()
 for i, v in enumerate(ser_class.values):
     ax2.text(v + 5, i, str(v), va='center', fontsize=10)
@@ -201,13 +201,13 @@ bars = ax.barh(range(len(hm_df)), hm_df['da_ratio'], color=colors, edgecolor='wh
 ax.axvline(x=0.5, color='black', linestyle='--', alpha=0.5, linewidth=1)
 ax.set_yticks(range(len(hm_df)))
 ax.set_yticklabels(hm_df['region'], fontsize=8)
-ax.set_xlabel('Dopamin Oranı (0=Serotonin, 1=Dopamin)', fontsize=11)
-ax.set_title('Beyin Bölgelerinde Dopamin vs Serotonin Baskınlığı', fontsize=14, fontweight='bold')
+ax.set_xlabel('Dopamine Ratio (0=Serotonin, 1=Dopamine)', fontsize=11)
+ax.set_title('Dopamine vs Serotonin Dominance Across Brain Regions', fontsize=14, fontweight='bold')
 ax.set_xlim(0, 1)
 
 # Etiketler
-ax.text(0.15, len(hm_df) + 0.5, '◄ SEROTONİN', fontsize=12, color='#9b59b6', fontweight='bold')
-ax.text(0.75, len(hm_df) + 0.5, 'DOPAMİN ►', fontsize=12, color='#f39c12', fontweight='bold')
+ax.text(0.15, len(hm_df) + 0.5, '◄ SEROTONIN', fontsize=12, color='#9b59b6', fontweight='bold')
+ax.text(0.75, len(hm_df) + 0.5, 'DOPAMINE ►', fontsize=12, color='#f39c12', fontweight='bold')
 
 plt.tight_layout()
 plt.savefig('results/06_da_ser_dominance.png', dpi=150, bbox_inches='tight')

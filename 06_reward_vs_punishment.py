@@ -108,12 +108,12 @@ mb_ppl1 = [ppl1_targets.get(r, 0) for r in mb_regions]
 
 x = np.arange(len(mb_regions))
 w = 0.35
-axes[0].bar(x - w/2, mb_pam, w, label='PAM (ödül)', color='#2ecc71', alpha=0.85)
-axes[0].bar(x + w/2, mb_ppl1, w, label='PPL1 (ceza)', color='#e74c3c', alpha=0.85)
+axes[0].bar(x - w/2, mb_pam, w, label='PAM (reward)', color='#2ecc71', alpha=0.85)
+axes[0].bar(x + w/2, mb_ppl1, w, label='PPL1 (punishment)', color='#e74c3c', alpha=0.85)
 axes[0].set_xticks(x)
 axes[0].set_xticklabels(mb_regions, rotation=45, ha='right', fontsize=10)
-axes[0].set_ylabel('Sinaps Sayısı', fontsize=11)
-axes[0].set_title('Mushroom Body: Ödül vs Ceza Sinyali', fontsize=13, fontweight='bold')
+axes[0].set_ylabel('Synapse Count', fontsize=11)
+axes[0].set_title('Mushroom Body: Reward vs Punishment Signal', fontsize=13, fontweight='bold')
 axes[0].legend(fontsize=11)
 axes[0].grid(axis='y', alpha=0.3)
 
@@ -122,8 +122,8 @@ pam_types = pam['cell_type'].value_counts()
 axes[1].barh(range(len(pam_types)), pam_types.values, color='#2ecc71', alpha=0.85)
 axes[1].set_yticks(range(len(pam_types)))
 axes[1].set_yticklabels(pam_types.index, fontsize=10)
-axes[1].set_xlabel('Nöron Sayısı', fontsize=11)
-axes[1].set_title(f'PAM Alt Tipleri (n={len(pam)})', fontsize=13, fontweight='bold')
+axes[1].set_xlabel('Neuron Count', fontsize=11)
+axes[1].set_title(f'PAM Subtypes (n={len(pam)})', fontsize=13, fontweight='bold')
 axes[1].invert_yaxis()
 for i, v in enumerate(pam_types.values):
     axes[1].text(v + 0.5, i, str(v), va='center', fontsize=10)
@@ -142,27 +142,27 @@ ax.axis('off')
 # PAM kutusu
 pam_box = plt.Rectangle((0.3, 7), 3, 2.5, fill=True, facecolor='#2ecc71', alpha=0.2, edgecolor='#2ecc71', linewidth=2)
 ax.add_patch(pam_box)
-ax.text(1.8, 9, 'PAM (ÖDÜL)', ha='center', fontsize=15, fontweight='bold', color='#27ae60')
-ax.text(1.8, 8.3, f'{len(pam)} nöron, 15 alt tip', ha='center', fontsize=10)
+ax.text(1.8, 9, 'PAM (REWARD)', ha='center', fontsize=15, fontweight='bold', color='#27ae60')
+ax.text(1.8, 8.3, f'{len(pam)} neurons, 15 subtypes', ha='center', fontsize=10)
 ax.text(1.8, 7.6, '→ MB Medial Lobe', ha='center', fontsize=10, style='italic')
-ax.text(1.8, 7.2, f'{pam_conn["syn_count"].sum():,} sinaps', ha='center', fontsize=10)
+ax.text(1.8, 7.2, f'{pam_conn["syn_count"].sum():,} synapses', ha='center', fontsize=10)
 
 # PPL1 kutusu
 ppl1_box = plt.Rectangle((6.7, 7), 3, 2.5, fill=True, facecolor='#e74c3c', alpha=0.2, edgecolor='#e74c3c', linewidth=2)
 ax.add_patch(ppl1_box)
-ax.text(8.2, 9, 'PPL1 (CEZA)', ha='center', fontsize=15, fontweight='bold', color='#c0392b')
-ax.text(8.2, 8.3, f'{len(ppl1)} nöron, 8 alt tip', ha='center', fontsize=10)
+ax.text(8.2, 9, 'PPL1 (PUNISHMENT)', ha='center', fontsize=15, fontweight='bold', color='#c0392b')
+ax.text(8.2, 8.3, f'{len(ppl1)} neurons, 8 subtypes', ha='center', fontsize=10)
 ax.text(8.2, 7.6, '→ MB Vertical Lobe', ha='center', fontsize=10, style='italic')
-ax.text(8.2, 7.2, f'{ppl1_conn["syn_count"].sum():,} sinaps', ha='center', fontsize=10)
+ax.text(8.2, 7.2, f'{ppl1_conn["syn_count"].sum():,} synapses', ha='center', fontsize=10)
 
 # Kenyon Cell kutusu
 kc_box = plt.Rectangle((2, 2.5), 6, 3.5, fill=True, facecolor='#f39c12', alpha=0.15, edgecolor='#f39c12', linewidth=2)
 ax.add_patch(kc_box)
 ax.text(5, 5.5, 'KENYON CELLS', ha='center', fontsize=16, fontweight='bold', color='#e67e22')
-ax.text(5, 4.8, f'{len(kenyon_ids):,} nöron (hafıza hücreleri)', ha='center', fontsize=11)
-ax.text(5, 4.1, f'{len(shared_kenyon):,} tanesi (%{len(shared_kenyon)/len(kenyon_ids)*100:.0f}) HER İKİSİNDEN sinyal alıyor', ha='center', fontsize=11, fontweight='bold')
-ax.text(5, 3.3, '"PAM daha güçlü → yaklaş"', ha='center', fontsize=10, color='#27ae60')
-ax.text(5, 2.8, '"PPL1 daha güçlü → kaç"', ha='center', fontsize=10, color='#c0392b')
+ax.text(5, 4.8, f'{len(kenyon_ids):,} neurons (memory cells)', ha='center', fontsize=11)
+ax.text(5, 4.1, f'{len(shared_kenyon):,} ({len(shared_kenyon)/len(kenyon_ids)*100:.0f}%) receive signals from BOTH', ha='center', fontsize=11, fontweight='bold')
+ax.text(5, 3.3, '"PAM stronger → approach"', ha='center', fontsize=10, color='#27ae60')
+ax.text(5, 2.8, '"PPL1 stronger → escape"', ha='center', fontsize=10, color='#c0392b')
 
 # Oklar
 ax.annotate('', xy=(3.5, 6), xytext=(1.8, 7),
@@ -173,9 +173,9 @@ ax.annotate('', xy=(6.5, 6), xytext=(8.2, 7),
 # Karar oku
 ax.annotate('', xy=(5, 1.5), xytext=(5, 2.5),
             arrowprops=dict(arrowstyle='->', color='#e67e22', lw=2.5))
-ax.text(5, 1, 'KARAR: Yaklaş mı? Kaç mı?', ha='center', fontsize=13, fontweight='bold', color='#e67e22')
+ax.text(5, 1, 'DECISION: Approach or Escape?', ha='center', fontsize=13, fontweight='bold', color='#e67e22')
 
-ax.set_title('Dopamin Ödül-Ceza Devresi', fontsize=16, fontweight='bold', pad=20)
+ax.set_title('Dopamine Reward-Punishment Circuit', fontsize=16, fontweight='bold', pad=20)
 
 plt.savefig('results/11_reward_punishment_diagram.png', dpi=150, bbox_inches='tight')
 plt.close()

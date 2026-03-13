@@ -101,7 +101,13 @@ All analyses were implemented in Python using pandas, pyarrow, matplotlib, and s
 
 ### 1. Neurotransmitter system characterization
 
-Synapse-weighted analysis across 139,255 neurons revealed the following NT distribution: acetylcholine (ACh) 48.4%, GABA 23.1%, glutamate (Glut) 19.2%, dopamine (DA) 4.4%, octopamine (OCT) 2.7%, and serotonin (SER) 2.1% (Table 1). Each NT system showed distinct regional specialization.
+Synapse-weighted analysis across 139,255 neurons revealed the following NT distribution: acetylcholine (ACh) 48.4%, GABA 23.1%, glutamate (Glut) 19.2%, dopamine (DA) 4.4%, octopamine (OCT) 2.7%, and serotonin (SER) 2.1% (Figure 1, Table 1). Each NT system showed distinct regional specialization.
+
+![Figure 1. Synapse-weighted neurotransmitter distribution across the complete Drosophila brain (54.5M synapses). Acetylcholine dominates at 48.4%, followed by GABA (23.2%) and glutamate (19.3%).](results/01_pie_overall.png)
+
+![Figure 2. Neurotransmitter composition of the 15 largest brain regions by synapse count. Visual neuropils (ME, LO) show ACh dominance, while central regions (FB) have elevated glutamate and dopamine.](results/02_bar_regions.png)
+
+![Figure 3. Dopamine vs serotonin dominance across all brain regions. MB regions are strongly dopamine-dominant; AL and AMMC are serotonin-dominant.](results/06_da_ser_dominance.png)
 
 **Table 1. Neurotransmitter system overview**
 
@@ -116,7 +122,9 @@ Synapse-weighted analysis across 139,255 neurons revealed the following NT distr
 
 ACh and GABA formed a widespread excitation-inhibition (E/I) balance system, with ACh sending 8.2 million synapses to GABAergic neurons. GABA showed the highest per-neuron motor connectivity (33.7 synapses/neuron) and a notable 19.7% self-inhibition rate, suggesting a disinhibitory circuit motif.
 
-Dopamine and serotonin systems showed mutual avoidance: cross-system connectivity was only 0.21× expected by chance, with 19,235 bridge neurons mediating indirect communication. Serotonin was predominantly associated with olfactory processing, showing 481× more synapses in the antennal lobe (AL) than in the reward/punishment circuit.
+Dopamine and serotonin systems showed mutual avoidance (Figure 4): cross-system connectivity was only 0.21× expected by chance, with 19,235 bridge neurons mediating indirect communication.
+
+![Figure 4. Dopamine-serotonin interaction diagram showing minimal cross-talk (0.21× expected) and 19,235 bridge neurons providing indirect integration.](results/09_interaction_diagram.png) Serotonin was predominantly associated with olfactory processing, showing 481× more synapses in the antennal lobe (AL) than in the reward/punishment circuit.
 
 Octopamine was highly specialized for visual processing: 58% of its synapses were in visual neuropils (Medulla, Lobula), 48% of its postsynaptic targets were photoreceptors, and it showed zero direct interaction with GABAergic neurons.
 
@@ -145,6 +153,10 @@ Gustatory processing showed a dramatically different architecture compared to ol
 - Kenyon Cells were **never activated** during gustatory processing
 
 This confirms a direct taste→motor reflex pathway that bypasses the mushroom body memory circuit entirely, consistent with the ecological constraint that taste evaluation (food already in contact with the mouth) requires immediate action.
+
+![Figure 5. Mushroom Body: Reward vs punishment synapse distribution and PAM subtypes.](results/10_reward_vs_punishment.png)
+
+![Figure 6. Dopamine reward-punishment circuit. PAM (307 neurons, reward) targets MB Medial Lobe; PPL1 (16 neurons, punishment) targets MB Vertical Lobe. 91% of Kenyon Cells receive signals from both systems.](results/11_reward_punishment_diagram.png)
 
 ### 4. PPL1 temporal priority: a structural property
 

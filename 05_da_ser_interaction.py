@@ -186,10 +186,10 @@ small_labels = ['Dopamin', 'Serotonin']
 
 im = axes[0].imshow(small_matrix, cmap='YlOrRd')
 axes[0].set_xticks(range(2))
-axes[0].set_xticklabels(['→ Dopamin', '→ Serotonin'], fontsize=11)
+axes[0].set_xticklabels(['→ Dopamine', '→ Serotonin'], fontsize=11)
 axes[0].set_yticks(range(2))
-axes[0].set_yticklabels(['Dopamin →', 'Serotonin →'], fontsize=11)
-axes[0].set_title('Sinaps Sayısı Matrisi\n(satır=gönderen, sütun=alan)', fontsize=13, fontweight='bold')
+axes[0].set_yticklabels(['Dopamine →', 'Serotonin →'], fontsize=11)
+axes[0].set_title('Synapse Count Matrix\n(row=sender, column=receiver)', fontsize=13, fontweight='bold')
 
 for i in range(2):
     for j in range(2):
@@ -210,8 +210,8 @@ axes[1].bar(x - w/2, da_ser_vals, w, label='DA → SER', color='#f39c12', alpha=
 axes[1].bar(x + w/2, ser_da_vals, w, label='SER → DA', color='#9b59b6', alpha=0.85)
 axes[1].set_xticks(x)
 axes[1].set_xticklabels(top_regions, rotation=45, ha='right', fontsize=10)
-axes[1].set_ylabel('Sinaps Sayısı', fontsize=11)
-axes[1].set_title('DA ↔ SER Buluşma Bölgeleri', fontsize=13, fontweight='bold')
+axes[1].set_ylabel('Synapse Count', fontsize=11)
+axes[1].set_title('DA ↔ SER Meeting Regions', fontsize=13, fontweight='bold')
 axes[1].legend(fontsize=11)
 axes[1].grid(axis='y', alpha=0.3)
 
@@ -232,8 +232,8 @@ bar_colors = [colors_nt.get(nt, 'gray') for nt in bridge_nt.index]
 ax1.barh(range(len(bridge_nt)), bridge_nt.values, color=bar_colors)
 ax1.set_yticks(range(len(bridge_nt)))
 ax1.set_yticklabels(bridge_nt.index, fontsize=11)
-ax1.set_xlabel('Nöron Sayısı', fontsize=11)
-ax1.set_title(f'Köprü Nöronların NT Tipi\n(n={len(bridge_ann):,})', fontsize=13, fontweight='bold')
+ax1.set_xlabel('Neuron Count', fontsize=11)
+ax1.set_title(f'Bridge Neuron NT Types\n(n={len(bridge_ann):,})', fontsize=13, fontweight='bold')
 ax1.invert_yaxis()
 for i, v in enumerate(bridge_nt.values):
     ax1.text(v + 50, i, f'{v:,}', va='center', fontsize=10)
@@ -243,8 +243,8 @@ bridge_super = bridge_ann['super_class'].value_counts().head(8)
 ax2.barh(range(len(bridge_super)), bridge_super.values, color='#1abc9c', alpha=0.85)
 ax2.set_yticks(range(len(bridge_super)))
 ax2.set_yticklabels(bridge_super.index, fontsize=11)
-ax2.set_xlabel('Nöron Sayısı', fontsize=11)
-ax2.set_title(f'Köprü Nöronların Süper Sınıfı', fontsize=13, fontweight='bold')
+ax2.set_xlabel('Neuron Count', fontsize=11)
+ax2.set_title(f'Bridge Neuron Super Classes', fontsize=13, fontweight='bold')
 ax2.invert_yaxis()
 for i, v in enumerate(bridge_super.values):
     ax2.text(v + 50, i, f'{v:,}', va='center', fontsize=10)
@@ -263,39 +263,39 @@ ax.axis('off')
 # DA kutusu
 da_box = plt.Rectangle((0.5, 6), 3.5, 3.5, fill=True, facecolor='#f39c12', alpha=0.2, edgecolor='#f39c12', linewidth=2)
 ax.add_patch(da_box)
-ax.text(2.25, 9, 'DOPAMİN', ha='center', fontsize=16, fontweight='bold', color='#e67e22')
-ax.text(2.25, 8.3, f'{len(da_ids):,} nöron', ha='center', fontsize=12)
-ax.text(2.25, 7.6, 'Merkezi beyin (%96)', ha='center', fontsize=10)
+ax.text(2.25, 9, 'DOPAMINE', ha='center', fontsize=16, fontweight='bold', color='#e67e22')
+ax.text(2.25, 8.3, f'{len(da_ids):,} neurons', ha='center', fontsize=12)
+ax.text(2.25, 7.6, 'Central brain (96%)', ha='center', fontsize=10)
 ax.text(2.25, 7.0, 'Kenyon Cell, PAM', ha='center', fontsize=10)
 ax.text(2.25, 6.4, '→ Mushroom Body', ha='center', fontsize=10, style='italic')
 
 # SER kutusu
 ser_box = plt.Rectangle((6, 6), 3.5, 3.5, fill=True, facecolor='#9b59b6', alpha=0.2, edgecolor='#9b59b6', linewidth=2)
 ax.add_patch(ser_box)
-ax.text(7.75, 9, 'SEROTONİN', ha='center', fontsize=16, fontweight='bold', color='#8e44ad')
-ax.text(7.75, 8.3, f'{len(ser_ids):,} nöron', ha='center', fontsize=12)
-ax.text(7.75, 7.6, 'Duyusal (%68)', ha='center', fontsize=10)
-ax.text(7.75, 7.0, 'Koku, Görme', ha='center', fontsize=10)
+ax.text(7.75, 9, 'SEROTONIN', ha='center', fontsize=16, fontweight='bold', color='#8e44ad')
+ax.text(7.75, 8.3, f'{len(ser_ids):,} neurons', ha='center', fontsize=12)
+ax.text(7.75, 7.6, 'Sensory (68%)', ha='center', fontsize=10)
+ax.text(7.75, 7.0, 'Olfactory, Visual', ha='center', fontsize=10)
 ax.text(7.75, 6.4, '→ Antennal Lobe', ha='center', fontsize=10, style='italic')
 
 # Oklar
 ax.annotate('', xy=(5.8, 8), xytext=(4.2, 8),
             arrowprops=dict(arrowstyle='->', color='#e74c3c', lw=2.5))
-ax.text(5, 8.4, f'{da_to_ser["syn_count"].sum():,}\nsinaps', ha='center', fontsize=10, color='#e74c3c')
+ax.text(5, 8.4, f'{da_to_ser["syn_count"].sum():,}\nsynapses', ha='center', fontsize=10, color='#e74c3c')
 
 ax.annotate('', xy=(4.2, 7), xytext=(5.8, 7),
             arrowprops=dict(arrowstyle='->', color='#3498db', lw=2.5))
-ax.text(5, 6.4, f'{ser_to_da["syn_count"].sum():,}\nsinaps', ha='center', fontsize=10, color='#3498db')
+ax.text(5, 6.4, f'{ser_to_da["syn_count"].sum():,}\nsynapses', ha='center', fontsize=10, color='#3498db')
 
 # Köprü kutusu
 bridge_box = plt.Rectangle((2.5, 1), 5, 4, fill=True, facecolor='#1abc9c', alpha=0.15, edgecolor='#1abc9c', linewidth=2)
 ax.add_patch(bridge_box)
-ax.text(5, 4.5, f'KÖPRÜ NÖRONLAR', ha='center', fontsize=14, fontweight='bold', color='#16a085')
-ax.text(5, 3.8, f'{len(bridge_neurons):,} nöron', ha='center', fontsize=13)
-ax.text(5, 3.1, 'Hem DA hem SER\'den sinyal alıyor', ha='center', fontsize=10)
-ax.text(5, 2.4, f'Çoğunluğu: Asetilkolin ({bridge_nt.iloc[0]:,})', ha='center', fontsize=10)
-ax.text(5, 1.8, f'Ana konum: Optic ({bridge_super.iloc[0]:,}) + Central ({bridge_super.iloc[1]:,})', ha='center', fontsize=10)
-ax.text(5, 1.2, 'İki sistemi birleştiren entegrasyon katmanı', ha='center', fontsize=10, style='italic', color='#16a085')
+ax.text(5, 4.5, f'BRIDGE NEURONS', ha='center', fontsize=14, fontweight='bold', color='#16a085')
+ax.text(5, 3.8, f'{len(bridge_neurons):,} neurons', ha='center', fontsize=13)
+ax.text(5, 3.1, 'Receive signals from both DA and SER', ha='center', fontsize=10)
+ax.text(5, 2.4, f'Majority: Acetylcholine ({bridge_nt.iloc[0]:,})', ha='center', fontsize=10)
+ax.text(5, 1.8, f'Main location: Optic ({bridge_super.iloc[0]:,}) + Central ({bridge_super.iloc[1]:,})', ha='center', fontsize=10)
+ax.text(5, 1.2, 'Integration layer connecting two systems', ha='center', fontsize=10, style='italic', color='#16a085')
 
 # Köprüye oklar
 ax.annotate('', xy=(3.5, 5), xytext=(2.25, 6),
@@ -303,7 +303,7 @@ ax.annotate('', xy=(3.5, 5), xytext=(2.25, 6),
 ax.annotate('', xy=(6.5, 5), xytext=(7.75, 6),
             arrowprops=dict(arrowstyle='->', color='#9b59b6', lw=2, alpha=0.7))
 
-ax.set_title('Dopamin ↔ Serotonin Etkileşim Şeması', fontsize=16, fontweight='bold', pad=20)
+ax.set_title('Dopamine ↔ Serotonin Interaction Diagram', fontsize=16, fontweight='bold', pad=20)
 
 plt.savefig('results/09_interaction_diagram.png', dpi=150, bbox_inches='tight')
 plt.close()
