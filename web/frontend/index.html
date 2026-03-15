@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drosophila Brain Simulation</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Header -->
+        <div id="header">
+            <h1>Drosophila melanogaster</h1>
+            <span class="subtitle">138,639 LIF neurons &middot; FlyWire v783</span>
+            <div class="status">
+                <span id="status-text">Disconnected</span>
+                <span id="status-dot" class="dot"></span>
+            </div>
+        </div>
+
+        <!-- 3D Viewport -->
+        <div id="viewport">
+            <canvas id="three-canvas"></canvas>
+            <div id="behavior-badge">IDLE</div>
+            <div id="viewport-overlay">
+                <span id="time-display">t = 0.0 ms</span> &middot;
+                <span id="pos-display">pos = [0, 0, 0]</span> &middot;
+                <span id="fps-display">0 fps</span>
+            </div>
+        </div>
+
+        <!-- Dashboard -->
+        <div id="dashboard">
+            <!-- Scenario picker + controls -->
+            <div class="section">
+                <div class="section-title">Scenario</div>
+                <div class="controls" id="scenario-buttons"></div>
+                <div class="controls" style="margin-top: 6px;">
+                    <button class="start" id="btn-walk" onclick="startWalk()" style="border-color:#9b59b6;color:#9b59b6;">Walk</button>
+                    <button class="start" id="btn-start" onclick="startSim()">Start</button>
+                    <button class="stop" id="btn-stop" onclick="stopSim()">Stop</button>
+                    <label style="display:flex;align-items:center;gap:4px;font-size:10px;color:var(--text-secondary);cursor:pointer;">
+                        <input type="checkbox" id="chk-real-brain"> Real Brain
+                    </label>
+                    <label style="display:flex;align-items:center;gap:4px;font-size:10px;color:var(--text-secondary);cursor:pointer;">
+                        <input type="checkbox" id="chk-loop"> Loop
+                    </label>
+                </div>
+            </div>
+
+            <!-- Phase timeline -->
+            <div class="section">
+                <div class="section-title">Phase Timeline</div>
+                <div id="phase-bar"></div>
+                <div id="progress-marker"><div id="progress-needle"></div></div>
+            </div>
+
+            <!-- Simulation info -->
+            <div class="section">
+                <div class="section-title">Simulation</div>
+                <div class="info-row"><span class="label">Time</span><span class="value" id="info-time">0.0 ms</span></div>
+                <div class="info-row"><span class="label">Phase</span><span class="value" id="info-phase">—</span></div>
+                <div class="info-row"><span class="label">Behavior</span><span class="value" id="info-behavior">—</span></div>
+                <div class="info-row"><span class="label">Flight</span><span class="value" id="info-flight">GROUNDED</span></div>
+                <div class="info-row"><span class="label">Altitude</span><span class="value" id="info-alt">0.0 mm</span></div>
+                <div class="info-row"><span class="label">Wing Freq</span><span class="value" id="info-wing">0 Hz</span></div>
+                <div class="info-row"><span class="label">Total Spikes</span><span class="value" id="info-spikes">0</span></div>
+            </div>
+
+            <!-- DN Rates -->
+            <div class="section">
+                <div class="section-title">Descending Neurons</div>
+                <div id="dn-bars"></div>
+            </div>
+
+            <!-- Drive -->
+            <div class="section">
+                <div class="section-title">Motor Drive</div>
+                <div id="drive-bars"></div>
+            </div>
+
+            <!-- NT Populations -->
+            <div class="section">
+                <div class="section-title">Neurotransmitter Activity</div>
+                <div id="nt-bars"></div>
+            </div>
+
+            <!-- NT Time Series -->
+            <div class="section">
+                <div class="section-title">NT Time Series</div>
+                <div id="nt-chart-container">
+                    <canvas id="nt-chart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+
+    <!-- App modules -->
+    <script src="/static/js/room.js"></script>
+    <script src="/static/js/dashboard.js"></script>
+    <script src="/static/js/controls.js"></script>
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
