@@ -29,67 +29,128 @@
             </div>
         </div>
 
+        <!-- Bottom Panel: Brain View + Time Series (always visible) -->
+        <div id="bottom-panel">
+            <div class="section" style="flex:1.2;">
+                <div class="section-title">Brain Activity (Dorsal View) <button class="info-toggle" onclick="toggleInfo('brain-vis-info')">?</button></div>
+                <div id="brain-vis-info" class="info-box" style="display:none;">
+                    <p>Top-down view of the fly brain. 10,000 real neuron positions from FlyWire v783. Brighter = more active.</p>
+                </div>
+                <div id="brain-canvas-container" style="height:calc(100% - 30px);position:relative;">
+                    <canvas id="brain-canvas" style="width:100%;height:100%;"></canvas>
+                </div>
+            </div>
+            <div class="section" style="flex:1;">
+                <div class="section-title">Time Series</div>
+                <div id="nt-chart-container" style="height:calc(100% - 20px);">
+                    <canvas id="nt-chart"></canvas>
+                </div>
+            </div>
+        </div>
+
         <!-- Dashboard -->
         <div id="dashboard">
-            <!-- Scenario picker + controls -->
+
+            <!-- STIMULUS CONTROL -->
             <div class="section">
-                <div class="section-title">Scenario</div>
-                <div class="controls" id="scenario-buttons"></div>
-                <div class="controls" style="margin-top: 6px;">
-                    <button class="start" id="btn-walk" onclick="startWalk()" style="border-color:#9b59b6;color:#9b59b6;">Walk</button>
-                    <button class="start" id="btn-start" onclick="startSim()">Start</button>
-                    <button class="stop" id="btn-stop" onclick="stopSim()">Stop</button>
-                    <label style="display:flex;align-items:center;gap:4px;font-size:10px;color:var(--text-secondary);cursor:pointer;">
-                        <input type="checkbox" id="chk-real-brain"> Real Brain
-                    </label>
-                    <label style="display:flex;align-items:center;gap:4px;font-size:10px;color:var(--text-secondary);cursor:pointer;">
-                        <input type="checkbox" id="chk-loop"> Loop
-                    </label>
+                <div class="section-title">Stimulus Control</div>
+                <div class="stim-grid" id="stim-grid">
+                    <!-- Sensory -->
+                    <button class="stim-btn" data-stim="p9" data-color="#9b59b6"
+                        data-info="P9/oDN1 forward walking neurons (2 neurons, 100Hz). Direct descending command for locomotion.">P9 Walk</button>
+                    <button class="stim-btn" data-stim="lc4" data-color="#e74c3c"
+                        data-info="LC4 looming detector (104 neurons, 200Hz). Responds to approaching dark objects → Giant Fiber → escape flight.">LC4 Loom</button>
+                    <button class="stim-btn" data-stim="sugar" data-color="#ff9800"
+                        data-info="Sugar gustatory receptor neurons (21 GRNs, 200Hz). Tarsal taste detection → MN9 → proboscis extension + feeding.">Sugar</button>
+                    <button class="stim-btn" data-stim="bitter" data-color="#c0392b"
+                        data-info="Bitter gustatory receptor neurons (42 GRNs, 200Hz). Aversive taste → avoidance/escape behavior.">Bitter</button>
+                    <button class="stim-btn" data-stim="jo" data-color="#00bcd4"
+                        data-info="Johnston's Organ mechanoreceptors (209 neurons, 300Hz). Antennal touch/vibration → aDN1 → grooming behavior.">JO Touch</button>
+                    <button class="stim-btn" data-stim="or56a" data-color="#27ae60"
+                        data-info="Or56a olfactory receptor neurons (39 ORNs, 250Hz). Geosmin (mold) detector → aversion. Strongest cascade in connectome.">Or56a Odor</button>
+                </div>
+                <div id="stim-info" style="margin-top:6px;font-size:10px;color:var(--text-muted);min-height:28px;line-height:1.4;display:none;padding:4px 6px;background:var(--bg-primary);border-radius:3px;"></div>
+                <div class="controls" style="margin-top:6px;">
+                    <button class="start" id="btn-brain-start" onclick="startBrain()">Start Brain</button>
+                    <button class="stop" onclick="stopSim()">Stop</button>
                 </div>
             </div>
 
-            <!-- Phase timeline -->
+            <!-- ACTIVE STIMULI -->
             <div class="section">
-                <div class="section-title">Phase Timeline</div>
-                <div id="phase-bar"></div>
-                <div id="progress-marker"><div id="progress-needle"></div></div>
+                <div class="section-title">Active Stimuli</div>
+                <div id="active-stim-display" style="font-size:11px;color:var(--text-primary);min-height:16px;">None</div>
             </div>
 
-            <!-- Simulation info -->
+            <!-- SIMULATION INFO -->
             <div class="section">
                 <div class="section-title">Simulation</div>
                 <div class="info-row"><span class="label">Time</span><span class="value" id="info-time">0.0 ms</span></div>
-                <div class="info-row"><span class="label">Phase</span><span class="value" id="info-phase">—</span></div>
-                <div class="info-row"><span class="label">Behavior</span><span class="value" id="info-behavior">—</span></div>
-                <div class="info-row"><span class="label">Flight</span><span class="value" id="info-flight">GROUNDED</span></div>
-                <div class="info-row"><span class="label">Altitude</span><span class="value" id="info-alt">0.0 mm</span></div>
-                <div class="info-row"><span class="label">Wing Freq</span><span class="value" id="info-wing">0 Hz</span></div>
+                <div class="info-row"><span class="label">Behavior</span><span class="value" id="info-behavior">&mdash;</span></div>
+                <div class="info-row"><span class="label">Flight State</span><span class="value" id="info-flight">GROUNDED</span></div>
+                <div class="info-row"><span class="label">Drive L / R</span><span class="value" id="info-drive">0.00 / 0.00</span></div>
                 <div class="info-row"><span class="label">Total Spikes</span><span class="value" id="info-spikes">0</span></div>
+                <div class="info-row"><span class="label">Brain Steps</span><span class="value" id="info-steps">0</span></div>
             </div>
 
-            <!-- DN Rates -->
+            <!-- DN OUTPUTS -->
             <div class="section">
-                <div class="section-title">Descending Neurons</div>
+                <div class="section-title">Descending Neurons (Output) <button class="info-toggle" onclick="toggleInfo('dn-info')">?</button></div>
+                <div id="dn-info" class="info-box" style="display:none;">
+                    <p><b>GF Escape/Flight</b> — The "panic button." When danger is detected, these neurons fire to make the fly jump and fly away. The fastest pathway in the brain.</p>
+                    <p><b>P9 Forward</b> — Makes the fly walk forward. The hungrier the fly, the more these fire.</p>
+                    <p><b>MDN Backward</b> — Makes the fly walk backwards (moonwalk). Used when the fly bumps into something.</p>
+                    <p><b>Turn L/R</b> — Steers the fly left or right. When one side fires more, the fly turns.</p>
+                    <p><b>aDN1 Groom</b> — Triggers cleaning behavior. The fly rubs its front legs over its face and antennae.</p>
+                    <p><b>MN9 Feed</b> — Extends the proboscis (drinking tube) and starts feeding when food is found.</p>
+                </div>
                 <div id="dn-bars"></div>
             </div>
 
-            <!-- Drive -->
+            <!-- INTERNEURON ACTIVITY -->
             <div class="section">
-                <div class="section-title">Motor Drive</div>
-                <div id="drive-bars"></div>
+                <div class="section-title">Dopamine &amp; Valence <button class="info-toggle" onclick="toggleInfo('da-info')">?</button></div>
+                <div id="da-info" class="info-box" style="display:none;">
+                    <p><b>PAM Reward</b> — The "this is good!" signal (~295 dopamine neurons). Fires when the fly finds sugar or food. Teaches the brain to approach.</p>
+                    <p><b>PPL1 Punishment</b> — The "this is bad!" signal (16 dopamine neurons). Fires before PAM during threats — the brain checks for danger before reward (threat-first architecture).</p>
+                    <p><b>MBON Approach</b> — Decision neurons that say "go towards it." Strengthened by PAM reward signals.</p>
+                    <p><b>MBON Avoidance</b> — Decision neurons that say "stay away." Strengthened by PPL1 punishment signals.</p>
+                    <p><b>MBON Suppress</b> — Referee neurons that resolve conflicts when both approach and avoid are active.</p>
+                </div>
+                <div id="da-bars"></div>
             </div>
 
-            <!-- NT Populations -->
             <div class="section">
-                <div class="section-title">Neurotransmitter Activity</div>
+                <div class="section-title">Neuromodulators <button class="info-toggle" onclick="toggleInfo('nm-info')">?</button></div>
+                <div id="nm-info" class="info-box" style="display:none;">
+                    <p><b>5-HT (Serotonin)</b> — The "mood" chemical. Calms the brain during stress, helps with grooming. Spikes when bad smells are detected.</p>
+                    <p><b>OA (Octopamine)</b> — The insect version of adrenaline. Wakes the brain up, boosts alertness and fight-or-flight response.</p>
+                </div>
+                <div id="nm-bars"></div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Bulk NT Activity <button class="info-toggle" onclick="toggleInfo('nt-info')">?</button></div>
+                <div id="nt-info" class="info-box" style="display:none;">
+                    <p><b>GABA</b> — The brain's brake pedal (~15,000 neurons). Stops other neurons from firing. Without it, the brain would have seizures.</p>
+                    <p><b>ACh (Acetylcholine)</b> — The brain's gas pedal (~40,000 neurons). The main "go" signal. Nearly half of all brain cells use this.</p>
+                    <p><b>Glut (Glutamate)</b> — A versatile messenger (~50,000 neurons). Can speed up or slow down signals depending on the circuit.</p>
+                </div>
                 <div id="nt-bars"></div>
             </div>
 
-            <!-- NT Time Series -->
+            <!-- BEHAVIOR ANIMATIONS -->
             <div class="section">
-                <div class="section-title">NT Time Series</div>
-                <div id="nt-chart-container">
-                    <canvas id="nt-chart"></canvas>
+                <div class="section-title">Behavior Replay (cached)</div>
+                <div class="controls">
+                    <button onclick="startBehavior('walk')">Walk</button>
+                    <button onclick="startBehavior('groom')">Groom</button>
+                    <button onclick="startBehavior('fly')">Fly</button>
+                    <button onclick="startBehavior('feed')">Feed</button>
+                    <button onclick="startBehavior('escape')">Escape</button>
+                    <button onclick="startBehavior('backward')">Back</button>
+                    <button onclick="startBehavior('odor')">Odor</button>
+                    <button onclick="startBehavior('courtship')">Court</button>
                 </div>
             </div>
         </div>
@@ -103,6 +164,7 @@
     <!-- App modules -->
     <script src="/static/js/room.js"></script>
     <script src="/static/js/dashboard.js"></script>
+    <script src="/static/js/brain_vis.js"></script>
     <script src="/static/js/controls.js"></script>
     <script src="/static/js/app.js"></script>
 </body>

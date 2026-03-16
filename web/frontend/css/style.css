@@ -37,7 +37,11 @@ body {
 #app {
     display: grid;
     grid-template-columns: 1fr 360px;
-    grid-template-rows: 48px 1fr;
+    grid-template-rows: 48px 1fr 240px;
+    grid-template-areas:
+        "header header"
+        "viewport dashboard"
+        "bottom-panel dashboard";
     height: 100vh;
     gap: 1px;
     background: var(--border);
@@ -45,7 +49,7 @@ body {
 
 /* Header */
 #header {
-    grid-column: 1 / -1;
+    grid-area: header;
     background: var(--bg-secondary);
     display: flex;
     align-items: center;
@@ -90,6 +94,7 @@ body {
 
 /* 3D Viewport */
 #viewport {
+    grid-area: viewport;
     background: var(--bg-primary);
     position: relative;
 }
@@ -123,8 +128,30 @@ body {
     letter-spacing: 1px;
 }
 
+/* Bottom Panel (Brain + Time Series) */
+#bottom-panel {
+    grid-area: bottom-panel;
+    background: var(--bg-secondary);
+    display: flex;
+    gap: 1px;
+    overflow: hidden;
+}
+
+#bottom-panel .section {
+    flex: 1;
+    margin: 0;
+    border-radius: 0;
+    border: none;
+    border-right: 1px solid var(--border);
+}
+
+#bottom-panel .section:last-child {
+    border-right: none;
+}
+
 /* Dashboard Panel */
 #dashboard {
+    grid-area: dashboard;
     background: var(--bg-secondary);
     overflow-y: auto;
     padding: 12px;
@@ -285,6 +312,87 @@ body {
     background: white;
     top: 0;
     transition: left 0.08s linear;
+}
+
+/* Info toggle button */
+.info-toggle {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 1px solid var(--text-muted);
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 10px;
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+    padding: 0;
+    line-height: 14px;
+    text-align: center;
+    margin-left: 4px;
+    vertical-align: middle;
+    transition: all 0.15s;
+}
+
+.info-toggle:hover {
+    border-color: var(--text-primary);
+    color: var(--text-primary);
+    background: var(--bg-card);
+}
+
+/* Info box */
+.info-box {
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 8px 10px;
+    margin-bottom: 8px;
+    font-size: 10px;
+    line-height: 1.5;
+    color: var(--text-secondary);
+}
+
+.info-box p {
+    margin: 0 0 6px 0;
+}
+
+.info-box p:last-child {
+    margin-bottom: 0;
+}
+
+.info-box b {
+    color: var(--text-primary);
+}
+
+/* Stimulus grid */
+.stim-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 4px;
+}
+
+.stim-btn {
+    padding: 6px 4px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--bg-card);
+    color: var(--text-secondary);
+    font-family: inherit;
+    font-size: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+    text-align: center;
+}
+
+.stim-btn:hover {
+    background: var(--border);
+}
+
+.stim-btn.active {
+    color: white;
+    border-width: 2px;
 }
 
 /* Scrollbar */

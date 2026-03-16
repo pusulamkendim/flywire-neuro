@@ -1,26 +1,87 @@
 /**
- * App: WebSocket connection, state management, glue.
- *
- * "Buffered playback" model: backend pushes frames as fast as it can,
- * frontend renders each frame immediately when it arrives.
- * Mock mode → ~30 fps (wall-clock paced).
- * Real brain → ~1-10 fps depending on CPU (data-paced, no waiting).
+ * App: WebSocket, stimulus control, brain simulation interface.
  */
 
 let ws = null;
 let frameCount = 0;
 let lastFpsTime = performance.now();
 let fpsDisplay = 0;
-let simStartWall = 0;   // wall-clock ms when sim started
+let simStartWall = 0;
 let totalFrames = 0;
+let lastBehavior = 'walk';
+
+// Active stimuli (multiple can be on)
+let activeStimuli = new Set();
 
 window.addEventListener('DOMContentLoaded', async () => {
     Room.init(document.getElementById('three-canvas'));
     Dashboard.init();
-    await Controls.init();
+    BrainVis.init();
+    Controls.init();
     connectWebSocket();
+    initStimulusButtons();
 });
 
+// --- Stimulus toggle buttons ---
+function initStimulusButtons() {
+    const infoEl = document.getElementById('stim-info');
+
+    document.querySelectorAll('.stim-btn').forEach(btn => {
+        const stim = btn.dataset.stim;
+        const color = btn.dataset.color;
+        const info = btn.dataset.info;
+
+        // Hover: show info tooltip
+        btn.addEventListener('mouseenter', () => {
+            if (infoEl && info) {
+                infoEl.textContent = info;
+                infoEl.style.display = 'block';
+                infoEl.style.borderLeft = `3px solid ${color}`;
+            }
+        });
+        btn.addEventListener('mouseleave', () => {
+            if (infoEl) infoEl.style.display = 'none';
+        });
+
+        btn.addEventListener('click', () => {
+            btn.classList.toggle('active');
+            if (btn.classList.contains('active')) {
+                btn.style.borderColor = color;
+                btn.style.background = color + '33';
+                btn.style.color = 'white';
+                activeStimuli.add(stim);
+            } else {
+                btn.style.borderColor = '';
+                btn.style.background = '';
+                btn.style.color = '';
+                activeStimuli.delete(stim);
+            }
+            // Send stimulus update to backend
+            sendStimulusUpdate();
+            updateActiveDisplay();
+        });
+    });
+}
+
+function sendStimulusUpdate() {
+    if (ws && ws.readyState === WebSocket.OPEN) {
+        ws.send(JSON.stringify({
+            cmd: 'set_stimuli',
+            stimuli: Array.from(activeStimuli),
+        }));
+    }
+}
+
+function updateActiveDisplay() {
+    const el = document.getElementById('active-stim-display');
+    if (el) {
+        el.textContent = activeStimuli.size > 0
+            ? Array.from(activeStimuli).join(' + ')
+            : 'None';
+    }
+}
+
+// --- WebSocket ---
 function connectWebSocket() {
     const protocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
     ws = new WebSocket(`${protocol}//${location.host}/ws/sim`);
@@ -39,145 +100,101 @@ function connectWebSocket() {
     ws.onmessage = (evt) => {
         const data = JSON.parse(evt.data);
 
+        // End events
         if (data.event === 'end' || data.event === 'walk_end') {
             document.getElementById('status-dot').classList.remove('running');
             const elapsed = ((performance.now() - simStartWall) / 1000).toFixed(1);
-            const tag = `Done (${totalFrames} frames in ${elapsed}s)`;
-            document.getElementById('status-text').textContent = tag;
-
+            document.getElementById('status-text').textContent =
+                `Done (${totalFrames} frames in ${elapsed}s)`;
             if (data.event === 'walk_end') Room.walkEnd();
-
-            if (document.getElementById('chk-loop').checked) {
-                setTimeout(() => {
-                    if (data.event === 'walk_end') startWalk();
-                    else startSim();
-                }, 500);
-                return;
-            }
             document.getElementById('behavior-badge').textContent = 'ENDED';
             return;
         }
 
-        // Walking animation frames
+        // Walk animation frames
         if (data.event === 'walk_init') {
-            Room.walkInit(data.geom_names);
+            Room.walkInit(data);
             return;
         }
-
         if (data.event === 'walk_frame') {
             Room.walkUpdate(data);
             totalFrames++;
-
-            document.getElementById('behavior-badge').textContent = 'WALKING';
-            document.getElementById('behavior-badge').style.borderColor = 'var(--accent-forward)';
-            document.getElementById('behavior-badge').style.color = 'var(--accent-forward)';
-            document.getElementById('time-display').textContent = `t = ${data.t_ms.toFixed(1)} ms`;
-
-            // FPS counter
-            frameCount++;
-            const now = performance.now();
-            if (now - lastFpsTime >= 1000) {
-                fpsDisplay = frameCount;
-                frameCount = 0;
-                lastFpsTime = now;
-                document.getElementById('fps-display').textContent = fpsDisplay + ' fps';
-                const elapsedS = ((now - simStartWall) / 1000).toFixed(0);
-                document.getElementById('status-text').textContent =
-                    `Walking | sim ${data.t_ms.toFixed(0)}ms | ${elapsedS}s`;
-            }
+            _updateFps();
             return;
         }
 
+        // Brain simulation frames
+        if (data.event === 'brain_frame') {
+            Dashboard.update(data);
+            BrainVis.update(data);
+            Room.brainDrive(data);
+            totalFrames++;
+            _updateFps();
+
+            const elapsedS = ((performance.now() - simStartWall) / 1000).toFixed(0);
+            document.getElementById('status-text').textContent =
+                `Brain | sim ${data.t_ms.toFixed(0)}ms | ${elapsedS}s`;
+            return;
+        }
+
+        // Legacy NT simulation frames
         if (data.event === 'frame') {
             Dashboard.update(data);
             Room.updateFly(data);
             totalFrames++;
-
-            // FPS counter (frames received per second)
-            frameCount++;
-            const now = performance.now();
-            if (now - lastFpsTime >= 1000) {
-                fpsDisplay = frameCount;
-                frameCount = 0;
-                lastFpsTime = now;
-                document.getElementById('fps-display').textContent = fpsDisplay + ' fps';
-            }
-
-            // Status: show sim time + wall elapsed
-            const elapsedS = ((now - simStartWall) / 1000).toFixed(0);
-            const simT = data.t_ms.toFixed(1);
-            const isReal = document.getElementById('chk-real-brain').checked;
-            const mode = isReal ? '138K neurons' : 'mock';
-            document.getElementById('status-text').textContent =
-                `${mode} | sim ${simT}ms | ${elapsedS}s elapsed`;
+            _updateFps();
         }
     };
 }
 
-async function startSim() {
-    const scenario = Controls.getSelected();
+function _updateFps() {
+    frameCount++;
+    const now = performance.now();
+    if (now - lastFpsTime >= 1000) {
+        fpsDisplay = frameCount;
+        frameCount = 0;
+        lastFpsTime = now;
+        document.getElementById('fps-display').textContent = fpsDisplay + ' fps';
+    }
+}
 
-    const knownScenarios = {
-        escape: {
-            duration_s: 1.5,
-            phases: [
-                { name: 'hunger', start_ms: 0, end_ms: 300 },
-                { name: 'looming', start_ms: 300, end_ms: 600 },
-                { name: 'free', start_ms: 600, end_ms: 1500 },
-            ],
-        },
-        foraging: {
-            duration_s: 1.5,
-            phases: [
-                { name: 'search', start_ms: 0, end_ms: 500 },
-                { name: 'sugar', start_ms: 500, end_ms: 1200 },
-                { name: 'feeding', start_ms: 1200, end_ms: 1500 },
-            ],
-        },
-        grooming: {
-            duration_s: 1.2,
-            phases: [
-                { name: 'walking', start_ms: 0, end_ms: 300 },
-                { name: 'touch', start_ms: 300, end_ms: 900 },
-                { name: 'free', start_ms: 900, end_ms: 1200 },
-            ],
-        },
-    };
-    Controls.buildPhaseBar(knownScenarios[scenario] || knownScenarios.escape);
-
+// --- Brain simulation ---
+async function startBrain() {
     Dashboard.resetChart();
-    Room.resetTrail();
-
-    const useRealBrain = document.getElementById('chk-real-brain').checked;
     simStartWall = performance.now();
     totalFrames = 0;
 
-    const res = await fetch('/api/start', {
+    Room.loadWalkCache();
+
+    const res = await fetch('/api/brain', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            scenario,
-            duration_s: knownScenarios[scenario]?.duration_s || 1.5,
-            use_real_brain: useRealBrain,
-        }),
+        body: JSON.stringify({ stimuli: Array.from(activeStimuli) }),
     });
     await res.json();
 
-    const mode = useRealBrain ? '138K neurons' : 'mock';
-    document.getElementById('status-text').textContent = `Starting ${mode}...`;
+    document.getElementById('status-text').textContent = 'Starting 138K neurons...';
     document.getElementById('status-dot').classList.add('running');
 }
 
-async function startWalk() {
+// --- Behavior replay ---
+async function startBehavior(name) {
+    lastBehavior = name;
     Room.resetTrail();
+    Dashboard.resetChart();
     simStartWall = performance.now();
     totalFrames = 0;
 
-    const res = await fetch('/api/walk?duration_s=5', { method: 'POST' });
+    const res = await fetch(`/api/${name}`, { method: 'POST' });
     await res.json();
 
-    document.getElementById('status-text').textContent = 'Starting walk...';
+    document.getElementById('status-text').textContent = `Starting ${name}...`;
     document.getElementById('status-dot').classList.add('running');
+}
+
+function toggleInfo(id) {
+    const el = document.getElementById(id);
+    if (el) el.style.display = el.style.display === 'none' ? 'block' : 'none';
 }
 
 async function stopSim() {
