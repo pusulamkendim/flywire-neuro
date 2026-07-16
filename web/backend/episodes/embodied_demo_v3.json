@@ -1,0 +1,121 @@
+{
+  "schema_version": "flywire-episode-v1",
+  "id": "embodied_demo_v3",
+  "title": "Embodied Episode v3 — Causal Motor",
+  "description": "Recorded DN activity causally selects motor controllers through a joint behavior-intent and flight-state resolver.",
+  "source_mode": "recorded_lif_causal_motor",
+  "motor_control": "dn_state_resolver",
+  "neural_trace": "lif_trace_v1.json",
+  "playback_fps": 30,
+  "controller_bank": {
+    "idle": {
+      "cache": "walk_5.0s.json",
+      "start_frame": 0,
+      "end_frame": 1,
+      "render_mode": "standard",
+      "stationary": true
+    },
+    "walk": {
+      "cache": "walk_5.0s.json",
+      "render_mode": "standard"
+    },
+    "backward": {
+      "cache": "backward_4.0s.json",
+      "render_mode": "standard"
+    },
+    "groom": {
+      "cache": "groom_eye_clean_v2_3.0s.json",
+      "start_frame": 15,
+      "end_frame": 53,
+      "loop_start_frame": 27,
+      "render_mode": "standard",
+      "stationary": true
+    },
+    "groom_recover": {
+      "cache": "groom_eye_clean_v2_3.0s.json",
+      "start_frame": 53,
+      "end_frame": 60,
+      "render_mode": "standard",
+      "stationary": true
+    },
+    "feed": {
+      "cache": "feed_flybody_4.0s.json",
+      "start_frame": 14,
+      "end_frame": 104,
+      "render_mode": "proboscis_overlay",
+      "stationary": true
+    },
+    "flight_takeoff": {
+      "cache": "flight_leg_posture_v3_4.2s.json",
+      "start_frame": 9,
+      "end_frame": 21,
+      "render_mode": "flight_path"
+    },
+    "flight": {
+      "cache": "flight_leg_posture_v3_4.2s.json",
+      "start_frame": 21,
+      "end_frame": 93,
+      "render_mode": "flight_path"
+    },
+    "flight_landing": {
+      "cache": "flight_leg_posture_v3_4.2s.json",
+      "start_frame": 93,
+      "end_frame": 108,
+      "render_mode": "flight_path"
+    }
+  },
+  "segments": [
+    {
+      "key": "explore",
+      "label": "P9 → Explore",
+      "behavior": "causal",
+      "neural_clip": "p9_forward",
+      "duration_frames": 60,
+      "pipeline": {
+        "world": "Open arena",
+        "sensory": "Recorded P9 trial",
+        "neural": "DN intent resolved live",
+        "motor": "Resolver chooses controller"
+      }
+    },
+    {
+      "key": "loom_escape",
+      "label": "LC4 → Escape",
+      "behavior": "causal",
+      "neural_clip": "lc4_escape",
+      "duration_frames": 75,
+      "pipeline": {
+        "world": "Looming threat",
+        "sensory": "Recorded LC4 trial",
+        "neural": "Escape DN + hysteresis",
+        "motor": "Takeoff → flight"
+      }
+    },
+    {
+      "key": "recover_groom",
+      "label": "JO → Land/Groom",
+      "behavior": "causal",
+      "neural_clip": "jo_groom",
+      "duration_frames": 120,
+      "pipeline": {
+        "world": "Threat clears; antennal touch",
+        "sensory": "Continuous recorded JO trial",
+        "neural": "Escape decays; groom rises",
+        "motor": "Landing gates groom"
+      }
+    },
+    {
+      "key": "sugar_feed",
+      "label": "Sugar → Feed",
+      "behavior": "causal",
+      "neural_clip": "sugar_feed",
+      "duration_frames": 180,
+      "pipeline": {
+        "world": "Sugar contact",
+        "sensory": "Recorded sugar trial",
+        "neural": "Groom/feed DN competition",
+        "motor": "Winning intent controls body"
+      }
+    }
+  ]
+}

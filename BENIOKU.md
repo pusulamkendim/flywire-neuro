@@ -271,3 +271,147 @@ flywire-neuro/
 - Eckstein, Bates et al. (2024) "Neurotransmitter classification from EM images" — Cell
 - Winding et al. (2023) "The connectome of an insect brain" — Science
 - Nern et al. (2025) "Connectome-driven neural inventory of a complete visual system" — Nature
+
+
+ FlyWire / Drosophila Connectome -- Repository Research Report
+
+       ---
+       1. murthylab/flywire-network-analysis
+
+       - Team: Princeton (Albert Lin, Runzhe Yang, Sven Dorkenwald)
+       - What they built: Jupyter/MATLAB notebooks for whole-brain network analysis -- degree distributions, motif frequencies, rich-club organization, spectral
+       properties, random walks, reciprocal connectivity, neuropil projectome.
+       - Key findings: Identified fundamental organizational principles of a complete brain connectome including rich-club topology, characteristic motif
+       distributions, and reciprocal wiring patterns. Uses FlyWire v630 snapshot.
+       - Paper: Lin, Yang et al. 2023 + Dorkenwald et al. 2023 (Nature 2024)
+       - Status: Last commit Feb 2024. 7 stars. MIT license. Stable/complete.
+       - Limitations: Analysis only, no simulation. Tied to v630 (not latest v783). Small community engagement (7 stars, 1 fork).
+
+       ---
+       2. flyconnectome/flywire_annotations
+
+       - Team: Cambridge (Philipp Schlegel, Gregory Jefferis, Yijie Yin, Marta Costa)
+       - What they built: Systematic neuron annotations for the FlyWire female adult brain (release 783) -- cell types, morphology, neurotransmitter labels, synapse
+       tables, NBLAST similarity scores, cross-connectome mapping to hemibrain.
+       - Key findings: Whole-brain annotation and multi-connectome cell typing enabling cross-dataset comparison. Most comprehensive annotation resource for the adult
+        fly brain.
+       - Paper: Schlegel et al. 2024 (Nature); also referenced by Berg et al. 2025, Matsliah et al. 2024, Dorkenwald et al. 2024.
+       - Status: Actively maintained. Last update Oct 2025 (v3.0.0). 40 stars.
+       - Limitations: Annotation-only (no dynamics/simulation). Primarily female brain; male annotations handled elsewhere.
+
+       ---
+       3. flyconnectome/ol_annotations
+
+       - Team: Cambridge / flyconnectome (linked to Nern et al.)
+       - What they built: Matching tables that map optic lobe cell types between FAFB-FlyWire (female) and Male CNS datasets, using Nern et al. cell types as
+       reference.
+       - Key findings: Great majority of cross-sex cell type matches are 1-to-1, but some are more complex, enabling comparative sexual dimorphism analysis in the
+       visual system.
+       - Paper: Nern et al. 2024 (bioRxiv preprint 2024.04.16.589741)
+       - Status: Last commit May 2024. 2 stars. R-based. Versioned releases.
+       - Limitations: Narrow scope (optic lobe only). Very small community. R-only codebase.
+
+       ---
+       4. josiclab/flybrain-clustering
+
+       - Team: Josic Lab (Alex Kunin et al.)
+       - What they built: Hierarchical clustering analysis of the hemibrain and larval mushroom body connectomes using generalized modularity density maximization.
+       - Key findings: Demonstrated modular organization in fly brain networks with distinct clustering patterns across brain regions (mushroom body, fan-shaped
+       body). Cell type-specific wiring follows modular structure.
+       - Paper: "Clustering analysis of the Fly Hemibrain data set" (bioRxiv 2022)
+       - Status: Last commit May 2023. 2 stars, 3 forks. Stable/complete.
+       - Limitations: Based on hemibrain (partial brain), not the full FlyWire connectome. Preprint only (not peer-reviewed as of last check). Stale -- no updates in
+       ~3 years.
+
+       ---
+       5. reiserlab/male-drosophila-visual-system-connectome-code
+
+       - Team: Reiser Lab, Janelia (Nern et al., 14 contributors)
+       - What they built: Analysis code for the male optic lobe connectome from Janelia's FlyEM/neuPrint database. Jupyter notebooks, Python scripts, Blender
+       visualizations, Snakemake pipelines.
+       - Key findings: Connectome-driven neural inventory of a complete visual system. Companion "Cell type explorer" repo provides interactive exploration.
+       - Paper: Nern et al. 2025 (Nature, doi:10.1038/s41586-025-08746-0)
+       - Status: Active. v1.0 released March 2025. 9 stars, 7 forks.
+       - Limitations: Male visual system only (not whole brain). Analysis code, not simulation.
+
+       ---
+       6. brain-networks/larval-drosophila-connectome
+
+       - Team: Betzel, Puxeddu, Seguin (brain-networks org)
+       - What they built: Supplementary connectome data from the larval Drosophila brain (originally from Winding et al. 2023, Science) with hierarchical community
+       analysis.
+       - Key findings: Identified hierarchical communities in the larval connectome and linked them to cellular annotations and network topology.
+       - Paper: Betzel et al. 2023 (bioRxiv preprint); data from Winding et al. 2023 (Science).
+       - Status: Minimal. 0 stars, 0 forks, only 3 commits. Data archive only.
+       - Limitations: Larval brain (very different from adult). Essentially a data deposit, not an analysis toolkit. Zero community adoption. Preprint only.
+
+       ---
+       7. funkelab/synister
+
+       - Team: Funke Lab, Janelia Research Campus
+       - What they built: Deep learning (CNN) system for predicting neurotransmitter types (GABA, ACh, glutamate, serotonin, octopamine, dopamine) from EM image
+       patches at synaptic sites. Predictions available for both FAFB/FlyWire and HemiBrain volumes.
+       - Key findings: Demonstrated that neurotransmitter identity can be classified directly from EM imagery at synaptic sites, enabling brain-wide neurotransmitter
+       mapping without wet-lab experiments.
+       - Paper: "Neurotransmitter Classification from Electron Microscopy Images at Synaptic Sites in Drosophila" (bioRxiv 2020)
+       - Status: Active. Last commit Jan 2025. 16 stars, 6 forks. Python.
+       - Limitations: Predictions are probabilistic (not ground truth). Limited to 6 NT types. Requires EM imagery as input. Accuracy depends on synapse quality.
+
+       ---
+       8. funkelab/drosophila_neurotransmitters
+
+       - Team: Alexander Bates (Harvard), Diane Adjavon, Jan Funke (Janelia); Mark Eddison (EASI-FISH)
+       - What they built: Curated ground-truth CSV mapping neurotransmitters to 900+ cell types from 71 published studies. Covers FAFB-FlyWire, HemiBrain, FANC, MANC,
+        and larval L1 connectomes. Confidence-scored (0-5 scale).
+       - Key findings: For FAFB-783 alone: 27.9M ACh synapses across 442 ACh cell types. Provides the empirical validation layer that synister and other NT prediction
+        tools are benchmarked against.
+       - Paper: Bates et al. 2019; Eckstein & Bates et al. 2024.
+       - Status: Active. Last commit April 2024. 2 stars. Welcomes community PRs.
+       - Limitations: Manual curation -- coverage gaps for rare NT types. Community-dependent for updates. Small engagement (2 stars).
+
+       ---
+       9. erojasoficial-byte/fly-brain
+
+       - Team: Enrique Manuel Rojas Aliaga (independent researcher, Lima, Peru)
+       - What they built: Full embodied simulation: 138,639 spiking neurons + 15.1M synapses (FlyWire v783) coupled to NeuroMechFly v2 biomechanical body (87 joints,
+       6 legs, 2 wings) in MuJoCo. Includes vision (721 ommatidia/eye), olfaction, gustation, somatosensory, Hebbian plasticity, and "consciousness metrics" (Phi,
+       Broadcast, Self-Model, Complexity).
+       - Key findings: Two identical flies diverged after 24h of embodied experience: escape behavior 81% vs 47%, neural integration CI=0.221 vs 0.198, 76k divergent
+       synapses. Claims "computational individuality" emerges from connectome + experience + plasticity.
+       - Paper: Rojas 2026 (bioRxiv preprint, English + Spanish).
+       - Status: Brand new (March 2026). 2 stars.
+       - Limitations: Single-author, independent work -- no institutional backing or peer review. Extraordinary claims (consciousness metrics) without established
+       validation. Reproducibility unverified by community. Very early stage.
+
+       ---
+       10. philshiu/Drosophila_brain_model
+
+       - Team: Phil Shiu (independent / academic)
+       - What they built: Leaky integrate-and-fire (LIF) model of the entire adult Drosophila brain using Brian 2 simulator. Supports FlyWire v630 and v783. Users can
+        activate neurons (optogenetic-style Poisson spiking) or silence them (zero synaptic weights) by FlyWire ID. Outputs spike times and firing rates.
+       - Key findings: Demonstrated that a simple LIF model over the full connectome can reveal insights into sensorimotor processing pathways.
+       - Paper: "A leaky integrate-and-fire computational model based on the connectome of the entire adult Drosophila brain reveals insights into sensorimotor
+       processing" (bioRxiv 2023).
+       - Status: 122 stars, 29 forks (by far the most popular). MIT license. Last significant activity ~2023, appears stale.
+       - Limitations: LIF is the simplest neuron model -- no dendritic computation, no plasticity, no neuromodulation. Preprint only. Development appears stalled
+       despite high community interest.
+
+       ---
+       Cross-Cutting Observations
+
+       ┌────────────────────┬─────────────────────────────────────────────────────────────┬─────────────────────────────────────────────────────────────────────┐
+       │     Dimension      │                          Coverage                           │                                Gaps                                 │
+       ├────────────────────┼─────────────────────────────────────────────────────────────┼─────────────────────────────────────────────────────────────────────┤
+       │ Connectome data    │ Female whole-brain (v783), male visual system, larval brain │ No unified male whole-brain repo yet                                │
+       ├────────────────────┼─────────────────────────────────────────────────────────────┼─────────────────────────────────────────────────────────────────────┤
+       │ Annotations        │ Cell types, NT labels, cross-sex matching                   │ NT ground truth still manually curated                              │
+       ├────────────────────┼─────────────────────────────────────────────────────────────┼─────────────────────────────────────────────────────────────────────┤
+       │ Network analysis   │ Motifs, modularity, rich-club, hierarchy                    │ Most use hemibrain or v630, not latest v783                         │
+       ├────────────────────┼─────────────────────────────────────────────────────────────┼─────────────────────────────────────────────────────────────────────┤
+       │ NT prediction      │ synister CNN + ground truth CSV                             │ Only 6 NT types; neuropeptides missing                              │
+       ├────────────────────┼─────────────────────────────────────────────────────────────┼─────────────────────────────────────────────────────────────────────┤
+       │ Simulation         │ LIF whole-brain (Shiu), embodied spiking (Rojas)            │ No biophysically detailed (Hodgkin-Huxley) whole-brain model exists │
+       ├────────────────────┼─────────────────────────────────────────────────────────────┼─────────────────────────────────────────────────────────────────────┤
+       │ Community traction │ Shiu's LIF model dominates (122 stars)                      │ Most repos have under 10 stars                                      │
+       └────────────────────┴─────────────────────────────────────────────────────────────┴─────────────────────────────────────────────────────────────────────┘
+  ⎿  Done (11 tool uses · 17.5k tokens · 3m 17s)

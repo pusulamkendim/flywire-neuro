@@ -1,0 +1,6757 @@
+{
+  "schema_version": "flywire-neural-trace-v1",
+  "id": "recorded_lif_p9_jo_sugar_v1",
+  "provenance": {
+    "kind": "recorded_lif",
+    "source_log": "brain_20260316_161125.csv",
+    "neuron_count": 138639,
+    "source_dt_ms": 1.0,
+    "note": "Recorded locally from the full LIF network; reusable neural stream for synchronized or causal replay."
+  },
+  "clips": {
+    "p9_forward": {
+      "id": "p9_forward",
+      "stimulus": "p9",
+      "frames": [
+        {
+          "t_ms": 0.0,
+          "brain_steps": 10,
+          "behavior_mode": "idle",
+          "total_spikes": 0,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 0,
+            "glut": 0
+          },
+          "stimulus": "p9"
+        },
+        {
+          "t_ms": 1.0,
+          "brain_steps": 20,
+          "behavior_mode": "idle",
+          "total_spikes": 0,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 0,
+            "glut": 0
+          },
+          "stimulus": "p9"
+        },
+        {
+          "t_ms": 2.0,
+          "brain_steps": 30,
+          "behavior_mode": "idle",
+          "total_spikes": 0,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 0,
+            "glut": 0
+          },
+          "stimulus": "p9"
+        },
+        {
+          "t_ms": 3.0,
+          "brain_steps": 40,
+          "behavior_mode": "idle",
+          "total_spikes": 0,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 0,
+            "glut": 0
+          },
+          "stimulus": "p9"
+        },
+        {
+          "t_ms": 4.0,
+          "brain_steps": 50,
+          "behavior_mode": "idle",
+          "total_spikes": 0,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 0,
+            "glut": 0
+          },
+          "stimulus": "p9"
+        },
+        {
+          "t_ms": 5.0,
+          "brain_steps": 60,
+          "behavior_mode": "walking",
+          "total_spikes": 1,
+          "dn": {
+            "forward": 0.2083,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 1,
+            "glut": 0
+          },
+          "stimulus": "p9"
+        },
+        {
+          "t_ms": 6.0,
+          "brain_steps": 70,
+          "behavior_mode": "walking",
+          "total_spikes": 0,
+          "dn": {
+            "forward": 0.1786,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 0,
+            "glut": 0
+          },
+          "stimulus": "p9"
+        },
+        {
+          "t_ms": 7.0,
+          "brain_steps": 80,
+          "behavior_mode": "walking",
+          "total_spikes": 0,
+          "dn": {
+            "forward": 0.1562,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 0,
+            "glut": 0
+          },
+          "stimulus": "p9"
+        },
+        {
+          "t_ms": 8.0,
+          "brain_steps": 90,
+          "behavior_mode": "walking",
+          "total_spikes": 0,
+          "dn": {
+            "forward": 0.1389,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 0,
+            "glut": 0
+          },
+          "stimulus": "p9"
+        },
+        {
+          "t_ms": 9.0,
+          "brain_steps": 100,
+          "behavior_mode": "walking",
+          "total_spikes": 0,
+          "dn": {
+            "forward": 0.125,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 0,
+            "glut": 0
+          },
+          "stimulus": "p9"
+        },
+        {
+          "t_ms": 10.0,
+          "brain_steps": 110,
+          "behavior_mode": "walking",
+          "total_spikes": 0,
+          "dn": {
+            "forward": 0.1136,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 0,
+            "glut": 0
+          },
+          "stimulus": "p9"
+        },
+        {
+          "t_ms": 11.0,
+          "brain_steps": 120,
+          "behavior_mode": "walking",
+          "total_spikes": 0,
+          "dn": {
+            "forward": 0.1042,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 0,
+            "glut": 0
+          },
+          "stimulus": "p9"
+        },
+        {
+          "t_ms": 12.0,
+          "brain_steps": 130,
+          "behavior_mode": "walking",
+          "total_spikes": 0,
+          "dn": {
+            "forward": 0.0962,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 0,
+            "glut": 0
+          },
+          "stimulus": "p9"
+        },
+        {
+          "t_ms": 13.0,
+          "brain_steps": 140,
+          "behavior_mode": "walking",
+          "total_spikes": 0,
+          "dn": {
+            "forward": 0.0893,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 0,
+            "glut": 0
+          },
+          "stimulus": "p9"
+        },
+        {
+          "t_ms": 14.0,
+          "brain_steps": 150,
+          "behavior_mode": "walking",
+          "total_spikes": 0,
+          "dn": {
+            "forward": 0.0833,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 0,
+            "glut": 0
+          },
+          "stimulus": "p9"
+        },
+        {
+          "t_ms": 15.0,
+          "brain_steps": 160,
+          "behavior_mode": "walking",
+          "total_spikes": 0,
+          "dn": {
+            "forward": 0.0781,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 0,
+            "glut": 0
+          },
+          "stimulus": "p9"
+        },
+        {
+          "t_ms": 16.0,
+          "brain_steps": 170,
+          "behavior_mode": "walking",
+          "total_spikes": 0,
+          "dn": {
+            "forward": 0.0735,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 0,
+            "glut": 0
+          },
+          "stimulus": "p9"
+        },
+        {
+          "t_ms": 17.0,
+          "brain_steps": 180,
+          "behavior_mode": "walking",
+          "total_spikes": 0,
+          "dn": {
+            "forward": 0.0694,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 0,
+            "glut": 0
+          },
+          "stimulus": "p9"
+        },
+        {
+          "t_ms": 18.0,
+          "brain_steps": 190,
+          "behavior_mode": "walking",
+          "total_spikes": 0,
+          "dn": {
+            "forward": 0.0658,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 0,
+            "glut": 0
+          },
+          "stimulus": "p9"
+        },
+        {
+          "t_ms": 19.0,
+          "brain_steps": 200,
+          "behavior_mode": "walking",
+          "total_spikes": 0,
+          "dn": {
+            "forward": 0.0625,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 0,
+            "glut": 0
+          },
+          "stimulus": "p9"
+        },
+        {
+          "t_ms": 20.0,
+          "brain_steps": 210,
+          "behavior_mode": "walking",
+          "total_spikes": 0,
+          "dn": {
+            "forward": 0.0595,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 0,
+            "glut": 0
+          },
+          "stimulus": "p9"
+        },
+        {
+          "t_ms": 21.0,
+          "brain_steps": 220,
+          "behavior_mode": "walking",
+          "total_spikes": 1,
+          "dn": {
+            "forward": 0.1136,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 1,
+            "glut": 0
+          },
+          "stimulus": "p9"
+        },
+        {
+          "t_ms": 22.0,
+          "brain_steps": 230,
+          "behavior_mode": "walking",
+          "total_spikes": 0,
+          "dn": {
+            "forward": 0.1087,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 0,
+            "glut": 0
+          },
+          "stimulus": "p9"
+        },
+        {
+          "t_ms": 23.0,
+          "brain_steps": 240,
+          "behavior_mode": "walking",
+          "total_spikes": 0,
+          "dn": {
+            "forward": 0.1042,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 0,
+            "glut": 0
+          },
+          "stimulus": "p9"
+        },
+        {
+          "t_ms": 24.0,
+          "brain_steps": 250,
+          "behavior_mode": "walking",
+          "total_spikes": 0,
+          "dn": {
+            "forward": 0.1,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 0,
+            "glut": 0
+          },
+          "stimulus": "p9"
+        },
+        {
+          "t_ms": 25.0,
+          "brain_steps": 260,
+          "behavior_mode": "walking",
+          "total_spikes": 0,
+          "dn": {
+            "forward": 0.0962,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 0,
+            "glut": 0
+          },
+          "stimulus": "p9"
+        },
+        {
+          "t_ms": 26.0,
+          "brain_steps": 270,
+          "behavior_mode": "walking",
+          "total_spikes": 0,
+          "dn": {
+            "forward": 0.0926,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 0,
+            "glut": 0
+          },
+          "stimulus": "p9"
+        },
+        {
+          "t_ms": 27.0,
+          "brain_steps": 280,
+          "behavior_mode": "walking",
+          "total_spikes": 0,
+          "dn": {
+            "forward": 0.0893,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 0,
+            "glut": 0
+          },
+          "stimulus": "p9"
+        },
+        {
+          "t_ms": 28.0,
+          "brain_steps": 290,
+          "behavior_mode": "walking",
+          "total_spikes": 1,
+          "dn": {
+            "forward": 0.1293,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 1,
+            "glut": 0
+          },
+          "stimulus": "p9"
+        },
+        {
+          "t_ms": 29.0,
+          "brain_steps": 300,
+          "behavior_mode": "walking",
+          "total_spikes": 0,
+          "dn": {
+            "forward": 0.125,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 0,
+            "glut": 0
+          },
+          "stimulus": "p9"
+        },
+        {
+          "t_ms": 30.0,
+          "brain_steps": 310,
+          "behavior_mode": "walking",
+          "total_spikes": 0,
+          "dn": {
+            "forward": 0.121,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 0,
+            "glut": 0
+          },
+          "stimulus": "p9"
+        },
+        {
+          "t_ms": 31.0,
+          "brain_steps": 320,
+          "behavior_mode": "walking",
+          "total_spikes": 0,
+          "dn": {
+            "forward": 0.1172,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 0,
+            "glut": 0
+          },
+          "stimulus": "p9"
+        },
+        {
+          "t_ms": 32.0,
+          "brain_steps": 330,
+          "behavior_mode": "walking",
+          "total_spikes": 1,
+          "dn": {
+            "forward": 0.1136,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 1,
+            "ach": 0,
+            "glut": 0
+          },
+          "stimulus": "p9"
+        },
+        {
+          "t_ms": 33.0,
+          "brain_steps": 340,
+          "behavior_mode": "walking",
+          "total_spikes": 1,
+          "dn": {
+            "forward": 0.1103,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 1,
+            "ach": 0,
+            "glut": 0
+          },
+          "stimulus": "p9"
+        },
+        {
+          "t_ms": 34.0,
+          "brain_steps": 350,
+          "behavior_mode": "walking",
+          "total_spikes": 1,
+          "dn": {
+            "forward": 0.1429,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 1,
+            "glut": 0
+          },
+          "stimulus": "p9"
+        },
+        {
+          "t_ms": 35.0,
+          "brain_steps": 360,
+          "behavior_mode": "walking",
+          "total_spikes": 0,
+          "dn": {
+            "forward": 0.1389,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 0,
+            "glut": 0
+          },
+          "stimulus": "p9"
+        },
+        {
+          "t_ms": 36.0,
+          "brain_steps": 370,
+          "behavior_mode": "walking",
+          "total_spikes": 0,
+          "dn": {
+            "forward": 0.1351,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 0,
+            "glut": 0
+          },
+          "stimulus": "p9"
+        },
+        {
+          "t_ms": 37.0,
+          "brain_steps": 380,
+          "behavior_mode": "walking",
+          "total_spikes": 0,
+          "dn": {
+            "forward": 0.1316,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 0,
+            "glut": 0
+          },
+          "stimulus": "p9"
+        },
+        {
+          "t_ms": 38.0,
+          "brain_steps": 390,
+          "behavior_mode": "walking",
+          "total_spikes": 0,
+          "dn": {
+            "forward": 0.1282,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 0,
+            "glut": 0
+          },
+          "stimulus": "p9"
+        },
+        {
+          "t_ms": 39.0,
+          "brain_steps": 400,
+          "behavior_mode": "walking",
+          "total_spikes": 0,
+          "dn": {
+            "forward": 0.125,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 0,
+            "glut": 0
+          },
+          "stimulus": "p9"
+        },
+        {
+          "t_ms": 40.0,
+          "brain_steps": 410,
+          "behavior_mode": "walking",
+          "total_spikes": 0,
+          "dn": {
+            "forward": 0.122,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 0,
+            "glut": 0
+          },
+          "stimulus": "p9"
+        },
+        {
+          "t_ms": 41.0,
+          "brain_steps": 420,
+          "behavior_mode": "walking",
+          "total_spikes": 0,
+          "dn": {
+            "forward": 0.119,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 0,
+            "glut": 0
+          },
+          "stimulus": "p9"
+        },
+        {
+          "t_ms": 42.0,
+          "brain_steps": 430,
+          "behavior_mode": "walking",
+          "total_spikes": 0,
+          "dn": {
+            "forward": 0.1163,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 0,
+            "glut": 0
+          },
+          "stimulus": "p9"
+        },
+        {
+          "t_ms": 43.0,
+          "brain_steps": 440,
+          "behavior_mode": "walking",
+          "total_spikes": 0,
+          "dn": {
+            "forward": 0.1136,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 0,
+            "glut": 0
+          },
+          "stimulus": "p9"
+        },
+        {
+          "t_ms": 44.0,
+          "brain_steps": 450,
+          "behavior_mode": "walking",
+          "total_spikes": 0,
+          "dn": {
+            "forward": 0.1111,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 0,
+            "glut": 0
+          },
+          "stimulus": "p9"
+        },
+        {
+          "t_ms": 45.0,
+          "brain_steps": 460,
+          "behavior_mode": "walking",
+          "total_spikes": 0,
+          "dn": {
+            "forward": 0.1087,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 0,
+            "glut": 0
+          },
+          "stimulus": "p9"
+        }
+      ]
+    },
+    "jo_groom": {
+      "id": "jo_groom",
+      "stimulus": "jo",
+      "frames": [
+        {
+          "t_ms": 0.0,
+          "brain_steps": 970,
+          "behavior_mode": "escape",
+          "total_spikes": 6,
+          "dn": {
+            "forward": 0.025,
+            "turn_L": 0.05,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.5,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 1,
+            "ach": 4,
+            "glut": 1
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 1.0,
+          "brain_steps": 980,
+          "behavior_mode": "escape",
+          "total_spikes": 6,
+          "dn": {
+            "forward": 0.025,
+            "turn_L": 0.05,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.5,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 2,
+            "ach": 1,
+            "glut": 3
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 2.0,
+          "brain_steps": 990,
+          "behavior_mode": "escape",
+          "total_spikes": 4,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.05,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.5,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 2,
+            "ach": 2,
+            "glut": 0
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 3.0,
+          "brain_steps": 1000,
+          "behavior_mode": "escape",
+          "total_spikes": 0,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.05,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.5,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 0,
+            "glut": 0
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 4.0,
+          "brain_steps": 1010,
+          "behavior_mode": "escape",
+          "total_spikes": 11,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.05,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.5,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 3,
+            "ach": 6,
+            "glut": 1
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 5.0,
+          "brain_steps": 1020,
+          "behavior_mode": "escape",
+          "total_spikes": 35,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.05,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.5,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 6,
+            "ach": 26,
+            "glut": 3
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 6.0,
+          "brain_steps": 1030,
+          "behavior_mode": "escape",
+          "total_spikes": 53,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.05,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.5,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 3,
+            "ach": 48,
+            "glut": 1
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 7.0,
+          "brain_steps": 1040,
+          "behavior_mode": "escape",
+          "total_spikes": 30,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.05,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.5,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 2,
+            "ach": 26,
+            "glut": 2
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 8.0,
+          "brain_steps": 1050,
+          "behavior_mode": "escape",
+          "total_spikes": 22,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.05,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.5,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 3,
+            "ach": 15,
+            "glut": 3
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 9.0,
+          "brain_steps": 1060,
+          "behavior_mode": "escape",
+          "total_spikes": 24,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.05,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.5,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 1,
+            "ach": 22,
+            "glut": 1
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 10.0,
+          "brain_steps": 1070,
+          "behavior_mode": "escape",
+          "total_spikes": 30,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.05,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.5,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 3,
+            "ach": 26,
+            "glut": 1
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 11.0,
+          "brain_steps": 1080,
+          "behavior_mode": "escape",
+          "total_spikes": 29,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.05,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.5,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 28,
+            "glut": 1
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 12.0,
+          "brain_steps": 1090,
+          "behavior_mode": "escape",
+          "total_spikes": 36,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.05,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.5,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 2,
+            "ach": 29,
+            "glut": 5
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 13.0,
+          "brain_steps": 1100,
+          "behavior_mode": "escape",
+          "total_spikes": 30,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.05,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.45,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 3,
+            "ach": 25,
+            "glut": 2
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 14.0,
+          "brain_steps": 1110,
+          "behavior_mode": "escape",
+          "total_spikes": 30,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.05,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.4,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 4,
+            "ach": 25,
+            "glut": 1
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 15.0,
+          "brain_steps": 1120,
+          "behavior_mode": "escape",
+          "total_spikes": 40,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.05,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.4,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 6,
+            "ach": 29,
+            "glut": 4
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 16.0,
+          "brain_steps": 1130,
+          "behavior_mode": "escape",
+          "total_spikes": 33,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.05,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.4,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 8,
+            "ach": 22,
+            "glut": 3
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 17.0,
+          "brain_steps": 1140,
+          "behavior_mode": "escape",
+          "total_spikes": 40,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.05,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.4,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 5,
+            "ach": 29,
+            "glut": 6
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 18.0,
+          "brain_steps": 1150,
+          "behavior_mode": "escape",
+          "total_spikes": 35,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.05,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.4,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 5,
+            "ach": 29,
+            "glut": 0
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 19.0,
+          "brain_steps": 1160,
+          "behavior_mode": "escape",
+          "total_spikes": 35,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.05,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.4,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 6,
+            "ach": 26,
+            "glut": 3
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 20.0,
+          "brain_steps": 1170,
+          "behavior_mode": "escape",
+          "total_spikes": 26,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.05,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.4,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 2,
+            "ach": 22,
+            "glut": 2
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 21.0,
+          "brain_steps": 1180,
+          "behavior_mode": "escape",
+          "total_spikes": 24,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.05,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.35,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 1,
+            "ach": 22,
+            "glut": 1
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 22.0,
+          "brain_steps": 1190,
+          "behavior_mode": "escape",
+          "total_spikes": 32,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.05,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.35,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 1,
+            "ach": 27,
+            "glut": 3
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 23.0,
+          "brain_steps": 1200,
+          "behavior_mode": "escape",
+          "total_spikes": 31,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.05,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.35,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 3,
+            "ach": 25,
+            "glut": 3
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 24.0,
+          "brain_steps": 1210,
+          "behavior_mode": "escape",
+          "total_spikes": 26,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.05,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.3,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 1,
+            "ach": 24,
+            "glut": 0
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 25.0,
+          "brain_steps": 1220,
+          "behavior_mode": "escape",
+          "total_spikes": 29,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.05,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.3,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 2,
+            "ach": 24,
+            "glut": 3
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 26.0,
+          "brain_steps": 1230,
+          "behavior_mode": "escape",
+          "total_spikes": 32,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.05,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.3,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 9,
+            "ach": 19,
+            "glut": 4
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 27.0,
+          "brain_steps": 1240,
+          "behavior_mode": "escape",
+          "total_spikes": 34,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.05,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.3,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 4,
+            "ach": 24,
+            "glut": 5
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 28.0,
+          "brain_steps": 1250,
+          "behavior_mode": "escape",
+          "total_spikes": 32,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.05,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.3,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 5,
+            "ach": 25,
+            "glut": 2
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 29.0,
+          "brain_steps": 1260,
+          "behavior_mode": "escape",
+          "total_spikes": 34,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.05,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.3,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 7,
+            "ach": 24,
+            "glut": 3
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 30.0,
+          "brain_steps": 1270,
+          "behavior_mode": "escape",
+          "total_spikes": 41,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.05,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.25,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 3,
+            "ach": 31,
+            "glut": 6
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 31.0,
+          "brain_steps": 1280,
+          "behavior_mode": "escape",
+          "total_spikes": 24,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.05,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.2,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 2,
+            "ach": 21,
+            "glut": 1
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 32.0,
+          "brain_steps": 1290,
+          "behavior_mode": "escape",
+          "total_spikes": 34,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.05,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.2,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 3,
+            "ach": 28,
+            "glut": 3
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 33.0,
+          "brain_steps": 1300,
+          "behavior_mode": "escape",
+          "total_spikes": 31,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.05,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.2,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 8,
+            "ach": 20,
+            "glut": 3
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 34.0,
+          "brain_steps": 1310,
+          "behavior_mode": "escape",
+          "total_spikes": 30,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.05,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.2,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 3,
+            "ach": 23,
+            "glut": 4
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 35.0,
+          "brain_steps": 1320,
+          "behavior_mode": "escape",
+          "total_spikes": 18,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.05,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.2,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 1,
+            "ach": 17,
+            "glut": 0
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 36.0,
+          "brain_steps": 1330,
+          "behavior_mode": "escape",
+          "total_spikes": 41,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.05,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.15,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 7,
+            "ach": 26,
+            "glut": 7
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 37.0,
+          "brain_steps": 1340,
+          "behavior_mode": "escape",
+          "total_spikes": 30,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.05,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.15,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 4,
+            "ach": 24,
+            "glut": 2
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 38.0,
+          "brain_steps": 1350,
+          "behavior_mode": "escape",
+          "total_spikes": 38,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.05,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.15,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 5,
+            "ach": 27,
+            "glut": 5
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 39.0,
+          "brain_steps": 1360,
+          "behavior_mode": "escape",
+          "total_spikes": 28,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.05,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.15,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 2,
+            "ach": 25,
+            "glut": 1
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 40.0,
+          "brain_steps": 1370,
+          "behavior_mode": "escape",
+          "total_spikes": 27,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.05,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.1,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 2,
+            "ach": 25,
+            "glut": 0
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 41.0,
+          "brain_steps": 1380,
+          "behavior_mode": "escape",
+          "total_spikes": 31,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.05,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.1,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 7,
+            "ach": 22,
+            "glut": 2
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 42.0,
+          "brain_steps": 1390,
+          "behavior_mode": "idle",
+          "total_spikes": 43,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.05,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.05,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 7,
+            "ach": 33,
+            "glut": 3
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 43.0,
+          "brain_steps": 1400,
+          "behavior_mode": "idle",
+          "total_spikes": 36,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.05,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.05,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 4,
+            "ach": 27,
+            "glut": 5
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 44.0,
+          "brain_steps": 1410,
+          "behavior_mode": "idle",
+          "total_spikes": 18,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.05,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.05,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 2,
+            "ach": 15,
+            "glut": 1
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 45.0,
+          "brain_steps": 1420,
+          "behavior_mode": "idle",
+          "total_spikes": 37,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.05,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 1,
+            "ach": 33,
+            "glut": 3
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 46.0,
+          "brain_steps": 1430,
+          "behavior_mode": "idle",
+          "total_spikes": 30,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.05,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 6,
+            "ach": 21,
+            "glut": 3
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 47.0,
+          "brain_steps": 1440,
+          "behavior_mode": "idle",
+          "total_spikes": 30,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.05,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 1,
+            "ach": 27,
+            "glut": 1
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 48.0,
+          "brain_steps": 1450,
+          "behavior_mode": "idle",
+          "total_spikes": 35,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.05,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 6,
+            "ach": 28,
+            "glut": 1
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 49.0,
+          "brain_steps": 1460,
+          "behavior_mode": "idle",
+          "total_spikes": 37,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.05,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 5,
+            "ach": 25,
+            "glut": 7
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 50.0,
+          "brain_steps": 1470,
+          "behavior_mode": "idle",
+          "total_spikes": 22,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 6,
+            "ach": 13,
+            "glut": 2
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 51.0,
+          "brain_steps": 1480,
+          "behavior_mode": "idle",
+          "total_spikes": 28,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 2,
+            "ach": 23,
+            "glut": 2
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 52.0,
+          "brain_steps": 1490,
+          "behavior_mode": "idle",
+          "total_spikes": 31,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 3,
+            "ach": 26,
+            "glut": 2
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 53.0,
+          "brain_steps": 1500,
+          "behavior_mode": "idle",
+          "total_spikes": 43,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 5,
+            "ach": 36,
+            "glut": 2
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 54.0,
+          "brain_steps": 1510,
+          "behavior_mode": "idle",
+          "total_spikes": 34,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 4,
+            "ach": 27,
+            "glut": 3
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 55.0,
+          "brain_steps": 1520,
+          "behavior_mode": "idle",
+          "total_spikes": 26,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 3,
+            "ach": 21,
+            "glut": 2
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 56.0,
+          "brain_steps": 1530,
+          "behavior_mode": "idle",
+          "total_spikes": 32,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 3,
+            "ach": 28,
+            "glut": 1
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 57.0,
+          "brain_steps": 1540,
+          "behavior_mode": "idle",
+          "total_spikes": 36,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 8,
+            "ach": 23,
+            "glut": 4
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 58.0,
+          "brain_steps": 1550,
+          "behavior_mode": "grooming",
+          "total_spikes": 42,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.05,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 10,
+            "ach": 31,
+            "glut": 1
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 59.0,
+          "brain_steps": 1560,
+          "behavior_mode": "grooming",
+          "total_spikes": 36,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.05,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 4,
+            "ach": 28,
+            "glut": 4
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 60.0,
+          "brain_steps": 1570,
+          "behavior_mode": "grooming",
+          "total_spikes": 32,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.05,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 4,
+            "ach": 25,
+            "glut": 3
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 61.0,
+          "brain_steps": 1580,
+          "behavior_mode": "grooming",
+          "total_spikes": 36,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.05,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 4,
+            "ach": 26,
+            "glut": 5
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 62.0,
+          "brain_steps": 1590,
+          "behavior_mode": "grooming",
+          "total_spikes": 42,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.05,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 6,
+            "ach": 31,
+            "glut": 5
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 63.0,
+          "brain_steps": 1600,
+          "behavior_mode": "grooming",
+          "total_spikes": 37,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.05,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 5,
+            "ach": 25,
+            "glut": 6
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 64.0,
+          "brain_steps": 1610,
+          "behavior_mode": "grooming",
+          "total_spikes": 23,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.05,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 5,
+            "ach": 17,
+            "glut": 1
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 65.0,
+          "brain_steps": 1620,
+          "behavior_mode": "grooming",
+          "total_spikes": 32,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.05,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 29,
+            "glut": 3
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 66.0,
+          "brain_steps": 1630,
+          "behavior_mode": "grooming",
+          "total_spikes": 34,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.05,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 5,
+            "ach": 25,
+            "glut": 3
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 67.0,
+          "brain_steps": 1640,
+          "behavior_mode": "grooming",
+          "total_spikes": 27,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.05,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 6,
+            "ach": 20,
+            "glut": 0
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 68.0,
+          "brain_steps": 1650,
+          "behavior_mode": "grooming",
+          "total_spikes": 44,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.05,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 7,
+            "ach": 32,
+            "glut": 5
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 69.0,
+          "brain_steps": 1660,
+          "behavior_mode": "grooming",
+          "total_spikes": 36,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.05,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 6,
+            "ach": 24,
+            "glut": 6
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 70.0,
+          "brain_steps": 1670,
+          "behavior_mode": "grooming",
+          "total_spikes": 35,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.05,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 7,
+            "ach": 26,
+            "glut": 2
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 71.0,
+          "brain_steps": 1680,
+          "behavior_mode": "grooming",
+          "total_spikes": 27,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.05,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 3,
+            "ach": 22,
+            "glut": 2
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 72.0,
+          "brain_steps": 1690,
+          "behavior_mode": "grooming",
+          "total_spikes": 27,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.05,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 3,
+            "ach": 23,
+            "glut": 1
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 73.0,
+          "brain_steps": 1700,
+          "behavior_mode": "grooming",
+          "total_spikes": 31,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.05,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 5,
+            "ach": 24,
+            "glut": 2
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 74.0,
+          "brain_steps": 1710,
+          "behavior_mode": "grooming",
+          "total_spikes": 29,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.05,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 1,
+            "ach": 24,
+            "glut": 3
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 75.0,
+          "brain_steps": 1720,
+          "behavior_mode": "grooming",
+          "total_spikes": 44,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.05,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 7,
+            "ach": 33,
+            "glut": 3
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 76.0,
+          "brain_steps": 1730,
+          "behavior_mode": "grooming",
+          "total_spikes": 28,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.05,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 24,
+            "glut": 4
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 77.0,
+          "brain_steps": 1740,
+          "behavior_mode": "grooming",
+          "total_spikes": 28,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.05,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 3,
+            "ach": 23,
+            "glut": 2
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 78.0,
+          "brain_steps": 1750,
+          "behavior_mode": "grooming",
+          "total_spikes": 50,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.05,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 15,
+            "ach": 32,
+            "glut": 3
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 79.0,
+          "brain_steps": 1760,
+          "behavior_mode": "grooming",
+          "total_spikes": 33,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.05,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 4,
+            "ach": 27,
+            "glut": 2
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 80.0,
+          "brain_steps": 1770,
+          "behavior_mode": "grooming",
+          "total_spikes": 23,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.05,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 4,
+            "ach": 18,
+            "glut": 1
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 81.0,
+          "brain_steps": 1780,
+          "behavior_mode": "grooming",
+          "total_spikes": 30,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.05,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 2,
+            "ach": 25,
+            "glut": 3
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 82.0,
+          "brain_steps": 1790,
+          "behavior_mode": "grooming",
+          "total_spikes": 30,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.05,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 1,
+            "ach": 28,
+            "glut": 1
+          },
+          "stimulus": "jo"
+        },
+        {
+          "t_ms": 83.0,
+          "brain_steps": 1800,
+          "behavior_mode": "grooming",
+          "total_spikes": 24,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.05,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 3,
+            "ach": 17,
+            "glut": 4
+          },
+          "stimulus": "jo"
+        }
+      ]
+    },
+    "sugar_feed": {
+      "id": "sugar_feed",
+      "stimulus": "sugar",
+      "frames": [
+        {
+          "t_ms": 0.0,
+          "brain_steps": 1830,
+          "behavior_mode": "grooming",
+          "total_spikes": 27,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.05,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 3,
+            "ach": 24,
+            "glut": 0
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 1.0,
+          "brain_steps": 1840,
+          "behavior_mode": "grooming",
+          "total_spikes": 25,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.05,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 3,
+            "ach": 19,
+            "glut": 3
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 2.0,
+          "brain_steps": 1850,
+          "behavior_mode": "grooming",
+          "total_spikes": 22,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.1,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 5,
+            "ach": 14,
+            "glut": 3
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 3.0,
+          "brain_steps": 1860,
+          "behavior_mode": "grooming",
+          "total_spikes": 29,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.1,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 9,
+            "ach": 18,
+            "glut": 2
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 4.0,
+          "brain_steps": 1870,
+          "behavior_mode": "grooming",
+          "total_spikes": 7,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.1,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 2,
+            "ach": 3,
+            "glut": 2
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 5.0,
+          "brain_steps": 1880,
+          "behavior_mode": "grooming",
+          "total_spikes": 5,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.1,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 5,
+            "glut": 0
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 6.0,
+          "brain_steps": 1890,
+          "behavior_mode": "grooming",
+          "total_spikes": 6,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.1,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 6,
+            "glut": 0
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 7.0,
+          "brain_steps": 1900,
+          "behavior_mode": "grooming",
+          "total_spikes": 1,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.1,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 1,
+            "ach": 0,
+            "glut": 0
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 8.0,
+          "brain_steps": 1910,
+          "behavior_mode": "grooming",
+          "total_spikes": 4,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.1,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 2,
+            "ach": 2,
+            "glut": 0
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 9.0,
+          "brain_steps": 1920,
+          "behavior_mode": "grooming",
+          "total_spikes": 4,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.1,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 4,
+            "glut": 0
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 10.0,
+          "brain_steps": 1930,
+          "behavior_mode": "grooming",
+          "total_spikes": 4,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.1,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 4,
+            "glut": 0
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 11.0,
+          "brain_steps": 1940,
+          "behavior_mode": "grooming",
+          "total_spikes": 4,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.1,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 1,
+            "ach": 2,
+            "glut": 1
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 12.0,
+          "brain_steps": 1950,
+          "behavior_mode": "grooming",
+          "total_spikes": 4,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.1,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 1,
+            "ach": 3,
+            "glut": 0
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 13.0,
+          "brain_steps": 1960,
+          "behavior_mode": "grooming",
+          "total_spikes": 3,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.1,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 3,
+            "glut": 0
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 14.0,
+          "brain_steps": 1970,
+          "behavior_mode": "grooming",
+          "total_spikes": 5,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.1,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 1,
+            "ach": 4,
+            "glut": 0
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 15.0,
+          "brain_steps": 1980,
+          "behavior_mode": "grooming",
+          "total_spikes": 5,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.1,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 1,
+            "ach": 4,
+            "glut": 0
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 16.0,
+          "brain_steps": 1990,
+          "behavior_mode": "grooming",
+          "total_spikes": 3,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.1,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 3,
+            "glut": 0
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 17.0,
+          "brain_steps": 2000,
+          "behavior_mode": "grooming",
+          "total_spikes": 4,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.1,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 4,
+            "glut": 0
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 18.0,
+          "brain_steps": 2010,
+          "behavior_mode": "grooming",
+          "total_spikes": 2,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.1,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 2,
+            "glut": 0
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 19.0,
+          "brain_steps": 2020,
+          "behavior_mode": "grooming",
+          "total_spikes": 10,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.1,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 6,
+            "ach": 4,
+            "glut": 0
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 20.0,
+          "brain_steps": 2030,
+          "behavior_mode": "grooming",
+          "total_spikes": 3,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.1,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 1,
+            "ach": 2,
+            "glut": 0
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 21.0,
+          "brain_steps": 2040,
+          "behavior_mode": "grooming",
+          "total_spikes": 2,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.1,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 1,
+            "ach": 1,
+            "glut": 0
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 22.0,
+          "brain_steps": 2050,
+          "behavior_mode": "grooming",
+          "total_spikes": 6,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.05,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 2,
+            "ach": 4,
+            "glut": 0
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 23.0,
+          "brain_steps": 2060,
+          "behavior_mode": "grooming",
+          "total_spikes": 2,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.05,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 2,
+            "glut": 0
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 24.0,
+          "brain_steps": 2070,
+          "behavior_mode": "grooming",
+          "total_spikes": 5,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.05,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 2,
+            "ach": 3,
+            "glut": 0
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 25.0,
+          "brain_steps": 2080,
+          "behavior_mode": "grooming",
+          "total_spikes": 0,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.05,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 0,
+            "glut": 0
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 26.0,
+          "brain_steps": 2090,
+          "behavior_mode": "grooming",
+          "total_spikes": 9,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.05,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 9,
+            "glut": 0
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 27.0,
+          "brain_steps": 2100,
+          "behavior_mode": "grooming",
+          "total_spikes": 5,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.05,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 2,
+            "ach": 2,
+            "glut": 0
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 28.0,
+          "brain_steps": 2110,
+          "behavior_mode": "grooming",
+          "total_spikes": 4,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.05,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 1,
+            "ach": 3,
+            "glut": 0
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 29.0,
+          "brain_steps": 2120,
+          "behavior_mode": "grooming",
+          "total_spikes": 9,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.05,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 1,
+            "ach": 8,
+            "glut": 0
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 30.0,
+          "brain_steps": 2130,
+          "behavior_mode": "grooming",
+          "total_spikes": 3,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.05,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 2,
+            "ach": 1,
+            "glut": 0
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 31.0,
+          "brain_steps": 2140,
+          "behavior_mode": "grooming",
+          "total_spikes": 8,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.05,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 2,
+            "ach": 6,
+            "glut": 0
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 32.0,
+          "brain_steps": 2150,
+          "behavior_mode": "grooming",
+          "total_spikes": 7,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.05,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 6,
+            "ach": 0,
+            "glut": 0
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 33.0,
+          "brain_steps": 2160,
+          "behavior_mode": "grooming",
+          "total_spikes": 4,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.05,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 4,
+            "glut": 0
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 34.0,
+          "brain_steps": 2170,
+          "behavior_mode": "grooming",
+          "total_spikes": 9,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.05,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 2,
+            "ach": 6,
+            "glut": 1
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 35.0,
+          "brain_steps": 2180,
+          "behavior_mode": "grooming",
+          "total_spikes": 7,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.05,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 2,
+            "ach": 5,
+            "glut": 0
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 36.0,
+          "brain_steps": 2190,
+          "behavior_mode": "grooming",
+          "total_spikes": 6,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.05,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 1,
+            "ach": 5,
+            "glut": 0
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 37.0,
+          "brain_steps": 2200,
+          "behavior_mode": "grooming",
+          "total_spikes": 2,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.05,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 2,
+            "glut": 0
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 38.0,
+          "brain_steps": 2210,
+          "behavior_mode": "grooming",
+          "total_spikes": 4,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.05,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 2,
+            "ach": 1,
+            "glut": 1
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 39.0,
+          "brain_steps": 2220,
+          "behavior_mode": "grooming",
+          "total_spikes": 7,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.05,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 1,
+            "ach": 6,
+            "glut": 0
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 40.0,
+          "brain_steps": 2230,
+          "behavior_mode": "grooming",
+          "total_spikes": 7,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.05,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 1,
+            "ach": 6,
+            "glut": 0
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 41.0,
+          "brain_steps": 2240,
+          "behavior_mode": "grooming",
+          "total_spikes": 7,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.05,
+            "feed": 0.05
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 2,
+            "ach": 5,
+            "glut": 0
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 42.0,
+          "brain_steps": 2250,
+          "behavior_mode": "grooming",
+          "total_spikes": 14,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.05,
+            "feed": 0.05
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 4,
+            "ach": 10,
+            "glut": 0
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 43.0,
+          "brain_steps": 2260,
+          "behavior_mode": "grooming",
+          "total_spikes": 7,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.05,
+            "feed": 0.05
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 5,
+            "ach": 2,
+            "glut": 0
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 44.0,
+          "brain_steps": 2270,
+          "behavior_mode": "grooming",
+          "total_spikes": 12,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.05,
+            "feed": 0.1
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 6,
+            "ach": 6,
+            "glut": 0
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 45.0,
+          "brain_steps": 2280,
+          "behavior_mode": "grooming",
+          "total_spikes": 9,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.05,
+            "feed": 0.1
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 4,
+            "ach": 4,
+            "glut": 0
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 46.0,
+          "brain_steps": 2290,
+          "behavior_mode": "grooming",
+          "total_spikes": 17,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.05,
+            "feed": 0.15
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 1,
+            "octopamine": 0,
+            "gaba": 5,
+            "ach": 10,
+            "glut": 0
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 47.0,
+          "brain_steps": 2300,
+          "behavior_mode": "grooming",
+          "total_spikes": 12,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.05,
+            "feed": 0.15
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 3,
+            "ach": 7,
+            "glut": 2
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 48.0,
+          "brain_steps": 2310,
+          "behavior_mode": "grooming",
+          "total_spikes": 18,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.05,
+            "feed": 0.15
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 4,
+            "ach": 12,
+            "glut": 2
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 49.0,
+          "brain_steps": 2320,
+          "behavior_mode": "grooming",
+          "total_spikes": 12,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.05,
+            "feed": 0.15
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 3,
+            "ach": 6,
+            "glut": 3
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 50.0,
+          "brain_steps": 2330,
+          "behavior_mode": "grooming",
+          "total_spikes": 5,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.05,
+            "feed": 0.15
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 5,
+            "glut": 0
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 51.0,
+          "brain_steps": 2340,
+          "behavior_mode": "grooming",
+          "total_spikes": 15,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.05,
+            "feed": 0.2
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 5,
+            "ach": 9,
+            "glut": 1
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 52.0,
+          "brain_steps": 2350,
+          "behavior_mode": "feeding",
+          "total_spikes": 18,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.2
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 7,
+            "ach": 7,
+            "glut": 4
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 53.0,
+          "brain_steps": 2360,
+          "behavior_mode": "feeding",
+          "total_spikes": 25,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.2
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 9,
+            "ach": 12,
+            "glut": 4
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 54.0,
+          "brain_steps": 2370,
+          "behavior_mode": "feeding",
+          "total_spikes": 11,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.2
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 2,
+            "ach": 9,
+            "glut": 0
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 55.0,
+          "brain_steps": 2380,
+          "behavior_mode": "feeding",
+          "total_spikes": 8,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.25
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 1,
+            "ach": 7,
+            "glut": 0
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 56.0,
+          "brain_steps": 2390,
+          "behavior_mode": "feeding",
+          "total_spikes": 11,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.25
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 2,
+            "ach": 6,
+            "glut": 3
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 57.0,
+          "brain_steps": 2400,
+          "behavior_mode": "feeding",
+          "total_spikes": 10,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.25
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 3,
+            "ach": 7,
+            "glut": 0
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 58.0,
+          "brain_steps": 2410,
+          "behavior_mode": "feeding",
+          "total_spikes": 19,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.25
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 4,
+            "ach": 14,
+            "glut": 1
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 59.0,
+          "brain_steps": 2420,
+          "behavior_mode": "feeding",
+          "total_spikes": 15,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.3
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 1,
+            "octopamine": 0,
+            "gaba": 4,
+            "ach": 8,
+            "glut": 2
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 60.0,
+          "brain_steps": 2430,
+          "behavior_mode": "feeding",
+          "total_spikes": 16,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.3
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 4,
+            "ach": 10,
+            "glut": 2
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 61.0,
+          "brain_steps": 2440,
+          "behavior_mode": "feeding",
+          "total_spikes": 11,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.3
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 3,
+            "ach": 6,
+            "glut": 2
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 62.0,
+          "brain_steps": 2450,
+          "behavior_mode": "feeding",
+          "total_spikes": 13,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.35
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 5,
+            "ach": 8,
+            "glut": 0
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 63.0,
+          "brain_steps": 2460,
+          "behavior_mode": "feeding",
+          "total_spikes": 19,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.35
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 1,
+            "gaba": 8,
+            "ach": 9,
+            "glut": 0
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 64.0,
+          "brain_steps": 2470,
+          "behavior_mode": "feeding",
+          "total_spikes": 20,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.35
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 1,
+            "octopamine": 0,
+            "gaba": 6,
+            "ach": 10,
+            "glut": 3
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 65.0,
+          "brain_steps": 2480,
+          "behavior_mode": "feeding",
+          "total_spikes": 13,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.35
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 6,
+            "ach": 7,
+            "glut": 0
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 66.0,
+          "brain_steps": 2490,
+          "behavior_mode": "feeding",
+          "total_spikes": 14,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.35
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 5,
+            "ach": 6,
+            "glut": 1
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 67.0,
+          "brain_steps": 2500,
+          "behavior_mode": "feeding",
+          "total_spikes": 16,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.35
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 3,
+            "ach": 11,
+            "glut": 2
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 68.0,
+          "brain_steps": 2510,
+          "behavior_mode": "feeding",
+          "total_spikes": 18,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.35
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 6,
+            "ach": 11,
+            "glut": 0
+          },
+          "stimulus": "sugar"
+        },
+        {
+          "t_ms": 69.0,
+          "brain_steps": 2520,
+          "behavior_mode": "feeding",
+          "total_spikes": 9,
+          "dn": {
+            "forward": 0.0,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.35
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 1,
+            "ach": 5,
+            "glut": 2
+          },
+          "stimulus": "sugar"
+        }
+      ]
+    },
+    "lc4_escape": {
+      "id": "lc4_escape",
+      "stimulus": "lc4",
+      "frames": [
+        {
+          "t_ms": 0.0,
+          "brain_steps": 490,
+          "behavior_mode": "walking",
+          "total_spikes": 1,
+          "dn": {
+            "forward": 0.1276,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 1,
+            "glut": 0
+          },
+          "stimulus": "lc4"
+        },
+        {
+          "t_ms": 1.0,
+          "brain_steps": 500,
+          "behavior_mode": "walking",
+          "total_spikes": 0,
+          "dn": {
+            "forward": 0.125,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 0,
+            "glut": 0
+          },
+          "stimulus": "lc4"
+        },
+        {
+          "t_ms": 2.0,
+          "brain_steps": 510,
+          "behavior_mode": "walking",
+          "total_spikes": 0,
+          "dn": {
+            "forward": 0.125,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 0,
+            "glut": 0
+          },
+          "stimulus": "lc4"
+        },
+        {
+          "t_ms": 3.0,
+          "brain_steps": 520,
+          "behavior_mode": "walking",
+          "total_spikes": 1,
+          "dn": {
+            "forward": 0.125,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 1,
+            "glut": 0
+          },
+          "stimulus": "lc4"
+        },
+        {
+          "t_ms": 4.0,
+          "brain_steps": 530,
+          "behavior_mode": "walking",
+          "total_spikes": 6,
+          "dn": {
+            "forward": 0.125,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 6,
+            "glut": 0
+          },
+          "stimulus": "lc4"
+        },
+        {
+          "t_ms": 5.0,
+          "brain_steps": 540,
+          "behavior_mode": "walking",
+          "total_spikes": 13,
+          "dn": {
+            "forward": 0.125,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 13,
+            "glut": 0
+          },
+          "stimulus": "lc4"
+        },
+        {
+          "t_ms": 6.0,
+          "brain_steps": 550,
+          "behavior_mode": "walking",
+          "total_spikes": 9,
+          "dn": {
+            "forward": 0.125,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 9,
+            "glut": 0
+          },
+          "stimulus": "lc4"
+        },
+        {
+          "t_ms": 7.0,
+          "brain_steps": 560,
+          "behavior_mode": "walking",
+          "total_spikes": 15,
+          "dn": {
+            "forward": 0.1,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 15,
+            "glut": 0
+          },
+          "stimulus": "lc4"
+        },
+        {
+          "t_ms": 8.0,
+          "brain_steps": 570,
+          "behavior_mode": "walking",
+          "total_spikes": 16,
+          "dn": {
+            "forward": 0.1,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 16,
+            "glut": 0
+          },
+          "stimulus": "lc4"
+        },
+        {
+          "t_ms": 9.0,
+          "brain_steps": 580,
+          "behavior_mode": "walking",
+          "total_spikes": 7,
+          "dn": {
+            "forward": 0.1,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 0,
+            "ach": 7,
+            "glut": 0
+          },
+          "stimulus": "lc4"
+        },
+        {
+          "t_ms": 10.0,
+          "brain_steps": 590,
+          "behavior_mode": "walking",
+          "total_spikes": 15,
+          "dn": {
+            "forward": 0.1,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.0,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 3,
+            "ach": 12,
+            "glut": 0
+          },
+          "stimulus": "lc4"
+        },
+        {
+          "t_ms": 11.0,
+          "brain_steps": 600,
+          "behavior_mode": "walking",
+          "total_spikes": 18,
+          "dn": {
+            "forward": 0.1,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.05,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 1,
+            "ach": 16,
+            "glut": 1
+          },
+          "stimulus": "lc4"
+        },
+        {
+          "t_ms": 12.0,
+          "brain_steps": 610,
+          "behavior_mode": "escape",
+          "total_spikes": 15,
+          "dn": {
+            "forward": 0.1,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.1,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 1,
+            "ach": 13,
+            "glut": 1
+          },
+          "stimulus": "lc4"
+        },
+        {
+          "t_ms": 13.0,
+          "brain_steps": 620,
+          "behavior_mode": "escape",
+          "total_spikes": 20,
+          "dn": {
+            "forward": 0.1,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.1,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 5,
+            "ach": 14,
+            "glut": 1
+          },
+          "stimulus": "lc4"
+        },
+        {
+          "t_ms": 14.0,
+          "brain_steps": 630,
+          "behavior_mode": "escape",
+          "total_spikes": 26,
+          "dn": {
+            "forward": 0.1,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.1,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 2,
+            "ach": 24,
+            "glut": 0
+          },
+          "stimulus": "lc4"
+        },
+        {
+          "t_ms": 15.0,
+          "brain_steps": 640,
+          "behavior_mode": "escape",
+          "total_spikes": 17,
+          "dn": {
+            "forward": 0.1,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.1,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 1,
+            "ach": 16,
+            "glut": 0
+          },
+          "stimulus": "lc4"
+        },
+        {
+          "t_ms": 16.0,
+          "brain_steps": 650,
+          "behavior_mode": "escape",
+          "total_spikes": 14,
+          "dn": {
+            "forward": 0.1,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.1,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 3,
+            "ach": 11,
+            "glut": 0
+          },
+          "stimulus": "lc4"
+        },
+        {
+          "t_ms": 17.0,
+          "brain_steps": 660,
+          "behavior_mode": "escape",
+          "total_spikes": 17,
+          "dn": {
+            "forward": 0.1,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.1,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 4,
+            "ach": 13,
+            "glut": 0
+          },
+          "stimulus": "lc4"
+        },
+        {
+          "t_ms": 18.0,
+          "brain_steps": 670,
+          "behavior_mode": "escape",
+          "total_spikes": 19,
+          "dn": {
+            "forward": 0.1,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.1,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 5,
+            "ach": 13,
+            "glut": 1
+          },
+          "stimulus": "lc4"
+        },
+        {
+          "t_ms": 19.0,
+          "brain_steps": 680,
+          "behavior_mode": "escape",
+          "total_spikes": 25,
+          "dn": {
+            "forward": 0.1,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.15,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 2,
+            "ach": 18,
+            "glut": 5
+          },
+          "stimulus": "lc4"
+        },
+        {
+          "t_ms": 20.0,
+          "brain_steps": 690,
+          "behavior_mode": "escape",
+          "total_spikes": 17,
+          "dn": {
+            "forward": 0.1,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.15,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 3,
+            "ach": 13,
+            "glut": 1
+          },
+          "stimulus": "lc4"
+        },
+        {
+          "t_ms": 21.0,
+          "brain_steps": 700,
+          "behavior_mode": "escape",
+          "total_spikes": 17,
+          "dn": {
+            "forward": 0.1,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.15,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 2,
+            "ach": 12,
+            "glut": 3
+          },
+          "stimulus": "lc4"
+        },
+        {
+          "t_ms": 22.0,
+          "brain_steps": 710,
+          "behavior_mode": "escape",
+          "total_spikes": 28,
+          "dn": {
+            "forward": 0.1,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.2,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 1,
+            "ach": 24,
+            "glut": 3
+          },
+          "stimulus": "lc4"
+        },
+        {
+          "t_ms": 23.0,
+          "brain_steps": 720,
+          "behavior_mode": "escape",
+          "total_spikes": 29,
+          "dn": {
+            "forward": 0.075,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.2,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 6,
+            "ach": 23,
+            "glut": 0
+          },
+          "stimulus": "lc4"
+        },
+        {
+          "t_ms": 24.0,
+          "brain_steps": 730,
+          "behavior_mode": "escape",
+          "total_spikes": 16,
+          "dn": {
+            "forward": 0.075,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.2,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 4,
+            "ach": 12,
+            "glut": 0
+          },
+          "stimulus": "lc4"
+        },
+        {
+          "t_ms": 25.0,
+          "brain_steps": 740,
+          "behavior_mode": "escape",
+          "total_spikes": 23,
+          "dn": {
+            "forward": 0.075,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.2,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 5,
+            "ach": 16,
+            "glut": 2
+          },
+          "stimulus": "lc4"
+        },
+        {
+          "t_ms": 26.0,
+          "brain_steps": 750,
+          "behavior_mode": "escape",
+          "total_spikes": 24,
+          "dn": {
+            "forward": 0.075,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.2,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 7,
+            "ach": 16,
+            "glut": 0
+          },
+          "stimulus": "lc4"
+        },
+        {
+          "t_ms": 27.0,
+          "brain_steps": 760,
+          "behavior_mode": "escape",
+          "total_spikes": 28,
+          "dn": {
+            "forward": 0.075,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.2,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 6,
+            "ach": 18,
+            "glut": 4
+          },
+          "stimulus": "lc4"
+        },
+        {
+          "t_ms": 28.0,
+          "brain_steps": 770,
+          "behavior_mode": "escape",
+          "total_spikes": 19,
+          "dn": {
+            "forward": 0.075,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.25,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 4,
+            "ach": 13,
+            "glut": 2
+          },
+          "stimulus": "lc4"
+        },
+        {
+          "t_ms": 29.0,
+          "brain_steps": 780,
+          "behavior_mode": "escape",
+          "total_spikes": 26,
+          "dn": {
+            "forward": 0.075,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.3,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 2,
+            "ach": 22,
+            "glut": 2
+          },
+          "stimulus": "lc4"
+        },
+        {
+          "t_ms": 30.0,
+          "brain_steps": 790,
+          "behavior_mode": "escape",
+          "total_spikes": 19,
+          "dn": {
+            "forward": 0.05,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.3,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 2,
+            "ach": 16,
+            "glut": 1
+          },
+          "stimulus": "lc4"
+        },
+        {
+          "t_ms": 31.0,
+          "brain_steps": 800,
+          "behavior_mode": "escape",
+          "total_spikes": 27,
+          "dn": {
+            "forward": 0.05,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.3,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 2,
+            "ach": 22,
+            "glut": 3
+          },
+          "stimulus": "lc4"
+        },
+        {
+          "t_ms": 32.0,
+          "brain_steps": 810,
+          "behavior_mode": "escape",
+          "total_spikes": 22,
+          "dn": {
+            "forward": 0.05,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.3,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 5,
+            "ach": 14,
+            "glut": 3
+          },
+          "stimulus": "lc4"
+        },
+        {
+          "t_ms": 33.0,
+          "brain_steps": 820,
+          "behavior_mode": "escape",
+          "total_spikes": 18,
+          "dn": {
+            "forward": 0.05,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.3,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 4,
+            "ach": 12,
+            "glut": 2
+          },
+          "stimulus": "lc4"
+        },
+        {
+          "t_ms": 34.0,
+          "brain_steps": 830,
+          "behavior_mode": "escape",
+          "total_spikes": 29,
+          "dn": {
+            "forward": 0.05,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.35,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 4,
+            "ach": 21,
+            "glut": 4
+          },
+          "stimulus": "lc4"
+        },
+        {
+          "t_ms": 35.0,
+          "brain_steps": 840,
+          "behavior_mode": "escape",
+          "total_spikes": 23,
+          "dn": {
+            "forward": 0.05,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.35,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 2,
+            "ach": 21,
+            "glut": 0
+          },
+          "stimulus": "lc4"
+        },
+        {
+          "t_ms": 36.0,
+          "brain_steps": 850,
+          "behavior_mode": "escape",
+          "total_spikes": 20,
+          "dn": {
+            "forward": 0.025,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.35,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 3,
+            "ach": 16,
+            "glut": 1
+          },
+          "stimulus": "lc4"
+        },
+        {
+          "t_ms": 37.0,
+          "brain_steps": 860,
+          "behavior_mode": "escape",
+          "total_spikes": 18,
+          "dn": {
+            "forward": 0.025,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.35,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 1,
+            "ach": 16,
+            "glut": 1
+          },
+          "stimulus": "lc4"
+        },
+        {
+          "t_ms": 38.0,
+          "brain_steps": 870,
+          "behavior_mode": "escape",
+          "total_spikes": 23,
+          "dn": {
+            "forward": 0.025,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.4,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 2,
+            "ach": 18,
+            "glut": 3
+          },
+          "stimulus": "lc4"
+        },
+        {
+          "t_ms": 39.0,
+          "brain_steps": 880,
+          "behavior_mode": "escape",
+          "total_spikes": 25,
+          "dn": {
+            "forward": 0.025,
+            "turn_L": 0.0,
+            "turn_R": 0.0,
+            "backward": 0.0,
+            "escape": 0.4,
+            "groom": 0.0,
+            "feed": 0.0
+          },
+          "pop": {
+            "pam": 0,
+            "ppl1": 0,
+            "mbon_approach": 0,
+            "mbon_avoidance": 0,
+            "mbon_suppress": 0,
+            "serotonin": 0,
+            "octopamine": 0,
+            "gaba": 2,
+            "ach": 23,
+            "glut": 0
+          },
+          "stimulus": "lc4"
+        }
+      ]
+    }
+  }
+}

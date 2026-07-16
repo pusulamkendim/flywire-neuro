@@ -97,6 +97,7 @@ body {
     grid-area: viewport;
     background: var(--bg-primary);
     position: relative;
+    overflow: hidden;
 }
 
 #three-canvas {
@@ -128,6 +129,30 @@ body {
     letter-spacing: 1px;
 }
 
+#world-scale-display {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    padding: 4px 8px;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: 4px;
+    background: rgba(10, 10, 15, 0.68);
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 9px;
+    letter-spacing: 0.5px;
+    pointer-events: none;
+    z-index: 4;
+    max-width: calc(100% - 180px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.world-section {
+    border-color: rgba(113, 212, 125, 0.38);
+    background: linear-gradient(145deg, rgba(37, 77, 43, 0.24), var(--bg-panel));
+}
+
 /* Bottom Panel (Brain + Time Series) */
 #bottom-panel {
     grid-area: bottom-panel;
@@ -147,6 +172,22 @@ body {
 
 #bottom-panel .section:last-child {
     border-right: none;
+}
+
+#brain-canvas-container {
+    overflow: hidden;
+    border: 1px solid rgba(67, 96, 118, 0.28);
+    border-radius: 5px;
+    background: #010305;
+    box-shadow:
+        inset 0 0 28px rgba(0, 0, 0, 0.92),
+        0 0 16px rgba(35, 111, 145, 0.05);
+}
+
+#brain-canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
 }
 
 /* Dashboard Panel */
@@ -198,6 +239,253 @@ body {
 .controls button.stop {
     border-color: var(--accent-escape);
     color: var(--accent-escape);
+}
+
+.lif-sync-control {
+    display: grid;
+    grid-template-columns: 14px 1fr;
+    column-gap: 7px;
+    row-gap: 2px;
+    align-items: center;
+    margin-top: 8px;
+    padding: 7px 8px;
+    border: 1px solid rgba(98, 214, 255, 0.28);
+    border-radius: 4px;
+    background: rgba(42, 164, 210, 0.07);
+    color: #bcecff;
+    font-size: 10px;
+    cursor: pointer;
+}
+
+.lif-sync-control input {
+    width: 13px;
+    height: 13px;
+    accent-color: #62d6ff;
+}
+
+.lif-sync-control small {
+    grid-column: 2;
+    color: var(--text-muted);
+    font-size: 8px;
+    line-height: 1.35;
+}
+
+.controls button.episode-start {
+    border-color: #62d6ff;
+    color: #9ce7ff;
+    background: rgba(42, 164, 210, 0.1);
+}
+
+.controls button.episode-start:hover {
+    background: rgba(42, 164, 210, 0.2);
+}
+
+.episode-monitor {
+    margin-top: 9px;
+    padding: 9px;
+    border: 1px solid rgba(98, 214, 255, 0.35);
+    border-radius: 5px;
+    background: rgba(4, 13, 21, 0.72);
+}
+
+.episode-monitor-head,
+.episode-progress-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+}
+
+.episode-monitor-head {
+    font-size: 10px;
+    color: var(--text-primary);
+    margin-bottom: 7px;
+}
+
+.episode-source {
+    padding: 2px 5px;
+    border: 1px solid #d49b36;
+    border-radius: 3px;
+    color: #f0bd62;
+    font-size: 8px;
+    letter-spacing: 0.6px;
+}
+
+.episode-progress-track {
+    height: 5px;
+    overflow: hidden;
+    border-radius: 5px;
+    background: var(--bg-primary);
+}
+
+#episode-progress-fill {
+    width: 0;
+    height: 100%;
+    background: linear-gradient(90deg, #29a9d6, #66e1ff);
+    transition: width 0.08s linear;
+}
+
+.episode-progress-meta {
+    margin-top: 5px;
+    font-size: 9px;
+    color: var(--text-muted);
+}
+
+#episode-stage {
+    color: #8edff8;
+    font-weight: 700;
+}
+
+.episode-steps {
+    display: flex;
+    gap: 3px;
+    margin-top: 8px;
+}
+
+.episode-step {
+    flex: 1;
+    min-width: 0;
+    padding: 4px 2px;
+    border-radius: 3px;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 8px;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.episode-step.active {
+    border-color: #62d6ff;
+    color: #b7efff;
+    background: rgba(42, 164, 210, 0.18);
+}
+
+.episode-step.done {
+    border-color: rgba(46, 204, 113, 0.45);
+    color: var(--accent-forward);
+}
+
+.episode-pipeline {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+    margin-top: 8px;
+}
+
+.episode-pipeline > div {
+    min-width: 0;
+    padding: 5px;
+    border: 1px solid rgba(42, 42, 68, 0.75);
+    border-radius: 3px;
+    background: rgba(20, 20, 32, 0.8);
+}
+
+.episode-pipeline span,
+.episode-pipeline b {
+    display: block;
+}
+
+.episode-pipeline span {
+    color: var(--text-muted);
+    font-size: 7px;
+    letter-spacing: 0.7px;
+}
+
+.episode-pipeline b {
+    margin-top: 2px;
+    color: var(--text-secondary);
+    font-size: 8px;
+    font-weight: 500;
+    line-height: 1.25;
+}
+
+.episode-neural-live {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 3px;
+    margin-top: 7px;
+}
+
+.episode-neural-live > div {
+    min-width: 0;
+    padding: 5px 2px;
+    border: 1px solid rgba(98, 214, 255, 0.18);
+    border-radius: 3px;
+    background: rgba(32, 108, 135, 0.08);
+    text-align: center;
+}
+
+.episode-neural-live span,
+.episode-neural-live b {
+    display: block;
+}
+
+.episode-neural-live span {
+    color: var(--text-muted);
+    font-size: 7px;
+    letter-spacing: 0.5px;
+}
+
+.episode-neural-live b {
+    margin-top: 2px;
+    color: #9ce7ff;
+    font-size: 8px;
+    font-weight: 600;
+}
+
+.episode-neural-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+    color: var(--text-muted);
+    font-size: 7px;
+    letter-spacing: 0.45px;
+}
+
+.episode-motor-live {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3px;
+    margin-top: 7px;
+    padding-top: 7px;
+    border-top: 1px solid rgba(98, 214, 255, 0.16);
+}
+
+.episode-motor-live > div {
+    min-width: 0;
+    padding: 5px;
+    border-radius: 3px;
+    background: rgba(20, 20, 32, 0.8);
+}
+
+.episode-motor-live span,
+.episode-motor-live b {
+    display: block;
+}
+
+.episode-motor-live span {
+    color: var(--text-muted);
+    font-size: 7px;
+    letter-spacing: 0.6px;
+}
+
+.episode-motor-live b {
+    margin-top: 2px;
+    color: #75e5b3;
+    font-size: 8px;
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.episode-motor-reason {
+    margin-top: 5px;
+    color: var(--text-muted);
+    font-size: 7px;
+    line-height: 1.35;
 }
 
 /* Section */
@@ -399,3 +687,9 @@ body {
 #dashboard::-webkit-scrollbar { width: 4px; }
 #dashboard::-webkit-scrollbar-track { background: var(--bg-secondary); }
 #dashboard::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+.preview-note {
+    margin-top: 7px;
+    color: var(--text-muted);
+    font-size: 9px;
+    line-height: 1.35;
+}

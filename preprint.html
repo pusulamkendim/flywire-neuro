@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>preprint</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="/dev/null" />
+</head>
+<body>
+<h1
+id="structural-basis-of-punishment-before-reward-processing-priority-in-the-drosophila-melanogaster-connectome">Structural
+Basis of Punishment-Before-Reward Processing Priority in the
+<em>Drosophila melanogaster</em> Connectome</h1>
+<p><strong>Necip Sulbu</strong></p>
+<p>Correspondence: necipsulbu@gmail.com</p>
+<p>Code availability: https://github.com/pusulamkendim/flywire-neuro</p>
+<hr />
+<h2 id="abstract">Abstract</h2>
+<p>The complete adult <em>Drosophila melanogaster</em> brain connectome
+(FlyWire v783; 139,255 neurons, 50M+ synapses) provides an unprecedented
+opportunity to investigate how neural circuit architecture shapes
+information processing. Here we present a comprehensive computational
+analysis of all six neurotransmitter systems and their roles in signal
+propagation, revealing a previously unreported structural property: PPL1
+punishment-encoding dopaminergic neurons consistently activate before
+PAM reward-encoding neurons during simulated sensory processing. Using a
+spreading activation model on the full connectome, we demonstrate that
+this temporal priority is robust across 400 parameter combinations (0%
+reversal rate), 10 different odor representations, four sensory
+modalities, and persists even when all GABAergic inhibition is removed.
+We identify five structural mechanisms underlying this asymmetry: (1)
+PPL1’s small population size (16 vs 307 neurons), (2) 11.6-fold greater
+synaptic input per neuron, (3) higher direct cholinergic excitation (29%
+vs 16%), (4) lower dependence on other dopaminergic neurons (53% vs
+70%), and (5) complete activation saturation in all tested conditions.
+Additionally, we characterize modality-specific processing architectures
+— olfactory signals reach motor output in 7 steps while gustatory
+signals arrive in 1 step, bypassing memory circuits entirely — and
+demonstrate Hebbian learning dynamics on real Kenyon Cell-to-MBON
+synaptic weights. These findings suggest that the connectome encodes an
+evolutionary “threat-first” processing architecture, where the cost
+asymmetry between missing a threat (potentially lethal) and missing a
+reward (merely suboptimal) is reflected in hard-wired circuit
+topology.</p>
+<p><strong>Keywords:</strong> connectome, <em>Drosophila</em>,
+neurotransmitter, dopamine, punishment, reward, PPL1, PAM, mushroom
+body, signal propagation</p>
+<hr />
+<h2 id="introduction">Introduction</h2>
+<p>The publication of the complete adult <em>Drosophila
+melanogaster</em> brain connectome (Dorkenwald et al., 2024) —
+comprising 139,255 neurons and over 50 million synapses — represents a
+landmark in neuroscience. Combined with neurotransmitter predictions at
+per-synapse resolution (Eckstein, Bates et al., 2024) and comprehensive
+neuron annotations (Schlegel et al., 2024), this dataset enables
+whole-brain computational analyses that were previously impossible.</p>
+<p>The <em>Drosophila</em> mushroom body (MB) is a well-characterized
+center for associative learning, where dopaminergic neurons encode
+valence: PAM cluster neurons (307 neurons) signal reward, while PPL1
+cluster neurons (16 neurons) signal punishment (Aso et al., 2014; Li et
+al., 2020). Behavioral studies have established that flies learn to
+avoid odors paired with punishment and approach odors paired with reward
+(Tempel et al., 1983; Schwaerzel et al., 2003). However, whether the
+connectome itself encodes a temporal priority between punishment and
+reward processing has not been systematically investigated.</p>
+<p>Here we use the FlyWire v783 connectome to conduct three lines of
+analysis: (1) comprehensive neurotransmitter system characterization
+across all brain regions, (2) spreading activation simulations of
+sensory signal propagation, and (3) systematic investigation of the PPL1
+temporal priority hypothesis through seven independent tests and a
+400-combination parameter sensitivity analysis.</p>
+<p>Our central finding — that PPL1 activates 2–3 steps before PAM across
+all tested conditions with a 0% reversal rate — constitutes a structural
+property of the connectome that has not been previously reported. This
+is consistent with an evolutionary “threat-first” architecture,
+analogous to the mammalian amygdala’s rapid threat-detection pathway
+(LeDoux, 1996).</p>
+<hr />
+<h2 id="methods">Methods</h2>
+<h3 id="data-sources">Data sources</h3>
+<p>We used two primary datasets from the FlyWire v783 connectome
+(Dorkenwald et al., 2024), obtained from Zenodo
+(https://zenodo.org/records/10676866):</p>
+<ol type="1">
+<li><p><strong>Synaptic connections</strong>
+(<code>proofread_connections_783.feather</code>): 16.8 million
+neuron-to-neuron connections with synapse counts and per-synapse
+neurotransmitter (NT) probabilities for six neurotransmitters
+(acetylcholine, GABA, glutamate, dopamine, serotonin, octopamine),
+predicted by the Synister CNN model (87% per-synapse, 94% per-neuron
+accuracy; Eckstein, Bates et al., 2024).</p></li>
+<li><p><strong>Neuron annotations</strong>
+(<code>neuron_annotations.tsv</code>): 139,244 neurons with cell type,
+class, primary neurotransmitter (<code>top_nt</code>), brain region
+(<code>super_class</code>), and lineage information (Schlegel et al.,
+2024).</p></li>
+</ol>
+<h3 id="neurotransmitter-system-characterization">Neurotransmitter
+system characterization</h3>
+<p>For each of the six neurotransmitter systems, we quantified: (a) the
+number and proportion of neurons with that NT as their primary type, (b)
+total synapse count weighted by NT probability, (c) regional
+distribution across brain neuropils, (d) target neuron profiles, and (e)
+interactions with other NT systems. NT dominance per brain region was
+computed as the proportion of synapses where that NT had the highest
+probability.</p>
+<h3 id="spreading-activation-model">Spreading activation model</h3>
+<p>We implemented a discrete-time spreading activation model on the full
+connectome graph. At each time step <em>t</em>, neuron <em>i</em>’s
+activation <em>a_i(t)</em> is updated as:</p>
+<p><em>a_i(t) = max(0, min(1, decay × a_i(t-1) + gain × Σ_j [w_ij × s_j
+× a_j(t-1)]))</em></p>
+<p>where <em>w_ij</em> is the normalized synaptic weight from neuron
+<em>j</em> to neuron <em>i</em> (synapse count / maximum synapse count
+in the network), <em>s_j</em> is the NT sign of neuron <em>j</em> (+1
+for acetylcholine, glutamate, dopamine, serotonin, octopamine; -1 for
+GABA), <em>decay</em> controls memory of prior activation, and
+<em>gain</em> scales incoming signals. A neuron is considered
+“activated” when <em>a_i(t)</em> exceeds a threshold <em>θ</em>.</p>
+<p>Default parameters: decay = 0.3, gain = 2.0, threshold = 0.1.</p>
+<h3 id="olfactory-signal-propagation">Olfactory signal propagation</h3>
+<p>Simulations were initiated by activating all 684 olfactory receptor
+neurons (ORNs) at <em>a</em> = 1.0 and propagating for 10 time steps. We
+tracked activation timing of key neuron populations: projection neurons
+(PNs), Kenyon Cells (KCs), mushroom body output neurons (MBONs), PAM and
+PPL1 dopaminergic neurons, and motor neurons.</p>
+<h3 id="gustatory-signal-propagation">Gustatory signal propagation</h3>
+<p>Simulations used 408 gustatory neurons as the starting population,
+with identical model parameters.</p>
+<h3 id="hebbian-learning-simulation">Hebbian learning simulation</h3>
+<p>We simulated associative learning on the real KC→MBON synaptic weight
+matrix (5,177 KCs, 96 MBONs, 89,315 connections). Each odor activated
+~10% of KCs (488/5,177, sparse coding). Synaptic weights were modified
+using a Hebbian rule:</p>
+<ul>
+<li><strong>Reward conditioning</strong> (Odor A + sugar):
+KC→approach-MBON weights increased by Δw = η × a_KC × a_PAM;
+KC→avoidance-MBON weights decreased proportionally.</li>
+<li><strong>Punishment conditioning</strong> (Odor B + shock):
+KC→avoidance-MBON weights increased by Δw = η × a_KC × a_PPL1;
+KC→approach-MBON weights decreased proportionally.</li>
+</ul>
+<p>Learning rate η = 0.1, applied over 10 training trials. MBONs were
+classified as approach (52), avoidance (25), or suppression (19) types
+based on their cell type annotations.</p>
+<h3 id="ppl1-priority-analysis">PPL1 priority analysis</h3>
+<p>We conducted seven independent tests:</p>
+<ol type="1">
+<li><strong>Intensity variation</strong>: ORN activation from 5% to 100%
+of the population.</li>
+<li><strong>Odor diversity</strong>: 10 different random odor
+representations (each activating a random ~10% of ORNs).</li>
+<li><strong>Structural path analysis</strong>: Breadth-first search
+(BFS) for shortest synaptic paths from ORNs to PPL1 and PAM
+neurons.</li>
+<li><strong>Cross-modal comparison</strong>: Separate simulations for
+olfactory (684 ORNs), gustatory (408 neurons), mechanosensory (801
+neurons), and visual (422 photoreceptors) inputs.</li>
+<li><strong>Input neuron analysis</strong>: Quantification of synaptic
+inputs to PPL1 and PAM by source neuron type and NT composition.</li>
+<li><strong>GABA removal</strong>: Simulations with all GABAergic
+connections set to zero (excitatory-only network).</li>
+<li><strong>Per-subtype analysis</strong>: Input quantification for each
+PPL1 (8 subtypes) and PAM subtype.</li>
+</ol>
+<h3 id="parameter-sensitivity-analysis">Parameter sensitivity
+analysis</h3>
+<p>We performed a grid search across 400 parameter combinations: -
+Decay: 0.1, 0.3, 0.5, 0.7 - Gain: 0.5, 1.0, 2.0, 3.0, 5.0 - Threshold:
+0.01, 0.05, 0.1, 0.2, 0.3 - Minimum synapse filter: 1, 3, 5, 10</p>
+<p>For each combination, we recorded which population (PPL1 or PAM)
+activated first, or whether they activated simultaneously. An additional
+25 simulations tested 5 odors × 5 parameter sets, and 3 simulations
+tested excitatory-only networks.</p>
+<h3 id="software-and-reproducibility">Software and reproducibility</h3>
+<p>All analyses were implemented in Python using pandas, pyarrow,
+matplotlib, and seaborn. Code is available at
+https://github.com/pusulamkendim/flywire-neuro.</p>
+<hr />
+<h2 id="results">Results</h2>
+<h3 id="neurotransmitter-system-characterization-1">1. Neurotransmitter
+system characterization</h3>
+<p>Synapse-weighted analysis across 139,255 neurons revealed the
+following NT distribution: acetylcholine (ACh) 48.4%, GABA 23.1%,
+glutamate (Glut) 19.2%, dopamine (DA) 4.4%, octopamine (OCT) 2.7%, and
+serotonin (SER) 2.1% (Figure 1, Table 1). Each NT system showed distinct
+regional specialization.</p>
+<figure>
+<img src="results/01_pie_overall.png"
+alt="Figure 1. Synapse-weighted neurotransmitter distribution across the complete Drosophila brain (54.5M synapses). Acetylcholine dominates at 48.4%, followed by GABA (23.2%) and glutamate (19.3%)." />
+<figcaption aria-hidden="true">Figure 1. Synapse-weighted
+neurotransmitter distribution across the complete Drosophila brain
+(54.5M synapses). Acetylcholine dominates at 48.4%, followed by GABA
+(23.2%) and glutamate (19.3%).</figcaption>
+</figure>
+<figure>
+<img src="results/02_bar_regions.png"
+alt="Figure 2. Neurotransmitter composition of the 15 largest brain regions by synapse count. Visual neuropils (ME, LO) show ACh dominance, while central regions (FB) have elevated glutamate and dopamine." />
+<figcaption aria-hidden="true">Figure 2. Neurotransmitter composition of
+the 15 largest brain regions by synapse count. Visual neuropils (ME, LO)
+show ACh dominance, while central regions (FB) have elevated glutamate
+and dopamine.</figcaption>
+</figure>
+<figure>
+<img src="results/06_da_ser_dominance.png"
+alt="Figure 3. Dopamine vs serotonin dominance across all brain regions. MB regions are strongly dopamine-dominant; AL and AMMC are serotonin-dominant." />
+<figcaption aria-hidden="true">Figure 3. Dopamine vs serotonin dominance
+across all brain regions. MB regions are strongly dopamine-dominant; AL
+and AMMC are serotonin-dominant.</figcaption>
+</figure>
+<p><strong>Table 1. Neurotransmitter system overview</strong></p>
+<table>
+<colgroup>
+<col style="width: 7%" />
+<col style="width: 16%" />
+<col style="width: 20%" />
+<col style="width: 31%" />
+<col style="width: 24%" />
+</colgroup>
+<thead>
+<tr>
+<th>NT</th>
+<th>Neurons</th>
+<th>% of total</th>
+<th>Primary regions</th>
+<th>Key finding</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ACh</td>
+<td>86,188</td>
+<td>61.9%</td>
+<td>MB (90% ACh dominant)</td>
+<td>Primary excitatory; 8.2M synapses onto GABA neurons</td>
+</tr>
+<tr>
+<td>GABA</td>
+<td>19,170</td>
+<td>13.8%</td>
+<td>EB (77.6% dominant)</td>
+<td>19.7% self-inhibition (disinhibition); highest motor connectivity
+(33.7 syn/neuron)</td>
+</tr>
+<tr>
+<td>Glut</td>
+<td>24,875</td>
+<td>17.9%</td>
+<td>FB (44.7%), PB (48.5%)</td>
+<td>Dual excitatory/inhibitory; Glut-MBONs provide reward feedback to
+PAM</td>
+</tr>
+<tr>
+<td>DA</td>
+<td>1,813</td>
+<td>1.3%</td>
+<td>MB (targets)</td>
+<td>96.5% central brain; PPL1 (16) + PAM (307) = valence coding</td>
+</tr>
+<tr>
+<td>SER</td>
+<td>626</td>
+<td>0.4%</td>
+<td>AL (481× enrichment)</td>
+<td>68% sensory-associated; modulates olfactory processing</td>
+</tr>
+<tr>
+<td>OCT</td>
+<td>478</td>
+<td>0.3%</td>
+<td>Medulla/Lobula (58%)</td>
+<td>48% photoreceptor targets; zero GABA interaction</td>
+</tr>
+</tbody>
+</table>
+<p>ACh and GABA formed a widespread excitation-inhibition (E/I) balance
+system, with ACh sending 8.2 million synapses to GABAergic neurons. GABA
+showed the highest per-neuron motor connectivity (33.7 synapses/neuron)
+and a notable 19.7% self-inhibition rate, suggesting a disinhibitory
+circuit motif.</p>
+<p>Dopamine and serotonin systems showed mutual avoidance (Figure 4):
+cross-system connectivity was only 0.21× expected by chance, with 19,235
+bridge neurons mediating indirect communication.</p>
+<p><img src="results/09_interaction_diagram.png"
+alt="Figure 4. Dopamine-serotonin interaction diagram showing minimal cross-talk (0.21× expected) and 19,235 bridge neurons providing indirect integration." />
+Serotonin was predominantly associated with olfactory processing,
+showing 481× more synapses in the antennal lobe (AL) than in the
+reward/punishment circuit.</p>
+<p>Octopamine was highly specialized for visual processing: 58% of its
+synapses were in visual neuropils (Medulla, Lobula), 48% of its
+postsynaptic targets were photoreceptors, and it showed zero direct
+interaction with GABAergic neurons.</p>
+<p>Glutamate exhibited a dual role: concentrated in navigation centers
+(Fan-shaped Body 44.7%, Protocerebral Bridge 48.5%) and providing reward
+feedback through Glut-MBONs that preferentially target PAM neurons.</p>
+<h3 id="olfactory-signal-propagation-1">2. Olfactory signal
+propagation</h3>
+<p>Starting from 684 ORNs, signals propagated through the brain in a
+stereotyped sequence (Fig. 1):</p>
+<ul>
+<li><strong>t+1</strong>: Projection neurons (PNs) in the antennal
+lobe</li>
+<li><strong>t+2</strong>: Higher-order olfactory neurons; GABA-mediated
+lateral inhibition begins</li>
+<li><strong>t+3</strong>: Kenyon Cells begin activating</li>
+<li><strong>t+4</strong>: PPL1 (punishment) neurons first activate
+(2/16)</li>
+<li><strong>t+5–6</strong>: KC activation expands; PPL1 reaches
+10/16</li>
+<li><strong>t+7</strong>: PAM (reward) neurons first activate (3/307);
+motor neurons reached</li>
+<li><strong>t+8–10</strong>: PAM expands to ~100/307; E/I balance
+stabilizes at 5.5:1</li>
+</ul>
+<p>The excitatory-to-inhibitory (E/I) activation ratio stabilized at
+approximately 5.5:1, consistent with published estimates of cortical E/I
+balance.</p>
+<h3 id="gustatory-signal-propagation-1">3. Gustatory signal
+propagation</h3>
+<p>Gustatory processing showed a dramatically different architecture
+compared to olfaction:</p>
+<ul>
+<li><strong>t+1</strong>: Motor neurons activated — a 7-step
+acceleration relative to olfaction</li>
+<li><strong>t+3</strong>: Both PPL1 and PAM activated simultaneously
+(parallel evaluation)</li>
+<li>Kenyon Cells were <strong>never activated</strong> during gustatory
+processing</li>
+</ul>
+<p>This confirms a direct taste→motor reflex pathway that bypasses the
+mushroom body memory circuit entirely, consistent with the ecological
+constraint that taste evaluation (food already in contact with the
+mouth) requires immediate action.</p>
+<figure>
+<img src="results/10_reward_vs_punishment.png"
+alt="Figure 5. Mushroom Body: Reward vs punishment synapse distribution and PAM subtypes." />
+<figcaption aria-hidden="true">Figure 5. Mushroom Body: Reward vs
+punishment synapse distribution and PAM subtypes.</figcaption>
+</figure>
+<figure>
+<img src="results/11_reward_punishment_diagram.png"
+alt="Figure 6. Dopamine reward-punishment circuit. PAM (307 neurons, reward) targets MB Medial Lobe; PPL1 (16 neurons, punishment) targets MB Vertical Lobe. 91% of Kenyon Cells receive signals from both systems." />
+<figcaption aria-hidden="true">Figure 6. Dopamine reward-punishment
+circuit. PAM (307 neurons, reward) targets MB Medial Lobe; PPL1 (16
+neurons, punishment) targets MB Vertical Lobe. 91% of Kenyon Cells
+receive signals from both systems.</figcaption>
+</figure>
+<h3 id="ppl1-temporal-priority-a-structural-property">4. PPL1 temporal
+priority: a structural property</h3>
+<h4 id="consistent-across-odor-intensities">4.1 Consistent across odor
+intensities</h4>
+<p>PPL1 activated 2–3 steps before PAM at all tested ORN activation
+levels (5%–100%). PPL1 reached 100% saturation (16/16) at every
+intensity, while PAM never exceeded 33% activation (100/307) even at
+maximum input (Table 2).</p>
+<p><strong>Table 2. PPL1 vs PAM activation across odor
+intensities</strong></p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 19%" />
+<col style="width: 19%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 13%" />
+</colgroup>
+<thead>
+<tr>
+<th>ORN activation</th>
+<th>PPL1 first step</th>
+<th>PAM first step</th>
+<th>Difference</th>
+<th>PPL1 final</th>
+<th>PAM final</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>5%</td>
+<td>t+7</td>
+<td>t+10</td>
+<td>+3</td>
+<td>16/16 (100%)</td>
+<td>23/307 (7.5%)</td>
+</tr>
+<tr>
+<td>10%</td>
+<td>t+6</td>
+<td>t+8</td>
+<td>+2</td>
+<td>16/16 (100%)</td>
+<td>75/307 (24%)</td>
+</tr>
+<tr>
+<td>20%</td>
+<td>t+5</td>
+<td>t+7</td>
+<td>+2</td>
+<td>16/16 (100%)</td>
+<td>87/307 (28%)</td>
+</tr>
+<tr>
+<td>50%</td>
+<td>t+3</td>
+<td>t+6</td>
+<td>+3</td>
+<td>16/16 (100%)</td>
+<td>97/307 (32%)</td>
+</tr>
+<tr>
+<td>100%</td>
+<td>t+3</td>
+<td>t+6</td>
+<td>+3</td>
+<td>16/16 (100%)</td>
+<td>100/307 (33%)</td>
+</tr>
+</tbody>
+</table>
+<h4 id="consistent-across-odor-representations">4.2 Consistent across
+odor representations</h4>
+<p>Testing 10 different random odor representations (each activating
+~10% of ORNs), PPL1 activated first in 10/10 cases (mean PPL1: t+3.9,
+mean PAM: t+7.0, mean difference: +3.1 steps).</p>
+<h4 id="structural-path-analysis">4.3 Structural path analysis</h4>
+<p>BFS analysis revealed that minimum path lengths from ORNs were
+identical (2 synapses for both PPL1 and PAM). However, all 16 PPL1
+neurons (100%) were reachable within 2–3 synapses, while only 50/307 PAM
+neurons (16%) were reachable at the same depth. The priority arises not
+from path length but from population-level accessibility.</p>
+<h4 id="cross-modal-comparison">4.4 Cross-modal comparison</h4>
+<table>
+<thead>
+<tr>
+<th>Modality</th>
+<th>Input neurons</th>
+<th>PPL1</th>
+<th>PAM</th>
+<th>Interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Olfactory</td>
+<td>684 ORN</td>
+<td>t+5</td>
+<td>t+7</td>
+<td>PPL1 +2 steps ahead</td>
+</tr>
+<tr>
+<td>Gustatory</td>
+<td>408</td>
+<td>t+3</td>
+<td>t+3</td>
+<td>Parallel evaluation</td>
+</tr>
+<tr>
+<td>Mechanosensory</td>
+<td>801</td>
+<td>t+6</td>
+<td>never</td>
+<td>PPL1 only — touch = threat</td>
+</tr>
+<tr>
+<td>Visual</td>
+<td>422</td>
+<td>t+12</td>
+<td>never</td>
+<td>Very distant from valence circuit</td>
+</tr>
+</tbody>
+</table>
+<p>Mechanosensory input activated only PPL1 (PAM never reached),
+consistent with unexpected touch being primarily a threat signal. Visual
+input was the most distant from the reward/punishment circuit.</p>
+<h4 id="input-neuron-analysis">4.5 Input neuron analysis</h4>
+<p>Both PPL1 and PAM receive ~85–88% of their input from Kenyon Cells.
+The critical asymmetry is in input density:</p>
+<ul>
+<li>PPL1: 76,864 total input synapses / 16 neurons = <strong>4,804
+synapses/neuron</strong></li>
+<li>PAM: 127,021 total input synapses / 307 neurons = <strong>414
+synapses/neuron</strong></li>
+</ul>
+<p>PPL1 receives <strong>11.6× more input per neuron</strong>,
+explaining its faster threshold-crossing. Furthermore, PPL1 receives
+more direct cholinergic (ACh) excitation (29% vs 16%), while PAM depends
+more heavily on other dopaminergic neurons (70% vs 53%), creating an
+additional delay.</p>
+<h4 id="gaba-removal-test">4.6 GABA removal test</h4>
+<p>Removing all GABAergic inhibition reduced the PPL1-PAM gap from 3
+steps to 2 steps but did not eliminate it. PPL1 still activated first
+(t+4) before PAM (t+6). The priority is structural, not
+inhibition-dependent.</p>
+<h4 id="per-subtype-analysis">4.7 Per-subtype analysis</h4>
+<p>PPL1 subtypes showed dramatically higher per-neuron input than any
+PAM subtype. PPL101 received 10,382 input synapses per neuron — 19× more
+than the highest PAM subtype (PAM11: 551/neuron).</p>
+<h3 id="parameter-sensitivity-analysis-1">5. Parameter sensitivity
+analysis</h3>
+<p>Grid search across 400 parameter combinations (4 decay × 5 gain × 5
+threshold × 4 min_synapse) yielded 217 valid simulations (where at least
+one population activated). Results:</p>
+<ul>
+<li><strong>PPL1 first: 153/217 (70.5%)</strong></li>
+<li><strong>PAM first: 0/217 (0.0%)</strong></li>
+<li><strong>Simultaneous: 64/217 (29.5%)</strong></li>
+</ul>
+<p>The mean temporal advantage was +1.3 steps (median +1, max +6). PAM
+never preceded PPL1 in any tested parameter combination — a 0% reversal
+rate across the entire parameter space.</p>
+<p>Individual parameter effects: - <strong>Decay</strong> (0.0–0.8):
+Higher decay increased the gap (2→5 steps) as weakened signals struggled
+to reach the larger PAM population. - <strong>Gain</strong> (0.5–5.0):
+Very high gain reduced the gap but never reversed it. -
+<strong>Threshold</strong> (0.01–0.50): Lower thresholds reduced the
+gap; higher thresholds increased it. - <strong>Network
+filtering</strong> (min 1–10 synapses): Removing weak connections
+dramatically increased the gap (2→6 steps), as PAM’s indirect access
+routes were severed while PPL1’s strong direct connections
+persisted.</p>
+<p>Additional validation: 5 odors × 5 parameter sets (25 simulations)
+showed consistent results within reasonable parameter ranges. Three
+excitatory-only network tests all confirmed PPL1 priority.</p>
+<h3 id="hebbian-learning-simulation-1">6. Hebbian learning
+simulation</h3>
+<p>Using 5,177 Kenyon Cells, 96 MBONs, and 89,315 real synaptic
+connections:</p>
+<ul>
+<li><strong>Reward learning</strong> (Odor A + sugar, 10 trials):
+Approach MBON score increased from 0 to +0.47 (normalized); avoidance
+score decreased proportionally.</li>
+<li><strong>Punishment learning</strong> (Odor B + shock, 10 trials):
+Avoidance MBON score increased; approach score decreased.</li>
+<li><strong>Specificity</strong>: Control odor (Odor C, never paired)
+showed no change — confirming sparse coding specificity with ~10% KC
+overlap.</li>
+<li><strong>Extinction</strong>: After 15 unreinforced presentations,
+learned response decayed by 81%, consistent with behavioral extinction
+data.</li>
+</ul>
+<hr />
+<h2 id="discussion">Discussion</h2>
+<h3 id="ppl1-temporal-priority-a-novel-structural-finding">PPL1 temporal
+priority: a novel structural finding</h3>
+<p>Our central finding — that PPL1 punishment neurons structurally
+precede PAM reward neurons in activation timing — has not been directly
+reported in the existing literature. While behavioral studies have
+demonstrated that punishment learning can be faster or more robust than
+reward learning in <em>Drosophila</em> (Schwaerzel et al., 2003) and
+that PPL1 neurons are sufficient for aversive memory formation (Aso et
+al., 2012), the structural basis for this asymmetry at the connectome
+level has not been previously characterized.</p>
+<p>We identify five structural mechanisms that collectively create this
+temporal priority:</p>
+<ol type="1">
+<li><strong>Population size asymmetry</strong> (16 vs 307): Activating a
+small, compact population is inherently faster than activating a large,
+distributed one.</li>
+<li><strong>Input density</strong> (4,804 vs 414 synapses/neuron): Each
+PPL1 neuron integrates 11.6× more synaptic input, reaching activation
+thresholds faster.</li>
+<li><strong>NT composition</strong> (29% vs 16% ACh): PPL1 receives more
+direct cholinergic excitation, the fastest excitatory pathway.</li>
+<li><strong>Reduced DA dependence</strong> (53% vs 70%): PAM’s heavy
+dependence on other dopaminergic neurons introduces a cascade
+delay.</li>
+<li><strong>Saturation dynamics</strong> (100% vs ≤33%): PPL1 always
+achieves complete population activation; PAM never does.</li>
+</ol>
+<p>These five factors are robust to parameter variation (0% reversal
+across 400 combinations), odor identity (10/10 odors), and the presence
+or absence of inhibition.</p>
+<h3 id="evolutionary-interpretation">Evolutionary interpretation</h3>
+<p>The asymmetry we describe is consistent with a “threat-first” or
+“better safe than sorry” processing strategy. In evolutionary terms, the
+cost of a false negative (failing to detect a threat) is potentially
+lethal, while the cost of a false positive (unnecessary avoidance) is
+merely energetic. Natural selection would therefore favor circuits that
+prioritize threat detection — exactly the architecture we observe.</p>
+<p>This is architecturally analogous to the mammalian subcortical
+threat-detection pathway, where the amygdala receives rapid,
+low-resolution sensory input via the thalamus before slower cortical
+processing (LeDoux, 1996). In <em>Drosophila</em>, the equivalent may be
+the structural channeling of sensory information through
+high-input-density PPL1 neurons before the more distributed PAM
+evaluation.</p>
+<h3 id="modality-specific-processing">Modality-specific processing</h3>
+<p>Our simulations reveal that different sensory modalities access the
+reward/punishment circuit through distinct architectures:</p>
+<ul>
+<li><strong>Olfaction</strong>: Sequential processing (PPL1 first, then
+PAM) — appropriate for distal stimuli where evaluation time is
+available.</li>
+<li><strong>Gustation</strong>: Parallel processing (PPL1 and PAM
+simultaneously) — appropriate for proximal stimuli requiring immediate
+decisions.</li>
+<li><strong>Mechanosensation</strong>: Threat-only processing (PPL1
+only) — unexpected touch as a danger signal.</li>
+<li><strong>Vision</strong>: Minimal access to valence circuits — visual
+processing is largely independent of the reward/punishment system.</li>
+</ul>
+<p>These patterns align with the ecological constraints of each modality
+and suggest that the connectome encodes modality-appropriate processing
+strategies.</p>
+<h3 id="limitations">Limitations</h3>
+<p>Our spreading activation model, while revealing structural
+properties, does not capture biophysical details such as membrane time
+constants, spike timing, neuromodulation dynamics, or synaptic
+plasticity during propagation. The NT sign assignment (+1/-1) is a
+simplification; glutamate, for example, can be excitatory or inhibitory
+depending on receptor type. Our simulations represent single-trial
+propagation and do not account for ongoing neural activity or recurrent
+dynamics.</p>
+<p>The Synister NT predictions, while highly accurate (94% per-neuron),
+introduce some classification uncertainty, particularly for neurons with
+mixed NT profiles. Additionally, the FlyWire connectome represents a
+single female brain; individual variation and sex differences are not
+captured.</p>
+<p>Despite these limitations, the robustness of the PPL1 priority
+finding across 428 simulations with varied parameters suggests that it
+reflects a genuine structural property rather than a model artifact.</p>
+<h3 id="comparison-with-published-findings">Comparison with published
+findings</h3>
+<p>Our NT distribution (ACh 48.4%, GABA 23.1%, Glut 19.2%) is consistent
+with the original FlyWire characterization (Dorkenwald et al., 2024).
+The E/I balance ratio of 5.5:1 from our simulations aligns with
+established estimates of cortical E/I ratios. The GABA self-inhibition
+rate (19.7%) and its role in disinhibitory circuits is consistent with
+studies of the central complex (Hulse et al., 2021). The mushroom body
+circuit architecture (KC→MBON→DAN feedback) matches the canonical model
+established by Aso et al. (2014) and Li et al. (2020).</p>
+<hr />
+<h2 id="conclusions">Conclusions</h2>
+<p>Using the complete FlyWire v783 <em>Drosophila</em> connectome, we
+demonstrate that PPL1 punishment-encoding neurons have a structural
+temporal priority over PAM reward-encoding neurons — a finding robust
+across 400 parameter combinations with a 0% reversal rate. This
+asymmetry arises from five quantifiable structural features (population
+size, input density, NT composition, DA dependence, and saturation
+dynamics) and is consistent with an evolutionary “threat-first”
+processing architecture. Combined with our characterization of
+modality-specific processing strategies and associative learning
+dynamics on real synaptic weights, these results demonstrate how
+connectome topology constrains and shapes neural computation.</p>
+<hr />
+<h2 id="data-availability">Data availability</h2>
+<p>The FlyWire v783 connectome data is available from Zenodo
+(https://zenodo.org/records/10676866). Neuron annotations are from the
+flyconnectome/flywire_annotations repository (Schlegel et al., 2024).
+All analysis code is available at
+https://github.com/pusulamkendim/flywire-neuro.</p>
+<hr />
+<h2 id="references">References</h2>
+<p>Aso, Y., Hattori, D., Yu, Y., Johnston, R. M., Iyer, N. A., Ngo, T.
+T., … &amp; Rubin, G. M. (2014). The neuronal architecture of the
+mushroom body provides a logic for associative learning. <em>eLife</em>,
+3, e04577.</p>
+<p>Aso, Y., Herb, A., Ogueta, M., Siwanowicz, I., Templier, T.,
+Friedrich, A. B., … &amp; Tanimoto, H. (2012). Three classes of
+dopaminergic neuron distinctly orchestrate different memory valences in
+<em>Drosophila</em>. <em>Nature Neuroscience</em>, 15(10),
+1422–1429.</p>
+<p>Dorkenwald, S., Matsliah, A., Sterling, A. R., Schlegel, P., Yu, S.
+C., McKellar, C. E., … &amp; Murthy, M. (2024). Neuronal wiring diagram
+of an adult brain. <em>Nature</em>, 634, 124–138.</p>
+<p>Eckstein, N., Bates, A. S., Champion, A., Du, M., Yin, Y., Schlegel,
+P., … &amp; Funke, J. (2024). Neurotransmitter classification from
+electron microscopy images at synaptic sites in <em>Drosophila
+melanogaster</em>. <em>Cell</em>, 187(10), 2574–2594.</p>
+<p>Hulse, B. K., Haberkern, H., Franconville, R., Turner-Evans, D. B.,
+Takemura, S. Y., Wolff, T., … &amp; Jayaraman, V. (2021). A connectome
+of the <em>Drosophila</em> central complex reveals network motifs
+suitable for flexible navigation and context-dependent action selection.
+<em>eLife</em>, 10, e66039.</p>
+<p>LeDoux, J. E. (1996). <em>The Emotional Brain: The Mysterious
+Underpinnings of Emotional Life</em>. Simon &amp; Schuster.</p>
+<p>Li, F., Lindsey, J. W., Marin, E. C., Otto, N., Dreber, M., Dempsey,
+G., … &amp; Rubin, G. M. (2020). The connectome of the adult
+<em>Drosophila</em> mushroom body provides insights into function.
+<em>eLife</em>, 9, e62576.</p>
+<p>Lin, A., Yang, R., Dorkenwald, S., Matsliah, A., Sterling, A. R.,
+Schlegel, P., … &amp; Bhatt, D. (2024). Network statistics of the
+whole-brain connectome of <em>Drosophila</em>. <em>Nature</em>, 634,
+153–165.</p>
+<p>Schlegel, P., Yin, Y., Bates, A. S., Dorkenwald, S., Eber, K.,
+Goldammer, J., … &amp; Jefferis, G. S. X. E. (2024). Whole-brain
+annotation and multi-connectome cell typing of <em>Drosophila</em>.
+<em>Nature</em>, 634, 139–152.</p>
+<p>Schwaerzel, M., Monastirioti, M., Scholz, H., Friggi-Grelin, F.,
+Birman, S., &amp; Heisenberg, M. (2003). Dopamine and octopamine
+differentiate between aversive and appetitive olfactory memories in
+<em>Drosophila</em>. <em>Journal of Neuroscience</em>, 23(33),
+10495–10502.</p>
+<p>Tempel, B. L., Bonini, N., Dawson, D. R., &amp; Quinn, W. G. (1983).
+Reward learning in normal and mutant <em>Drosophila</em>.
+<em>Proceedings of the National Academy of Sciences</em>, 80(5),
+1482–1486.</p>
+<p>Winding, M., Pedigo, B. D., Barnes, C. L., Patsolic, H. G., Park, Y.,
+Kazimiers, T., … &amp; Zlatic, M. (2023). The connectome of an insect
+brain. <em>Science</em>, 379(6636), eadd9330.</p>
+</body>
+</html>

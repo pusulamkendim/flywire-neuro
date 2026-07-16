@@ -40,16 +40,18 @@ class InteractiveBrain:
         self._loop = None
         self.running = False
         self._thread = None
+        self._motor_sink = None
 
         # Thread-safe stimulus state
         self._lock = threading.Lock()
         self._active_stimuli = set()
 
-    def start(self, loop, queue, initial_stimuli=None):
+    def start(self, loop, queue, initial_stimuli=None, motor_sink=None):
         if self.running:
             return
         self.queue = queue
         self._loop = loop
+        self._motor_sink = motor_sink
         self.running = True
         if initial_stimuli:
             self._active_stimuli = set(initial_stimuli)
@@ -94,6 +96,8 @@ class InteractiveBrain:
             print(f"[Brain] ERROR: {e}", flush=True)
             traceback.print_exc()
             self.running = False
+            if self._motor_sink is not None:
+                self._motor_sink.stop()
             self._emit({"event": "end"})
 
     def _run(self):
@@ -235,7 +239,13 @@ class InteractiveBrain:
                     "total_spikes": total,
                     "behavior_mode": behavior,
                     "active_stimuli": list(current_stimuli),
+                    # The persistent backend motor runtime consumes these DN
+                    # rates. The browser must not also apply its legacy fake
+                    # walk/jump driver to the same animal.
+                    "body_driven": self._motor_sink is not None,
                 }
+                if self._motor_sink is not None:
+                    self._motor_sink.set_brain_frame(frame_data)
                 self._emit(frame_data)
 
                 # Log row (flat for CSV)

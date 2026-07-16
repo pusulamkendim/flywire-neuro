@@ -1,0 +1,57 @@
+{
+  "schema_version": "flywire-sensory-contract-v1",
+  "id": "sensory_contract_v1",
+  "intensity_range": [0.0, 1.0],
+  "channels": {
+    "taste_sugar": {
+      "modality": "gustation",
+      "brain_stimulus": "sugar",
+      "activation": "tarsus_or_proboscis_contact",
+      "runtime_environment": true,
+      "calibration": {"intensities": [0.25, 0.5, 0.75, 1.0], "pulse_ms": [50, 100, 250, 500]}
+    },
+    "taste_bitter": {
+      "modality": "gustation",
+      "brain_stimulus": "bitter",
+      "activation": "tarsus_or_proboscis_contact",
+      "runtime_environment": true,
+      "calibration": {"intensities": [0.25, 0.5, 0.75, 1.0], "pulse_ms": [50, 100, 250, 500]}
+    },
+    "visual_looming": {
+      "modality": "vision",
+      "brain_stimulus": "lc4",
+      "activation": "retinal_angular_expansion",
+      "runtime_environment": true,
+      "calibration": {"intensities": [0.25, 0.5, 0.75, 1.0], "pulse_ms": [50, 100, 250, 500]}
+    },
+    "antennal_touch": {
+      "modality": "mechanosensation",
+      "brain_stimulus": "jo",
+      "activation": "antenna_contact_or_dust",
+      "runtime_environment": true,
+      "calibration": {"intensities": [0.25, 0.5, 0.75, 1.0], "pulse_ms": [50, 100, 250, 500]}
+    },
+    "odor_geosmin": {
+      "modality": "olfaction",
+      "brain_stimulus": "or56a",
+      "activation": "odor_concentration_at_antennae",
+      "runtime_environment": true,
+      "calibration": {"intensities": [0.25, 0.5, 0.75, 1.0], "pulse_ms": [100, 250, 500, 1000]}
+    },
+    "odor_food": {
+      "modality": "olfaction",
+      "brain_stimulus": null,
+      "activation": "food_odor_concentration_at_antennae",
+      "runtime_environment": true,
+      "status": "requires_attractive_orn_mapping",
+      "calibration": {"intensities": [0.25, 0.5, 0.75, 1.0], "pulse_ms": [100, 250, 500, 1000]}
+    },
+    "locomotor_probe": {
+      "modality": "direct_dn_calibration",
+      "brain_stimulus": "p9",
+      "activation": "offline_calibration_only",
+      "runtime_environment": false,
+      "calibration": {"intensities": [0.25, 0.5, 0.75, 1.0], "pulse_ms": [100, 250, 500, 1000]}
+    }
+  }
+}

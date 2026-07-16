@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Drosophila Brain Simulation</title>
-    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/style.css?v=world-layout-v2">
 </head>
 <body>
     <div id="app">
@@ -22,6 +22,7 @@
         <div id="viewport">
             <canvas id="three-canvas"></canvas>
             <div id="behavior-badge">IDLE</div>
+            <div id="world-scale-display">WORLD LOADING · 1 unit = 1 mm</div>
             <div id="viewport-overlay">
                 <span id="time-display">t = 0.0 ms</span> &middot;
                 <span id="pos-display">pos = [0, 0, 0]</span> &middot;
@@ -34,7 +35,7 @@
             <div class="section" style="flex:1.2;">
                 <div class="section-title">Brain Activity (Dorsal View) <button class="info-toggle" onclick="toggleInfo('brain-vis-info')">?</button></div>
                 <div id="brain-vis-info" class="info-box" style="display:none;">
-                    <p>Top-down view of the fly brain. 10,000 real neuron positions from FlyWire v783. Brighter = more active.</p>
+                    <p>Top-down FlyWire v783 anatomy with 10,000 sampled real soma positions. Runtime signals are aggregate population and descending-neuron activity projected onto related anatomical regions; they are not per-soma spike traces. Brighter halos and rings indicate stronger normalized activity.</p>
                 </div>
                 <div id="brain-canvas-container" style="height:calc(100% - 30px);position:relative;">
                     <canvas id="brain-canvas" style="width:100%;height:100%;"></canvas>
@@ -71,9 +72,15 @@
                 </div>
                 <div id="stim-info" style="margin-top:6px;font-size:10px;color:var(--text-muted);min-height:28px;line-height:1.4;display:none;padding:4px 6px;background:var(--bg-primary);border-radius:3px;"></div>
                 <div class="controls" style="margin-top:6px;">
-                    <button class="start" id="btn-brain-start" onclick="startBrain()">Start Brain</button>
+                    <button class="start" id="btn-brain-start" onclick="startBrain()">Start Digital Life</button>
                     <button class="stop" onclick="stopSim()">Stop</button>
                 </div>
+                <label class="lif-sync-control" for="brain-time-sync"
+                    title="Advance the body only when the 138K-neuron LIF model advances. On the current CPU this is approximately 440× slower than wall-time playback.">
+                    <input type="checkbox" id="brain-time-sync">
+                    <span>Real-time LIF sync</span>
+                    <small>body follows computed brain time (~440× slower here)</small>
+                </label>
             </div>
 
             <!-- ACTIVE STIMULI -->
@@ -91,6 +98,17 @@
                 <div class="info-row"><span class="label">Drive L / R</span><span class="value" id="info-drive">0.00 / 0.00</span></div>
                 <div class="info-row"><span class="label">Total Spikes</span><span class="value" id="info-spikes">0</span></div>
                 <div class="info-row"><span class="label">Brain Steps</span><span class="value" id="info-steps">0</span></div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Simulation Records</div>
+                <div class="info-row"><span class="label">Saved runs</span><span class="value" id="record-count">0</span></div>
+                <div class="info-row"><span class="label">Latest</span><span class="value" id="record-latest">—</span></div>
+                <div class="info-row"><span class="label">Events</span><span class="value" id="record-events">0</span></div>
+                <div class="controls" style="margin-top:6px;">
+                    <button onclick="refreshRecordings()">Refresh</button>
+                    <button id="record-download" onclick="downloadLatestRecording()" disabled>Download latest</button>
+                </div>
             </div>
 
             <!-- DN OUTPUTS -->
@@ -153,6 +171,89 @@
                     <button onclick="startBehavior('courtship')">Court</button>
                 </div>
             </div>
+
+            <div class="section">
+                <div class="section-title">Flight Data Preview v1</div>
+                <div class="controls">
+                    <button onclick="startFlightPreview('evasion')">Evasion 038</button>
+                    <button onclick="startFlightPreview('saccade')">Saccade 201</button>
+                    <button onclick="startFlightPreview('maneuver-chain')">Maneuver Chain · 12 + Land</button>
+                    <button onclick="startExplorationFlight()">Explore Room · Mocap</button>
+                    <button onclick="landExplorationFlight()">Land</button>
+                </div>
+                <div class="preview-note">
+                    12 measured clips · climb/dive · synthetic transitions · 0.5×
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Walking Data Preview v1</div>
+                <div class="controls">
+                    <button onclick="startWalkingPreview('straight-fast')">Straight 001</button>
+                    <button onclick="startWalkingPreview('turn-left-sharp')">Left 062</button>
+                    <button onclick="startWalkingPreview('turn-right-sharp')">Right 003</button>
+                    <button onclick="startWalkingPreview('maneuver-chain')">Maneuver Chain · 12</button>
+                    <button onclick="startWalkingExploration()">Explore Walk · Mocap</button>
+                </div>
+                <div class="preview-note">
+                    12 measured paths · stride-locked NeuromechFly tripod gait · 30 Hz
+                </div>
+            </div>
+
+            <div class="section episode-section">
+                <div class="section-title">Embodied Episodes</div>
+                <div class="controls">
+                    <button class="episode-start" onclick="startEpisode('embodied_demo_v1')">
+                        Phase 1 · Replay
+                    </button>
+                    <button class="episode-start" onclick="startEpisode('embodied_demo_v2')">
+                        Phase 2 · LIF
+                    </button>
+                    <button class="episode-start" onclick="startEpisode('embodied_demo_v3')">
+                        Phase 3 · Causal
+                    </button>
+                </div>
+                <div id="episode-monitor" class="episode-monitor" hidden>
+                    <div class="episode-monitor-head">
+                        <span id="episode-title">Embodied Episode v1</span>
+                        <span id="episode-source" class="episode-source">REPLAY</span>
+                    </div>
+                    <div class="episode-progress-track">
+                        <div id="episode-progress-fill"></div>
+                    </div>
+                    <div class="episode-progress-meta">
+                        <span id="episode-stage">Waiting</span>
+                        <span id="episode-time">0.0 / 0.0s</span>
+                    </div>
+                    <div id="episode-steps" class="episode-steps"></div>
+                    <div class="episode-pipeline">
+                        <div><span>WORLD</span><b id="episode-world">—</b></div>
+                        <div><span>SENSORY</span><b id="episode-sensory">—</b></div>
+                        <div><span>NEURAL</span><b id="episode-neural">—</b></div>
+                        <div><span>MOTOR</span><b id="episode-motor">—</b></div>
+                    </div>
+                    <div class="episode-neural-live" aria-label="Recorded LIF neural activity">
+                        <div><span>FWD</span><b id="episode-dn-forward">0.000</b></div>
+                        <div><span>TURN</span><b id="episode-dn-turn">0.000</b></div>
+                        <div><span>GROOM</span><b id="episode-dn-groom">0.000</b></div>
+                        <div><span>FEED</span><b id="episode-dn-feed">0.000</b></div>
+                        <div><span>SPIKES</span><b id="episode-spikes">0</b></div>
+                    </div>
+                    <div class="episode-neural-meta">
+                        <span id="episode-neural-stimulus">STIM —</span>
+                        <span id="episode-neural-behavior">LIF —</span>
+                    </div>
+                    <div class="episode-motor-live" aria-label="Causal motor state decision">
+                        <div><span>INTENT</span><b id="episode-motor-intent">—</b></div>
+                        <div><span>FLIGHT</span><b id="episode-flight-state">—</b></div>
+                        <div><span>CONTROLLER</span><b id="episode-controller">—</b></div>
+                        <div><span>QUEUED</span><b id="episode-queued-intent">—</b></div>
+                    </div>
+                    <div id="episode-motor-reason" class="episode-motor-reason">
+                        Phase 1/2: motor selection is not causal
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -162,10 +263,10 @@
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
 
     <!-- App modules -->
-    <script src="/static/js/room.js"></script>
-    <script src="/static/js/dashboard.js"></script>
-    <script src="/static/js/brain_vis.js"></script>
+    <script src="/static/js/room.js?v=digital-life-v1"></script>
+    <script src="/static/js/dashboard.js?v=flight-state-v3"></script>
+    <script src="/static/js/brain_vis.js?v=activity-v2"></script>
     <script src="/static/js/controls.js"></script>
-    <script src="/static/js/app.js"></script>
+    <script src="/static/js/app.js?v=recordings-v1"></script>
 </body>
 </html>

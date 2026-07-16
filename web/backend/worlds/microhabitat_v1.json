@@ -1,0 +1,95 @@
+{
+  "schema_version": "flywire-world-v1",
+  "id": "microhabitat_v1",
+  "title": "Fly-scale Microhabitat v1",
+  "units": "mm",
+  "coordinate_system": "threejs_y_up",
+  "arena": {
+    "width_mm": 1200,
+    "depth_mm": 800,
+    "ground": "sand",
+    "grid_step_mm": 10
+  },
+  "reference": {
+    "nominal_fly_length_mm": 3.0,
+    "body_contact_radius_mm": 1.5
+  },
+  "entities": [
+    {
+      "id": "sugar_drop_1",
+      "type": "sugar_droplet",
+      "position_mm": [54.7, 0.04, -6.2],
+      "geometry": {"radius_mm": 1.6, "height_mm": 0.08},
+      "sensory": {
+        "taste_sugar": {"contact_radius_mm": 1.9, "max_intensity": 1.0},
+        "odor_food": {"range_mm": 24, "max_intensity": 0.35}
+      }
+    },
+    {
+      "id": "fruit_chunk_1",
+      "type": "fruit_chunk",
+      "position_mm": [42, 2, 16],
+      "geometry": {"size_mm": [8, 4, 6]},
+      "sensory": {
+        "odor_food": {"range_mm": 35, "max_intensity": 0.8}
+      }
+    },
+    {
+      "id": "mold_patch_1",
+      "type": "mold_patch",
+      "position_mm": [-22, 0.5, 14],
+      "geometry": {"radius_mm": 3.0},
+      "sensory": {
+        "odor_geosmin": {"range_mm": 28, "max_intensity": 1.0}
+      }
+    },
+    {
+      "id": "bitter_leaf_1",
+      "type": "bitter_leaf",
+      "position_mm": [-14, 0.08, -12],
+      "geometry": {"size_mm": [7, 0.15, 3.5]},
+      "sensory": {
+        "taste_bitter": {"contact_radius_mm": 4.0, "max_intensity": 1.0}
+      }
+    },
+    {
+      "id": "dust_patch_1",
+      "type": "dust_patch",
+      "position_mm": [25, 0.3, -15],
+      "geometry": {"radius_mm": 3.5},
+      "sensory": {
+        "antennal_touch": {"contact_radius_mm": 3.8, "max_intensity": 0.75}
+      }
+    },
+    {
+      "id": "grass_blade_1",
+      "type": "grass_blade",
+      "position_mm": [-30, 5, -20],
+      "geometry": {"height_mm": 10, "radius_mm": 0.28},
+      "sensory": {}
+    },
+    {
+      "id": "grass_blade_2",
+      "type": "grass_blade",
+      "position_mm": [6, 7, -28],
+      "geometry": {"height_mm": 14, "radius_mm": 0.3},
+      "sensory": {}
+    }
+  ],
+  "scenery": [],
+  "events": [
+    {
+      "id": "looming_pass_1",
+      "type": "looming_threat",
+      "enabled": false,
+      "trigger": {"mode": "script_or_proximity"},
+      "trajectory": {
+        "start_mm": [70, 24, -35],
+        "target": "fly",
+        "speed_mm_s": 120,
+        "visual_size_mm": 10
+      },
+      "sensory_channel": "visual_looming"
+    }
+  ]
+}

@@ -30,9 +30,28 @@ LEG_NAMES = ['LF', 'LM', 'LH', 'RF', 'RM', 'RH']
 
 
 class GroomingController:
-    """Front-leg oscillation for antennal grooming. From Eon's fly_embodied.py."""
+    """Coordinated front-leg eye/antenna grooming controller.
 
-    def __init__(self, preprogrammed_steps, freq_hz=4.0):
+    The key poses were fitted against the FlyGym mesh so that Tarsus5 follows
+    a path over the compound eye instead of merely oscillating below the body.
+    Right-leg poses are mirrored from the left-leg poses.
+    """
+
+    GROOM_DURATION_S = 1.5
+
+    # Actuator order: Coxa, Coxa_roll, Coxa_yaw, Femur, Femur_roll,
+    # Tibia, Tarsus1. Values are degrees for readability.
+    LEFT_KEY_POSES_DEG = {
+        # Tarsus is lifted in front of the head before making contact.
+        'ready': [-20.9, 130.6, 13.2, -58.2, 88.8, 146.3, -6.2],
+        # Sweep from the lower/front edge of the eye to its upper edge.
+        'lower_eye': [-22.5, 135.0, 13.9, -56.5, 95.8, 150.9, -3.8],
+        'upper_eye': [-37.3, 130.8, 22.1, -55.1, 101.9, 148.1, -4.7],
+        # Pull laterally away before starting the next wiping stroke.
+        'outer_eye': [-29.9, 133.7, 17.5, -55.2, 98.4, 146.4, -6.0],
+    }
+
+    def __init__(self, preprogrammed_steps, freq_hz=2.4):
         self.steps = preprogrammed_steps
         self.freq = freq_hz
         self.neutral = np.zeros(42)
@@ -40,14 +59,71 @@ class GroomingController:
             self.neutral[i * 7:(i + 1) * 7] = self.steps.get_joint_angles(
                 leg, np.pi, 0.0)
 
-    def get_action(self, time_s):
+        self.left_poses = {
+            name: np.deg2rad(values)
+            for name, values in self.LEFT_KEY_POSES_DEG.items()
+        }
+        self.right_poses = {
+            name: self._mirror_pose(pose)
+            for name, pose in self.left_poses.items()
+        }
+
+    @staticmethod
+    def _mirror_pose(left_pose):
+        """Mirror the lateral rotational DOFs for the right front leg."""
+        right_pose = left_pose.copy()
+        right_pose[[1, 2, 4]] *= -1
+        return right_pose
+
+    @staticmethod
+    def _smoothstep(value):
+        value = np.clip(value, 0.0, 1.0)
+        return value * value * (3.0 - 2.0 * value)
+
+    @classmethod
+    def _blend(cls, start, end, amount):
+        amount = cls._smoothstep(amount)
+        return start + (end - start) * amount
+
+    def _stroke_pose(self, poses, phase):
+        """Interpolate a closed ready → eye wipe → release trajectory."""
+        names = ('ready', 'lower_eye', 'upper_eye', 'outer_eye', 'ready')
+        position = (phase % 1.0) * (len(names) - 1)
+        segment = min(int(position), len(names) - 2)
+        return self._blend(
+            poses[names[segment]],
+            poses[names[segment + 1]],
+            position - segment,
+        )
+
+    def get_action(self, groom_time_s):
         joints = self.neutral.copy()
-        phase = 2 * np.pi * self.freq * time_s
-        femur_offset = 0.3 * np.sin(phase)
-        tibia_offset = 0.4 * np.sin(phase + np.pi / 2)
-        for base in (0, 21):  # LF and RF
-            joints[base + 3] += femur_offset
-            joints[base + 5] += tibia_offset
+
+        entry_duration = 0.22
+        exit_duration = 0.20
+        active_time = max(0.0, groom_time_s - entry_duration)
+
+        # Introduce the half-cycle offset gradually so both legs lift smoothly,
+        # then wipe alternate eyes instead of moving as a rigid pair.
+        offset_ramp = self._smoothstep(active_time / 0.18)
+        left_phase = active_time * self.freq
+        right_phase = left_phase + 0.5 * offset_ramp
+        left_target = self._stroke_pose(self.left_poses, left_phase)
+        right_target = self._stroke_pose(self.right_poses, right_phase)
+
+        if groom_time_s < entry_duration:
+            entry = groom_time_s / entry_duration
+            left_target = self._blend(self.neutral[0:7], self.left_poses['ready'], entry)
+            right_target = self._blend(self.neutral[21:28], self.right_poses['ready'], entry)
+        elif groom_time_s > self.GROOM_DURATION_S - exit_duration:
+            exit_amount = (
+                groom_time_s - (self.GROOM_DURATION_S - exit_duration)
+            ) / exit_duration
+            left_target = self._blend(left_target, self.neutral[0:7], exit_amount)
+            right_target = self._blend(right_target, self.neutral[21:28], exit_amount)
+
+        joints[0:7] = left_target
+        joints[21:28] = right_target
         adhesion = np.array([0, 1, 1, 0, 1, 1])  # front legs free, rest grounded
         return {"joints": joints, "adhesion": adhesion}
 
@@ -126,8 +202,9 @@ def _generate_grooming():
             }
             phase = 'walking'
         elif t_ms < GROOM_END:
-            # Grooming phase — front legs oscillate
-            action = groom_ctrl.get_action(t_s)
+            # Grooming phase — front tarsi sweep across the compound eyes.
+            groom_time_s = (t_ms - WALK1_END) / 1000.0
+            action = groom_ctrl.get_action(groom_time_s)
             phase = 'grooming'
         else:
             # Return to walking
@@ -176,7 +253,7 @@ def _generate_grooming():
     return geom_names, frames
 
 
-GROOM_CACHE = CACHE_DIR / 'groom_3.0s.json'
+GROOM_CACHE = CACHE_DIR / 'groom_eye_clean_v2_3.0s.json'
 
 
 class GroomingBridge:

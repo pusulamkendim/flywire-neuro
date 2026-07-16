@@ -1,6 +1,12 @@
+.venv/
 venv/
 data/
 flywire-network-analysis/
+fly-brain/
 __pycache__/
 *.pyc
 .DS_Store
+web/backend/brain_logs/
+web/backend/simulation_records/
+flybody-datasets-v4/
+flybody-datasets-v4.zip

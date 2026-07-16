@@ -11,10 +11,38 @@
 const Room = (() => {
     let scene, camera, renderer, controls, clock;
     let flyGroup, flyModel, flyGlow;
+    let worldGroup = null;
+    let worldConfig = null;
+    let worldGround = null;
+    let worldDebugVisible = false;
     let trailPoints = [], trailLine;
 
     let geomMeshMap = {};    // name → THREE.Mesh
     let geomNames = [];      // from fly_pose.json
+    let activeRenderMode = 'standard';
+    const FLIGHT_RENDER_MODES = ['flight_path', 'flight_data_preview', 'flight_explore'];
+    const WALKING_DATA_RENDER_MODES = ['walking_data_preview', 'walking_data_explore'];
+    const PERSISTENT_RENDER_MODES = ['digital_life', 'proboscis_overlay'];
+    const DIRECT_POSITION_RENDER_MODES = [
+        'flight_data_preview', 'flight_explore',
+        'walking_data_preview', 'walking_data_explore',
+        ...PERSISTENT_RENDER_MODES,
+    ];
+    let lastFlightState = null;
+    let preserveLandedOrientation = false;
+
+    // Feeding keeps the NeuromechFly body and overlays only the more detailed
+    // flybody mouth parts. This avoids swapping the whole animal mid-scene.
+    const LABRUM_NAMES = ['labrum_left_lower', 'labrum_right_lower'];
+    const MAIN_MOUTH_MAP = { rostrum: 'Rostrum', haustellum: 'Haustellum' };
+    const FEED_TRANSLATION_SCALE = 5.5;  // flybody units → restrained NMF motion
+    const FEED_ROTATION_SCALE = 0.68;
+    const LABRUM_GEOMETRY_SCALE = 6.0;
+    let proboscisModel = null;
+    let proboscisMeshMap = {};
+    let feedGeomIndices = {};
+    let feedMouthReference = null;
+    let mainMouthReference = null;
 
     // Brain-driven animation: replay cached walk frames based on DN rates
     let walkCache = null;     // { geomNames, frames } from walk cache
@@ -33,10 +61,13 @@ const Room = (() => {
         clock = new THREE.Clock();
         scene = new THREE.Scene();
         scene.background = new THREE.Color(0x87ceeb);
-        scene.fog = new THREE.Fog(0x87ceeb, 60, 120);
+        // Millimetre world: keep the near microhabitat crisp while letting the
+        // full arena dissolve into atmospheric perspective instead of exposing
+        // a hard ground edge.
+        scene.fog = new THREE.Fog(0x9bcfe5, 320, 1050);
 
-        camera = new THREE.PerspectiveCamera(50, canvas.clientWidth / canvas.clientHeight, 0.1, 500);
-        camera.position.set(6, 4, 10);
+        camera = new THREE.PerspectiveCamera(50, canvas.clientWidth / canvas.clientHeight, 0.1, 2400);
+        camera.position.set(13, 7, 22);
 
         renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
         renderer.setSize(canvas.clientWidth, canvas.clientHeight);
@@ -50,7 +81,7 @@ const Room = (() => {
         controls.dampingFactor = 0.05;
         controls.target.set(0, 1, 0);
         controls.minDistance = 2;
-        controls.maxDistance = 80;
+        controls.maxDistance = 650;
 
         scene.add(new THREE.AmbientLight(0x8899aa, 1.0));
         const sun = new THREE.DirectionalLight(0xfffae6, 1.8);
@@ -58,7 +89,7 @@ const Room = (() => {
         sun.castShadow = true;
         sun.shadow.mapSize.set(2048, 2048);
         const sc = sun.shadow.camera;
-        sc.near = 1; sc.far = 150; sc.left = -40; sc.right = 40; sc.top = 40; sc.bottom = -40;
+        sc.near = 1; sc.far = 900; sc.left = -260; sc.right = 260; sc.top = 260; sc.bottom = -260;
         scene.add(sun);
         // Hemisphere light (sky blue + ground brown)
         scene.add(new THREE.HemisphereLight(0x87ceeb, 0xd4b876, 0.4));
@@ -67,6 +98,7 @@ const Room = (() => {
         buildFlyGroup();
         buildTrail();
         loadFly();
+        loadProboscisOverlay();
 
         window.addEventListener('resize', () => {
             camera.aspect = canvas.clientWidth / canvas.clientHeight;
@@ -79,152 +111,209 @@ const Room = (() => {
     function buildRoom() {
         // === SANDY GROUND ===
         const sandTex = _makeCheckerTexture(0xd4b876, 0xc9a85c, 64);
-        const ground = new THREE.Mesh(
-            new THREE.PlaneGeometry(200, 200),
+        worldGround = new THREE.Mesh(
+            new THREE.PlaneGeometry(160, 100),
             new THREE.MeshStandardMaterial({ map: sandTex, roughness: 0.95, metalness: 0 })
         );
-        ground.rotation.x = -Math.PI / 2;
-        ground.receiveShadow = true;
-        scene.add(ground);
+        worldGround.rotation.x = -Math.PI / 2;
+        worldGround.receiveShadow = true;
+        scene.add(worldGround);
 
         // === SKY (gradient dome) ===
-        const skyGeo = new THREE.SphereGeometry(90, 32, 16, 0, Math.PI * 2, 0, Math.PI / 2);
+        const skyGeo = new THREE.SphereGeometry(1200, 32, 16, 0, Math.PI * 2, 0, Math.PI / 2);
         const skyMat = new THREE.MeshBasicMaterial({
             color: 0x87ceeb, side: THREE.BackSide,
         });
         const sky = new THREE.Mesh(skyGeo, skyMat);
         scene.add(sky);
 
-        // === SUN ===
-        const sunGeo = new THREE.SphereGeometry(3, 16, 16);
-        const sunMat = new THREE.MeshBasicMaterial({ color: 0xffee88, emissive: 0xffdd44 });
-        const sun = new THREE.Mesh(sunGeo, sunMat);
-        sun.position.set(40, 60, -50);
-        scene.add(sun);
-        // Sun glow
-        const sunGlow = new THREE.PointLight(0xffeecc, 0.8, 200);
-        sunGlow.position.copy(sun.position);
-        scene.add(sunGlow);
+        _loadWorld('microhabitat_v1');
+    }
 
-        // === TREES / BUSHES (background greenery) ===
-        const treeMat = new THREE.MeshStandardMaterial({ color: 0x2d5a1e, roughness: 0.8 });
-        const trunkMat = new THREE.MeshStandardMaterial({ color: 0x4a3220, roughness: 0.9 });
+    async function _loadWorld(worldId) {
+        try {
+            const response = await fetch(`/api/world/${encodeURIComponent(worldId)}`);
+            if (!response.ok) throw new Error(`world request failed: ${response.status}`);
+            worldConfig = await response.json();
+            _buildConfiguredWorld(worldConfig);
+            const scaleEl = document.getElementById('world-scale-display');
+            if (scaleEl) scaleEl.textContent = `WORLD ${worldConfig.id} · 1 unit = 1 mm`;
+        } catch (error) {
+            console.error('World v1 could not be loaded:', error);
+        }
+    }
 
-        // Trees at various distances
-        const treePositions = [
-            [-30, -40], [-15, -45], [10, -50], [35, -42], [50, -48],
-            [-45, -35], [55, -38], [-25, -55], [25, -55], [0, -60],
-        ];
-        treePositions.forEach(([x, z]) => {
-            const height = 8 + Math.random() * 6;
-            const radius = 3 + Math.random() * 3;
-            // Trunk
-            const trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.3, 0.5, height * 0.5, 6), trunkMat);
-            trunk.position.set(x, height * 0.25, z);
-            trunk.castShadow = true;
-            scene.add(trunk);
-            // Canopy
-            const canopy = new THREE.Mesh(new THREE.SphereGeometry(radius, 8, 6), treeMat);
-            canopy.position.set(x, height * 0.6, z);
-            canopy.castShadow = true;
-            scene.add(canopy);
+    function _buildConfiguredWorld(config) {
+        if (worldGroup) scene.remove(worldGroup);
+        worldGroup = new THREE.Group();
+        worldGroup.name = config.id;
+        scene.add(worldGroup);
+
+        const { width_mm: width, depth_mm: depth, grid_step_mm: step } = config.arena;
+        worldGround.geometry.dispose();
+        worldGround.geometry = new THREE.PlaneGeometry(width, depth);
+        worldGround.material.map.repeat.set(width / 10, depth / 10);
+
+        const grid = _makeRectangularGrid(width, depth, step);
+        grid.position.y = 0.025;
+        worldGroup.add(grid);
+
+        (config.scenery || []).forEach(item => {
+            const object = _createScenery(item);
+            if (!object) return;
+            object.name = item.id;
+            object.position.fromArray(item.position_mm);
+            object.userData.visualOnly = true;
+            worldGroup.add(object);
         });
 
-        // Small bushes closer
-        const bushMat = new THREE.MeshStandardMaterial({ color: 0x3a7a28, roughness: 0.85 });
-        [[-12, -15], [15, -18], [-20, -10], [22, -12], [8, -20], [-8, -22]].forEach(([x, z]) => {
-            const bush = new THREE.Mesh(new THREE.SphereGeometry(1.5 + Math.random(), 6, 5), bushMat);
-            bush.position.set(x, 0.8, z);
-            bush.castShadow = true;
-            scene.add(bush);
+        config.entities.forEach(entity => {
+            const mesh = _createWorldEntity(entity);
+            if (!mesh) return;
+            mesh.name = entity.id;
+            mesh.position.fromArray(entity.position_mm);
+            mesh.castShadow = entity.type !== 'dust_patch';
+            mesh.receiveShadow = true;
+            worldGroup.add(mesh);
+            _addSensoryZones(entity);
         });
+        _addMillimetreRuler(width, depth);
+        toggleWorldDebug(worldDebugVisible);
+    }
 
-        // === GRASS PATCHES ===
-        const grassMat = new THREE.MeshStandardMaterial({ color: 0x5a8a3a, roughness: 0.9 });
-        for (let i = 0; i < 15; i++) {
-            const gx = (Math.random() - 0.5) * 60;
-            const gz = (Math.random() - 0.5) * 60;
-            const patch = new THREE.Mesh(
-                new THREE.CircleGeometry(1 + Math.random() * 2, 8),
-                grassMat
+    function _makeRectangularGrid(width, depth, step) {
+        const points = [];
+        for (let x = -width / 2; x <= width / 2 + 0.001; x += step) {
+            points.push(new THREE.Vector3(x, 0, -depth / 2), new THREE.Vector3(x, 0, depth / 2));
+        }
+        for (let z = -depth / 2; z <= depth / 2 + 0.001; z += step) {
+            points.push(new THREE.Vector3(-width / 2, 0, z), new THREE.Vector3(width / 2, 0, z));
+        }
+        return new THREE.LineSegments(
+            new THREE.BufferGeometry().setFromPoints(points),
+            new THREE.LineBasicMaterial({ color: 0x9f936f, transparent: true, opacity: 0.11 })
+        );
+    }
+
+    function _createScenery(item) {
+        const color = new THREE.Color(item.color || '#57734b');
+        const material = new THREE.MeshStandardMaterial({ color, roughness: 1, flatShading: true });
+        if (item.type === 'hill' || item.type === 'bush') {
+            const detail = item.type === 'hill' ? 2 : 1;
+            const mound = new THREE.Mesh(new THREE.DodecahedronGeometry(1, detail), material);
+            mound.scale.fromArray(item.size_mm);
+            mound.castShadow = false;
+            mound.receiveShadow = true;
+            return mound;
+        }
+        if (item.type === 'tree') {
+            const group = new THREE.Group();
+            const height = item.height_mm;
+            const crownRadius = item.crown_radius_mm;
+            const trunk = new THREE.Mesh(
+                new THREE.CylinderGeometry(height * 0.025, height * 0.04, height * 0.58, 7),
+                new THREE.MeshStandardMaterial({ color: 0x5d3f2b, roughness: 1, flatShading: true })
             );
-            patch.rotation.x = -Math.PI / 2;
-            patch.position.set(gx, 0.01, gz);
-            scene.add(patch);
+            trunk.position.y = height * 0.29;
+            const crown = new THREE.Mesh(new THREE.DodecahedronGeometry(1, 1), material);
+            crown.scale.set(crownRadius, height * 0.31, crownRadius * 0.88);
+            crown.position.y = height * 0.69;
+            trunk.castShadow = crown.castShadow = true;
+            trunk.receiveShadow = crown.receiveShadow = true;
+            group.add(trunk, crown);
+            return group;
         }
+        return null;
+    }
 
-        // === SUGAR WATER PUDDLE (stimulus: sugar) ===
-        const sugarMat = new THREE.MeshStandardMaterial({
-            color: 0x88ccff, transparent: true, opacity: 0.6,
-            roughness: 0.1, metalness: 0.3,
-        });
-        const puddle = new THREE.Mesh(new THREE.CircleGeometry(3, 16), sugarMat);
-        puddle.rotation.x = -Math.PI / 2;
-        puddle.position.set(8, 0.02, 5);
-        scene.add(puddle);
-        // Sugar crystals around puddle
-        const crystalMat = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.3, metalness: 0.1 });
-        for (let i = 0; i < 8; i++) {
-            const angle = (i / 8) * Math.PI * 2;
-            const cr = new THREE.Mesh(new THREE.OctahedronGeometry(0.15, 0), crystalMat);
-            cr.position.set(8 + Math.cos(angle) * 2.5, 0.15, 5 + Math.sin(angle) * 2.5);
-            cr.rotation.set(Math.random(), Math.random(), 0);
-            scene.add(cr);
+    function _createWorldEntity(entity) {
+        const g = entity.geometry || {};
+        const materials = {
+            sugar_droplet: new THREE.MeshStandardMaterial({ color: 0x8bd8ff, transparent: true, opacity: 0.72, roughness: 0.15 }),
+            fruit_chunk: new THREE.MeshStandardMaterial({ color: 0xb66a32, roughness: 0.82 }),
+            mold_patch: new THREE.MeshStandardMaterial({ color: 0x315b36, roughness: 1 }),
+            bitter_leaf: new THREE.MeshStandardMaterial({ color: 0x315f28, roughness: 0.88 }),
+            dust_patch: new THREE.MeshStandardMaterial({ color: 0xcbbd91, transparent: true, opacity: 0.16, roughness: 1 }),
+            pebble: new THREE.MeshStandardMaterial({ color: 0x77776e, roughness: 0.92 }),
+            grass_blade: new THREE.MeshStandardMaterial({ color: 0x4f7d35, roughness: 0.9 }),
+        };
+        let geometry;
+        if (entity.type === 'sugar_droplet') {
+            geometry = new THREE.CylinderGeometry(g.radius_mm, g.radius_mm, g.height_mm, 24);
+        } else if (entity.type === 'fruit_chunk') {
+            geometry = new THREE.SphereGeometry(0.5, 14, 10);
+        } else if (entity.type === 'mold_patch') {
+            geometry = new THREE.CircleGeometry(g.radius_mm, 18);
+        } else if (entity.type === 'bitter_leaf') {
+            geometry = new THREE.BoxGeometry(...g.size_mm);
+        } else if (entity.type === 'dust_patch') {
+            geometry = new THREE.SphereGeometry(g.radius_mm, 12, 8);
+        } else if (entity.type === 'pebble') {
+            geometry = new THREE.DodecahedronGeometry(g.radius_mm, 1);
+        } else if (entity.type === 'grass_blade') {
+            geometry = new THREE.CylinderGeometry(g.radius_mm * 0.35, g.radius_mm, g.height_mm, 7);
+        } else {
+            return null;
         }
-        // Label
-        _addLabel('SUGAR WATER', 8, 1.5, 5, 0x88ccff);
+        const mesh = new THREE.Mesh(geometry, materials[entity.type]);
+        if (entity.type === 'fruit_chunk') mesh.scale.fromArray(g.size_mm);
+        if (entity.type === 'mold_patch') mesh.rotation.x = -Math.PI / 2;
+        return mesh;
+    }
 
-        // === ROTTEN FRUIT (stimulus: or56a - geosmin) ===
-        const rotMat = new THREE.MeshStandardMaterial({ color: 0x5a3a1a, roughness: 0.9 });
-        const rotFruit = new THREE.Mesh(new THREE.SphereGeometry(0.8, 8, 6), rotMat);
-        rotFruit.position.set(-8, 0.5, 6);
-        rotFruit.scale.set(1.2, 0.7, 1);
-        scene.add(rotFruit);
-        // Mold spots
-        const moldMat = new THREE.MeshStandardMaterial({ color: 0x2a4a2a, roughness: 1 });
-        for (let i = 0; i < 4; i++) {
-            const spot = new THREE.Mesh(new THREE.SphereGeometry(0.15, 4, 4), moldMat);
-            spot.position.set(-8 + (Math.random()-0.5)*0.8, 0.7, 6 + (Math.random()-0.5)*0.6);
-            scene.add(spot);
-        }
-        _addLabel('ROTTEN FRUIT', -8, 1.5, 6, 0x27ae60);
-
-        // === DARK APPROACHING OBJECT (stimulus: lc4 - looming) ===
-        const threatMat = new THREE.MeshStandardMaterial({ color: 0x111111, roughness: 0.5 });
-        const threat = new THREE.Mesh(new THREE.SphereGeometry(2, 12, 8), threatMat);
-        threat.position.set(0, 3, -10);
-        threat.castShadow = true;
-        scene.add(threat);
-        _addLabel('THREAT', 0, 6, -10, 0xe74c3c);
-
-        // === OBSTACLES / ROCKS (physical barriers) ===
-        const rockMat = new THREE.MeshStandardMaterial({ color: 0x888880, roughness: 0.85 });
-        [[6, -5, 1.2], [-5, -7, 0.9], [12, 2, 0.7], [-10, 3, 1.0]].forEach(([x, z, s]) => {
-            const rock = new THREE.Mesh(
-                new THREE.DodecahedronGeometry(s, 1),
-                rockMat
+    function _addSensoryZones(entity) {
+        const colors = {
+            taste_sugar: 0xffa534, taste_bitter: 0xd44a4a, odor_food: 0x71d47d,
+            odor_geosmin: 0x5fa66a, antennal_touch: 0x49c9e8,
+        };
+        for (const [channel, params] of Object.entries(entity.sensory || {})) {
+            const radius = params.range_mm || params.contact_radius_mm;
+            if (!radius) continue;
+            const zone = new THREE.Mesh(
+                new THREE.RingGeometry(Math.max(0.05, radius - 0.12), radius, 48),
+                new THREE.MeshBasicMaterial({ color: colors[channel] || 0xffffff, transparent: true, opacity: 0.42, side: THREE.DoubleSide })
             );
-            rock.position.set(x, s * 0.4, z);
-            rock.castShadow = true;
-            scene.add(rock);
-        });
+            zone.rotation.x = -Math.PI / 2;
+            zone.position.set(entity.position_mm[0], 0.06, entity.position_mm[2]);
+            zone.userData.sensorZone = true;
+            zone.userData.channel = channel;
+            worldGroup.add(zone);
+        }
+    }
 
-        // === BITTER LEAF (stimulus: bitter) ===
-        const bitterMat = new THREE.MeshStandardMaterial({ color: 0x1a4a1a, roughness: 0.8 });
-        const leaf = new THREE.Mesh(new THREE.PlaneGeometry(2, 3), bitterMat);
-        leaf.rotation.x = -Math.PI / 2 + 0.1;
-        leaf.position.set(-4, 0.05, -3);
-        scene.add(leaf);
-        _addLabel('BITTER LEAF', -4, 1.2, -3, 0xc0392b);
+    function _addMillimetreRuler(width, depth) {
+        const x = -width / 2 + 5;
+        const z = depth / 2 - 5;
+        const points = [new THREE.Vector3(x, 0.08, z), new THREE.Vector3(x + 10, 0.08, z)];
+        const ruler = new THREE.Line(
+            new THREE.BufferGeometry().setFromPoints(points),
+            new THREE.LineBasicMaterial({ color: 0xffffff })
+        );
+        ruler.userData.worldRuler = true;
+        worldGroup.add(ruler);
+        for (const dx of [0, 10]) {
+            const tick = new THREE.Line(
+                new THREE.BufferGeometry().setFromPoints([
+                    new THREE.Vector3(x + dx, 0.08, z - 0.6),
+                    new THREE.Vector3(x + dx, 0.08, z + 0.6),
+                ]),
+                new THREE.LineBasicMaterial({ color: 0xffffff })
+            );
+            tick.userData.worldRuler = true;
+            worldGroup.add(tick);
+        }
+    }
 
-        // === DUST CLOUD AREA (stimulus: jo - touch) ===
-        const dustMat = new THREE.MeshStandardMaterial({
-            color: 0xccbb88, transparent: true, opacity: 0.15, roughness: 1,
-        });
-        const dust = new THREE.Mesh(new THREE.SphereGeometry(3, 8, 6), dustMat);
-        dust.position.set(4, 1.5, -5);
-        scene.add(dust);
-        _addLabel('DUST', 4, 3.5, -5, 0x00bcd4);
+    function toggleWorldDebug(force) {
+        worldDebugVisible = typeof force === 'boolean' ? force : !worldDebugVisible;
+        if (worldGroup) {
+            worldGroup.traverse(node => {
+                if (node.userData.sensorZone) node.visible = worldDebugVisible;
+            });
+        }
+        const button = document.getElementById('world-debug-toggle');
+        if (button) button.textContent = worldDebugVisible ? 'Hide sensor ranges' : 'Show sensor ranges';
+        return worldDebugVisible;
     }
 
     function _makeCheckerTexture(c1, c2, size) {
@@ -293,6 +382,7 @@ const Room = (() => {
             });
 
             flyGroup.add(flyModel);
+            _attachProboscisOverlay();
 
             // Debug: log ALL node names and types
             const allNames = [];
@@ -316,6 +406,150 @@ const Room = (() => {
                     flyModel.position.y = 1.2;
                 });
         });
+    }
+
+    function loadProboscisOverlay() {
+        const loader = new THREE.GLTFLoader();
+        loader.load('/static/assets/proboscis_flybody.glb', (gltf) => {
+            proboscisModel = gltf.scene;
+            // The overlay lives directly in NeuromechFly coordinates. Only the
+            // two missing labrum tips are shown; base mouth meshes stay native.
+            proboscisModel.position.set(0, 0, 0);
+            proboscisModel.scale.setScalar(1.0);
+            proboscisModel.visible = activeRenderMode === 'proboscis_overlay';
+            proboscisMeshMap = {};
+
+            proboscisModel.traverse((node) => {
+                if (node.name) proboscisMeshMap[node.name] = node;
+                if (node.isMesh) {
+                    node.castShadow = true;
+                    node.visible = LABRUM_NAMES.includes(node.name);
+                    node.scale.setScalar(LABRUM_GEOMETRY_SCALE);
+                }
+            });
+
+            _attachProboscisOverlay();
+            _matchLabrumMaterial();
+        });
+    }
+
+    function _attachProboscisOverlay() {
+        if (!proboscisModel || !flyModel || currentModel !== 'neuromechfly') return;
+        if (proboscisModel.parent !== flyModel) flyModel.add(proboscisModel);
+        _matchLabrumMaterial();
+    }
+
+    function _matchLabrumMaterial() {
+        const source = geomMeshMap.Haustellum || geomMeshMap.Rostrum;
+        if (!source || !source.material || !proboscisModel) return;
+        for (const name of LABRUM_NAMES) {
+            const node = proboscisMeshMap[name];
+            if (!node) continue;
+            node.traverse((child) => {
+                if (!child.isMesh) return;
+                child.material = source.material.clone();
+                child.material.roughness = 0.7;
+                child.material.metalness = 0.02;
+            });
+        }
+    }
+
+    function _setProboscisOverlayVisible(visible) {
+        _attachProboscisOverlay();
+        if (proboscisModel) proboscisModel.visible = visible;
+    }
+
+    function _readFeedTransform(pose, name) {
+        const index = feedGeomIndices[name];
+        if (index === undefined) return null;
+        const off = index * 7;
+        return {
+            position: new THREE.Vector3(pose[off], pose[off + 1], pose[off + 2]),
+            quaternion: new THREE.Quaternion(
+                pose[off + 3], pose[off + 4], pose[off + 5], pose[off + 6]),
+        };
+    }
+
+    function _captureMainMouthReference() {
+        mainMouthReference = {};
+        for (const mainName of Object.values(MAIN_MOUTH_MAP)) {
+            const mesh = geomMeshMap[mainName];
+            if (!mesh) continue;
+            mainMouthReference[mainName] = {
+                position: mesh.position.clone(),
+                quaternion: mesh.quaternion.clone(),
+            };
+        }
+    }
+
+    function _restoreMainMouth() {
+        if (!mainMouthReference) return;
+        for (const [name, transform] of Object.entries(mainMouthReference)) {
+            const mesh = geomMeshMap[name];
+            if (!mesh) continue;
+            mesh.position.copy(transform.position);
+            mesh.quaternion.copy(transform.quaternion);
+        }
+    }
+
+    function _applyMainMouthDelta(pose, feedName, mainName) {
+        const mesh = geomMeshMap[mainName];
+        const reference = feedMouthReference && feedMouthReference[feedName];
+        const mainReference = mainMouthReference && mainMouthReference[mainName];
+        const current = _readFeedTransform(pose, feedName);
+        if (!mesh || !reference || !mainReference || !current) return;
+
+        const translation = current.position.clone()
+            .sub(reference.position)
+            .multiplyScalar(FEED_TRANSLATION_SCALE);
+        mesh.position.copy(mainReference.position).add(translation);
+
+        const delta = current.quaternion.clone()
+            .multiply(reference.quaternion.clone().invert());
+        const restrainedDelta = new THREE.Quaternion().identity()
+            .slerp(delta, FEED_ROTATION_SCALE);
+        mesh.quaternion.copy(restrainedDelta.multiply(mainReference.quaternion));
+    }
+
+    function _applyLabrum(pose, name) {
+        const labrum = proboscisMeshMap[name];
+        const labrumFeed = _readFeedTransform(pose, name);
+        const haustellumFeed = _readFeedTransform(pose, 'haustellum');
+        const mainHaustellum = geomMeshMap.Haustellum;
+        if (!labrum || !labrumFeed || !haustellumFeed || !mainHaustellum) return;
+
+        // Express the labrum relative to flybody's haustellum, then attach that
+        // local offset to the animated native NeuromechFly haustellum.
+        const invHaustellum = haustellumFeed.quaternion.clone().invert();
+        const localOffset = labrumFeed.position.clone()
+            .sub(haustellumFeed.position)
+            .applyQuaternion(invHaustellum)
+            .multiplyScalar(FEED_TRANSLATION_SCALE);
+        labrum.position.copy(localOffset)
+            .applyQuaternion(mainHaustellum.quaternion)
+            .add(mainHaustellum.position);
+
+        const relativeRotation = invHaustellum.multiply(labrumFeed.quaternion);
+        labrum.quaternion.copy(mainHaustellum.quaternion)
+            .multiply(relativeRotation);
+    }
+
+    function _applyProboscisPose(pose) {
+        if (!proboscisModel || !pose) return;
+
+        if (!feedMouthReference) {
+            feedMouthReference = {};
+            for (const feedName of Object.keys(MAIN_MOUTH_MAP)) {
+                feedMouthReference[feedName] = _readFeedTransform(pose, feedName);
+            }
+        }
+
+        for (const [feedName, mainName] of Object.entries(MAIN_MOUTH_MAP)) {
+            _applyMainMouthDelta(pose, feedName, mainName);
+        }
+        for (const name of LABRUM_NAMES) {
+            _applyLabrum(pose, name);
+        }
     }
 
     /**
@@ -352,8 +586,57 @@ const Room = (() => {
         flyGlow.color.copy(BEHAVIOR_COLORS.walking);
         trailLine.material.color.copy(BEHAVIOR_COLORS.walking);
 
-        // Check if geom names suggest flybody model (has 'thorax' not 'Thorax')
         const names = data ? data.geom_names || [] : [];
+        const previousRenderMode = activeRenderMode;
+        activeRenderMode = data && data.render_mode || 'standard';
+        const persistentTransition = PERSISTENT_RENDER_MODES.includes(previousRenderMode)
+            && PERSISTENT_RENDER_MODES.includes(activeRenderMode);
+
+        // A completed landing keeps its final world quaternion on walk_end.
+        // Reset it only when a subsequent non-flight behavior actually starts.
+        if (preserveLandedOrientation && !FLIGHT_RENDER_MODES.includes(activeRenderMode)
+                && !persistentTransition) {
+            flyGroup.rotation.order = 'XYZ';
+            flyGroup.rotation.set(0, 0, 0);
+            preserveLandedOrientation = false;
+        }
+        if (FLIGHT_RENDER_MODES.includes(previousRenderMode)
+                && !FLIGHT_RENDER_MODES.includes(activeRenderMode)
+                && !preserveLandedOrientation && !persistentTransition) {
+            flyGroup.rotation.order = 'XYZ';
+            flyGroup.rotation.set(0, 0, 0);
+        }
+        if (WALKING_DATA_RENDER_MODES.includes(previousRenderMode)
+                && !WALKING_DATA_RENDER_MODES.includes(activeRenderMode)
+                && !persistentTransition) {
+            flyGroup.rotation.order = 'XYZ';
+            flyGroup.rotation.set(0, 0, 0);
+        }
+
+        if (FLIGHT_RENDER_MODES.includes(activeRenderMode)) {
+            lastFlightState = null;
+            preserveLandedOrientation = false;
+            flyGlow.color.copy(BEHAVIOR_COLORS.flight);
+            trailLine.material.color.copy(BEHAVIOR_COLORS.flight);
+        }
+
+        if (activeRenderMode === 'proboscis_overlay') {
+            feedGeomIndices = {};
+            names.forEach((name, index) => { feedGeomIndices[name] = index; });
+            feedMouthReference = null;
+            _captureMainMouthReference();
+            _setProboscisOverlayVisible(true);
+            return;
+        }
+
+        if (previousRenderMode === 'proboscis_overlay') {
+            _restoreMainMouth();
+            feedMouthReference = null;
+            mainMouthReference = null;
+        }
+        _setProboscisOverlayVisible(false);
+
+        // Check if geom names suggest flybody model (has 'thorax' not 'Thorax')
         const isFlybody = names.includes('thorax');  // flybody uses lowercase
 
         if (isFlybody && currentModel !== 'flybody') {
@@ -397,6 +680,7 @@ const Room = (() => {
             });
 
             flyGroup.add(flyModel);
+            _attachProboscisOverlay();
             console.log('Mesh map:', Object.keys(geomMeshMap).length, 'keys. Sample:', Object.keys(geomMeshMap).slice(0, 8));
 
             fetch(poseUrl).then(r => r.json()).then(poseData => {
@@ -418,26 +702,84 @@ const Room = (() => {
     }
 
     function walkUpdate(data) {
+        if (data.flight_state) lastFlightState = data.flight_state;
         if (!flyGroup || !geomNames.length) return;
 
-        // Apply per-mesh pose (position + quaternion in MuJoCo frame)
-        if (data.poses) applyPose(data.poses);
+        const behaviorColor = BEHAVIOR_COLORS[data.behavior_mode]
+            || (['TAKEOFF', 'FLYING', 'LANDING'].includes(data.flight_state)
+                ? BEHAVIOR_COLORS.flight : BEHAVIOR_COLORS.walking);
+        flyGlow.color.copy(behaviorColor);
+        trailLine.material.color.copy(behaviorColor);
+
+        // Feed frames contain flybody transforms, but only their mouth geoms
+        // are applied. All other behaviors continue to animate the base model.
+        if (activeRenderMode === 'proboscis_overlay') {
+            _applyProboscisPose(data.poses);
+        } else if (data.poses) {
+            applyPose(data.poses);
+        }
 
         // Fly global position → scene units
         const fp = data.fly_pos;
-        const s = currentModel === 'flybody' ? 3.0 : 0.3;
+        const s = 1.0;  // MuJoCo cache positions and World v1 both use millimetres.
         const tx = fp[0] * s;
-        const ty = 0;  // ground level
+        const airborne = FLIGHT_RENDER_MODES.includes(activeRenderMode)
+            || ['TAKEOFF', 'FLYING', 'LANDING'].includes(data.flight_state);
+        const ty = airborne ? fp[2] * s : 0;
         const tz = -fp[1] * s;
-        flyGroup.position.x += (tx - flyGroup.position.x) * 0.3;
-        flyGroup.position.y += (ty - flyGroup.position.y) * 0.3;
-        flyGroup.position.z += (tz - flyGroup.position.z) * 0.3;
+        if (DIRECT_POSITION_RENDER_MODES.includes(activeRenderMode)) {
+            // Preview frames are already resampled at 120 Hz. Applying their
+            // positions directly preserves the measured short saccade path.
+            flyGroup.position.set(tx, ty, tz);
+        } else {
+            flyGroup.position.x += (tx - flyGroup.position.x) * 0.3;
+            flyGroup.position.y += (ty - flyGroup.position.y) * 0.3;
+            flyGroup.position.z += (tz - flyGroup.position.z) * 0.3;
+        }
+        const posEl = document.getElementById('pos-display');
+        if (posEl) {
+            posEl.textContent = `pos = [${fp[0].toFixed(1)}, ${fp[1].toFixed(1)}, ${fp[2].toFixed(1)}] mm`;
+        }
+
+        if ((['flight_data_preview', 'flight_explore', 'digital_life'].includes(activeRenderMode))
+                && data.body_quat) {
+            // Cache quaternion is already converted from FlyBody Z-up into
+            // the Three.js Y-up world and expressed relative to frame zero.
+            flyGroup.quaternion.set(...data.body_quat);
+        } else if (activeRenderMode === 'flight_path') {
+            // NeuromechFly faces local +X. Yaw follows the circle tangent and
+            // local-X roll gives a readable inward bank through the turn.
+            flyGroup.rotation.order = 'YXZ';
+            flyGroup.rotation.set(
+                data.bank_rad || 0,
+                data.heading_rad || 0,
+                0,
+            );
+        } else if ((WALKING_DATA_RENDER_MODES.includes(activeRenderMode)
+                || PERSISTENT_RENDER_MODES.includes(activeRenderMode))
+                && Number.isFinite(data.body_heading_rad)) {
+            flyGroup.rotation.order = 'YXZ';
+            flyGroup.rotation.set(0, data.body_heading_rad, 0);
+        }
 
         _updateTrail();
         controls.target.lerp(flyGroup.position.clone(), 0.03);
     }
 
-    function walkEnd() {}
+    function walkEnd(data) {
+        if (activeRenderMode === 'proboscis_overlay') {
+            _restoreMainMouth();
+            _setProboscisOverlayVisible(false);
+        }
+        feedMouthReference = null;
+        mainMouthReference = null;
+        const landedFlight = FLIGHT_RENDER_MODES.includes(activeRenderMode)
+            && lastFlightState === 'GROUNDED';
+        const preserveRequested = Boolean(data && data.preserve_world_orientation);
+        preserveLandedOrientation = landedFlight || preserveRequested;
+        if (!preserveLandedOrientation) flyGroup.rotation.set(0, 0, 0);
+        activeRenderMode = 'standard';
+    }
 
     // === Brain-driven animation ===
     // Load walk cache once, then replay frames based on DN rates
@@ -509,7 +851,7 @@ const Room = (() => {
     // === Public: NT simulation fly update ===
     function updateFly(frame) {
         if (!flyGroup || !frame) return;
-        const s = 0.3;
+        const s = 1.0;
         flyGroup.position.x += (frame.pos[0]*s - flyGroup.position.x) * 0.3;
         flyGroup.position.y += (frame.pos[2]*s - flyGroup.position.y) * 0.3;
         flyGroup.position.z += (frame.pos[1]*s - flyGroup.position.z) * 0.3;
@@ -544,5 +886,5 @@ const Room = (() => {
         renderer.render(scene, camera);
     }
 
-    return { init, updateFly, resetTrail, walkInit, walkUpdate, walkEnd, loadWalkCache, brainDrive };
+    return { init, updateFly, resetTrail, walkInit, walkUpdate, walkEnd, loadWalkCache, brainDrive, toggleWorldDebug };
 })();

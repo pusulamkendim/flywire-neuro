@@ -210,7 +210,13 @@ class FeedBridge:
                 json.dump({'geom_names': geom_names, 'frames': frames}, f)
             print(f"[Feed] Cached: {CACHE.stat().st_size // 1024}KB", flush=True)
 
-        self._emit({"event": "walk_init", "geom_names": geom_names})
+        self._emit({
+            "event": "walk_init",
+            "geom_names": geom_names,
+            # Keep the NeuromechFly body on screen. The frontend uses only the
+            # detailed flybody mouth geoms as an aligned proboscis overlay.
+            "render_mode": "proboscis_overlay",
+        })
         for frame in frames:
             if not self.running:
                 break

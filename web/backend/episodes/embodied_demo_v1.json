@@ -1,0 +1,70 @@
+{
+  "schema_version": "flywire-episode-v1",
+  "id": "embodied_demo_v1",
+  "title": "Embodied Episode v1",
+  "description": "Observable multi-behavior replay infrastructure: explore, groom, approach, and feed on one continuous timeline.",
+  "source_mode": "cached_controller_replay",
+  "playback_fps": 30,
+  "segments": [
+    {
+      "key": "explore",
+      "label": "Explore",
+      "behavior": "walking",
+      "cache": "walk_5.0s.json",
+      "start_frame": 0,
+      "end_frame": 45,
+      "render_mode": "standard",
+      "pipeline": {
+        "world": "Open arena",
+        "sensory": "Authored exploration cue",
+        "neural": "Brain coupling: Phase 2",
+        "motor": "Tripod walk cache"
+      }
+    },
+    {
+      "key": "dust_groom",
+      "label": "Dust → Groom",
+      "behavior": "grooming",
+      "cache": "groom_eye_clean_v2_3.0s.json",
+      "start_frame": 0,
+      "end_frame": 90,
+      "render_mode": "standard",
+      "pipeline": {
+        "world": "Virtual antennal dust",
+        "sensory": "JO cue metadata",
+        "neural": "Brain coupling: Phase 2",
+        "motor": "Eye-clean grooming cache"
+      }
+    },
+    {
+      "key": "approach_food",
+      "label": "Approach Food",
+      "behavior": "walking",
+      "cache": "walk_5.0s.json",
+      "start_frame": 45,
+      "end_frame": 105,
+      "render_mode": "standard",
+      "pipeline": {
+        "world": "Sugar source ahead",
+        "sensory": "Taste gradient metadata",
+        "neural": "Brain coupling: Phase 2",
+        "motor": "Forward walk cache"
+      }
+    },
+    {
+      "key": "feeding",
+      "label": "Feed",
+      "behavior": "feeding",
+      "cache": "feed_flybody_4.0s.json",
+      "start_frame": 0,
+      "end_frame": 119,
+      "render_mode": "proboscis_overlay",
+      "pipeline": {
+        "world": "Sugar contact",
+        "sensory": "GRN cue metadata",
+        "neural": "Brain coupling: Phase 2",
+        "motor": "Proboscis feed cache"
+      }
+    }
+  ]
+}

@@ -116,10 +116,17 @@ const Dashboard = (() => {
         const gf = frame.dn ? (frame.dn.escape || 0) : (frame.dn_escape || 0);
         const flightEl = document.getElementById('info-flight');
         if (flightEl) {
-            if (gf > 0.3) flightEl.textContent = 'FLYING';
-            else if (gf > 0.06) flightEl.textContent = 'TAKEOFF';
-            else flightEl.textContent = 'GROUNDED';
-            flightEl.style.color = gf > 0.06 ? '#e74c3c' : 'var(--text-primary)';
+            if (frame.flight_state) {
+                flightEl.textContent = frame.flight_state;
+                flightEl.style.color = frame.flight_state === 'GROUNDED'
+                    ? 'var(--text-primary)'
+                    : '#e74c3c';
+            } else {
+                if (gf > 0.3) flightEl.textContent = 'FLYING';
+                else if (gf > 0.06) flightEl.textContent = 'TAKEOFF';
+                else flightEl.textContent = 'GROUNDED';
+                flightEl.style.color = gf > 0.06 ? '#e74c3c' : 'var(--text-primary)';
+            }
         }
 
         // Drive L/R (derived from forward ± turn)

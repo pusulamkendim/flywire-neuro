@@ -3,7 +3,8 @@ Flying simulation: Walk → Takeoff → Flight → Landing → Walk
 
 Wing beat kinematics from flybody's WingBeatPatternGenerator (218Hz, 3-DOF).
 Leg tuck angles from photo-referenced Drosophila flight posture.
-Flight forces via xfrc_applied on Thorax (like embodied/00_flight_camera_test.py).
+Flight altitude is physically supported while the replay follows a deterministic
+straight path, avoiding MuJoCo free-body drift between recordings.
 
 Architecture: same as walking_sim.py (MuJoCo + cache + WebSocket stream).
 """
@@ -30,26 +31,28 @@ for p in [str(FLY_BRAIN_DIR)]:
 
 LEG_NAMES = ['LF', 'LM', 'LH', 'RF', 'RM', 'RH']
 
-# Photo-referenced flight leg angles (from embodied/00_flight_camera_test.py)
+# Mesh-fitted in-flight tuck pose. Front and middle tarsi fold under the thorax;
+# hind legs remain partly visible behind the body for aerodynamic stability.
 FLIGHT_LEG_ANGLES = {
-    'LF': {'Coxa': 35, 'Coxa_roll': 76, 'Coxa_yaw': -6,
-            'Femur': -100, 'Femur_roll': 53, 'Tibia': 80, 'Tarsus1': -20},
-    'LM': {'Coxa': 23, 'Coxa_roll': 107, 'Coxa_yaw': 46,
-            'Femur': -60, 'Femur_roll': -11, 'Tibia': 70, 'Tarsus1': -20},
-    'LH': {'Coxa': 28, 'Coxa_roll': 143, 'Coxa_yaw': 25,
-            'Femur': -70, 'Femur_roll': -24, 'Tibia': 50, 'Tarsus1': 0},
-    'RF': {'Coxa': 35, 'Coxa_roll': -76, 'Coxa_yaw': 6,
-            'Femur': -100, 'Femur_roll': -53, 'Tibia': 80, 'Tarsus1': -20},
-    'RM': {'Coxa': 23, 'Coxa_roll': -107, 'Coxa_yaw': -46,
-            'Femur': -60, 'Femur_roll': 11, 'Tibia': 70, 'Tarsus1': -20},
-    'RH': {'Coxa': 28, 'Coxa_roll': -143, 'Coxa_yaw': -25,
-            'Femur': -70, 'Femur_roll': 24, 'Tibia': 50, 'Tarsus1': 0},
+    'LF': {'Coxa': 29.5, 'Coxa_roll': 117.7, 'Coxa_yaw': 27.3,
+            'Femur': -75.4, 'Femur_roll': 100.0, 'Tibia': 132.0, 'Tarsus1': 22.2},
+    'LM': {'Coxa': 37.7, 'Coxa_roll': 145.0, 'Coxa_yaw': 70.0,
+            'Femur': -74.9, 'Femur_roll': 36.8, 'Tibia': 117.5, 'Tarsus1': 79.6},
+    'LH': {'Coxa': 41.5, 'Coxa_roll': 138.2, 'Coxa_yaw': 59.4,
+            'Femur': -104.9, 'Femur_roll': -3.3, 'Tibia': 101.8, 'Tarsus1': 85.3},
+    'RF': {'Coxa': 29.5, 'Coxa_roll': -117.7, 'Coxa_yaw': -27.3,
+            'Femur': -75.4, 'Femur_roll': -100.0, 'Tibia': 132.0, 'Tarsus1': 22.2},
+    'RM': {'Coxa': 37.7, 'Coxa_roll': -145.0, 'Coxa_yaw': -70.0,
+            'Femur': -74.9, 'Femur_roll': -36.8, 'Tibia': 117.5, 'Tarsus1': 79.6},
+    'RH': {'Coxa': 41.5, 'Coxa_roll': -138.2, 'Coxa_yaw': -59.4,
+            'Femur': -104.9, 'Femur_roll': 3.3, 'Tibia': 101.8, 'Tarsus1': 85.3},
 }
 
 
 def _generate_flight():
     """
-    Walk 0.3s → Takeoff 0.3s → Fly 1.5s → Land 0.4s → Walk 0.5s = 3.0s
+    Walk 0.3s → Takeoff 0.4s → Straight flight 2.4s → Land 0.5s
+    → Walk 0.6s = 4.2s
     Returns (geom_names, frames).
     """
     import mujoco
@@ -117,7 +120,10 @@ def _generate_flight():
                 free_dof_adr = int(model_ptr.jnt_dofadr[jid])
                 break
 
-    # Tuck angles
+    # Standing and in-flight leg targets.
+    stance_angles = np.concatenate([
+        steps.get_joint_angles(leg, np.pi, 0.0) for leg in LEG_NAMES
+    ])
     tuck_angles = np.zeros(len(fly.actuators))
     for i, act in enumerate(fly.actuators):
         match = re.search(r'joint_([A-Z]{2})(\w+)', str(act))
@@ -129,10 +135,12 @@ def _generate_flight():
 
     # Phase timing (ms)
     WALK1_END = 300
-    TAKEOFF_END = 600
-    FLY_END = 2100
-    LAND_END = 2500
-    TOTAL_MS = 3000
+    TAKEOFF_END = 700
+    FLY_END = 3100
+    LAND_END = 3600
+    TOTAL_MS = 4200
+    FLIGHT_ALTITUDE = 5.0
+    FLIGHT_DISTANCE = 12.0
 
     timestep = 1e-4
     n_steps = int(TOTAL_MS / 1000.0 / timestep)
@@ -140,7 +148,8 @@ def _generate_flight():
 
     frames = []
     fly_start_pos = None
-    fly_start_z = float(data_ptr.qpos[free_qpos_adr + 2]) if free_qpos_adr else 0
+    flight_origin_xy = None
+    flight_origin_z = None
     is_flying = False
 
     print(f"[Flight] Generating {TOTAL_MS}ms flight sim ({n_steps} steps)...", flush=True)
@@ -148,7 +157,10 @@ def _generate_flight():
 
     for step_i in range(n_steps):
         t_ms = step_i * timestep * 1000
-        t_s = step_i * timestep
+        target_position = None
+        target_velocity = None
+        heading_rad = 0.0
+        bank_rad = 0.0
 
         if t_ms < WALK1_END:
             # Walking
@@ -164,39 +176,85 @@ def _generate_flight():
             data_ptr.xfrc_applied[thorax_id, :] = 0
 
         elif t_ms < TAKEOFF_END:
-            # Takeoff — direct position control (no force fights)
+            # The middle legs remain extended briefly to push off while the
+            # front/hind legs begin folding. All six finish in the tuck pose.
             phase = 'takeoff'
             is_flying = True
-            action = {'joints': tuck_angles, 'adhesion': np.zeros(6)}
-            # Smooth rise: 0 → 5mm over 300ms
+            if flight_origin_xy is None:
+                flight_origin_xy = data_ptr.qpos[
+                    free_qpos_adr:free_qpos_adr + 2].copy()
+                flight_origin_z = float(data_ptr.qpos[free_qpos_adr + 2])
             progress = (t_ms - WALK1_END) / (TAKEOFF_END - WALK1_END)
-            target_z = 5.0 * progress
+            rise = progress * progress * (3.0 - 2.0 * progress)
+
+            takeoff_joints = tuck_angles.copy()
+            for leg_i, leg in enumerate(LEG_NAMES):
+                delay = 0.24 if leg[1] == 'M' else 0.0
+                fold = np.clip((progress - delay) / (1.0 - delay), 0.0, 1.0)
+                fold = fold * fold * (3.0 - 2.0 * fold)
+                sl = slice(leg_i * 7, (leg_i + 1) * 7)
+                takeoff_joints[sl] = (
+                    stance_angles[sl] * (1.0 - fold) + tuck_angles[sl] * fold
+                )
+            takeoff_adhesion = np.zeros(6)
+            if progress < 0.24:
+                takeoff_adhesion[[1, 4]] = 1  # middle-leg push-off contact
+            action = {'joints': takeoff_joints, 'adhesion': takeoff_adhesion}
+
+            target_position = np.array([
+                flight_origin_xy[0],
+                flight_origin_xy[1],
+                flight_origin_z + FLIGHT_ALTITUDE * rise,
+            ])
+            target_velocity = np.zeros(3)
             data_ptr.xfrc_applied[thorax_id, :] = [0, 0, mg, 0, 0, 0]  # hover
-            data_ptr.qpos[free_qpos_adr + 2] = fly_start_z + target_z
-            data_ptr.qvel[free_dof_adr + 2] = 15.0 * (1 - progress)  # decelerating
-            data_ptr.qvel[free_dof_adr + 0] = 5.0  # gentle forward
 
         elif t_ms < FLY_END:
-            # Cruising — hold altitude, drift forward
+            # Stable, straight flight. The global path is deliberately simple
+            # so the tucked leg configuration and wing motion remain readable.
             phase = 'flying'
             is_flying = True
             action = {'joints': tuck_angles, 'adhesion': np.zeros(6)}
+            progress = (t_ms - TAKEOFF_END) / (FLY_END - TAKEOFF_END)
+            target_position = np.array([
+                flight_origin_xy[0] + FLIGHT_DISTANCE * progress,
+                flight_origin_xy[1],
+                flight_origin_z + FLIGHT_ALTITUDE + 0.18 * np.sin(2.0 * np.pi * progress),
+            ])
+            target_velocity = np.array([
+                FLIGHT_DISTANCE / ((FLY_END - TAKEOFF_END) / 1000.0),
+                0.0,
+                0.18 * 2.0 * np.pi / ((FLY_END - TAKEOFF_END) / 1000.0)
+                * np.cos(2.0 * np.pi * progress),
+            ])
             data_ptr.xfrc_applied[thorax_id, :] = [0, 0, mg, 0, 0, 0]  # hover
-            data_ptr.qpos[free_qpos_adr + 2] = fly_start_z + 5.0  # lock altitude
-            data_ptr.qvel[free_dof_adr + 2] = 0  # no vertical velocity
-            data_ptr.qvel[free_dof_adr + 0] = 3.0  # steady forward
 
         elif t_ms < LAND_END:
-            # Landing — smooth descent
+            # Extend all legs before touchdown. Front legs reach first, while
+            # middle/hind legs follow within the same landing response.
             phase = 'landing'
             is_flying = True
-            action = {'joints': tuck_angles, 'adhesion': np.zeros(6)}
             progress = (t_ms - FLY_END) / (LAND_END - FLY_END)
-            target_z = 5.0 * (1 - progress)
+            descend = 1.0 - progress * progress * (3.0 - 2.0 * progress)
+
+            landing_joints = tuck_angles.copy()
+            reach_durations = {'F': 0.58, 'M': 0.76, 'H': 0.92}
+            for leg_i, leg in enumerate(LEG_NAMES):
+                reach = np.clip(progress / reach_durations[leg[1]], 0.0, 1.0)
+                reach = reach * reach * (3.0 - 2.0 * reach)
+                sl = slice(leg_i * 7, (leg_i + 1) * 7)
+                landing_joints[sl] = (
+                    tuck_angles[sl] * (1.0 - reach) + stance_angles[sl] * reach
+                )
+            action = {'joints': landing_joints, 'adhesion': np.zeros(6)}
+
+            target_position = np.array([
+                flight_origin_xy[0] + FLIGHT_DISTANCE,
+                flight_origin_xy[1],
+                flight_origin_z + FLIGHT_ALTITUDE * descend,
+            ])
+            target_velocity = np.zeros(3)
             data_ptr.xfrc_applied[thorax_id, :] = [0, 0, mg * 0.8, 0, 0, 0]
-            data_ptr.qpos[free_qpos_adr + 2] = fly_start_z + target_z
-            data_ptr.qvel[free_dof_adr + 2] = -12.0 * (1 - progress)
-            data_ptr.qvel[free_dof_adr + 0] = 1.0 * (1 - progress)
 
         else:
             # Back to walking
@@ -214,16 +272,15 @@ def _generate_flight():
         # Physics step
         sim.step(action)
 
-        # Orientation lock during flight
+        # Constrain the replay root after the physics step. The joint/wing
+        # dynamics still come from MuJoCo, while the global flight path remains
+        # stable and reproducible.
         if is_flying and free_qpos_adr is not None:
+            data_ptr.qpos[free_qpos_adr:free_qpos_adr + 3] = target_position
             data_ptr.qpos[free_qpos_adr + 3:free_qpos_adr + 7] = [1, 0, 0, 0]
+            data_ptr.qvel[free_dof_adr:free_dof_adr + 3] = target_velocity
             data_ptr.qvel[free_dof_adr + 3:free_dof_adr + 6] = 0
-            if phase == 'landing':
-                vz = data_ptr.qvel[free_dof_adr + 2]
-                if vz > 0:
-                    data_ptr.qvel[free_dof_adr + 2] = vz * 0.95
-                data_ptr.qvel[free_dof_adr] *= 0.98
-                data_ptr.qvel[free_dof_adr + 1] *= 0.98
+            mujoco.mj_forward(model_ptr, data_ptr)
 
         # Wing beat animation (render-only, via geom_xmat)
         if is_flying and lwing_gid >= 0 and rwing_gid >= 0:
@@ -264,6 +321,8 @@ def _generate_flight():
                 "fly_pos": [round(v, 3) for v in fly_pos],
                 "poses": [round(v, 5) for v in poses],
                 "phase": phase,
+                "heading_rad": round(float(heading_rad), 5),
+                "bank_rad": round(float(bank_rad), 5),
             })
 
     sim.close()
@@ -272,7 +331,7 @@ def _generate_flight():
     return geom_names, frames
 
 
-FLIGHT_CACHE = CACHE_DIR / 'flight_3.0s.json'
+FLIGHT_CACHE = CACHE_DIR / 'flight_leg_posture_v3_4.2s.json'
 
 
 class FlyingBridge:
@@ -328,7 +387,11 @@ class FlyingBridge:
                 json.dump({'geom_names': geom_names, 'frames': frames}, f)
             print(f"[Flight] Cached: {FLIGHT_CACHE.stat().st_size // 1024}KB", flush=True)
 
-        self._emit({"event": "walk_init", "geom_names": geom_names})
+        self._emit({
+            "event": "walk_init",
+            "geom_names": geom_names,
+            "render_mode": "flight_path",
+        })
 
         for frame in frames:
             if not self.running:
